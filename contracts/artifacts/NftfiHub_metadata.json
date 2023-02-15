@@ -1,0 +1,334 @@
+{
+	"compiler": {
+		"version": "0.8.4+commit.c7e474f2"
+	},
+	"language": "Solidity",
+	"output": {
+		"abi": [
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "_admin",
+						"type": "address"
+					},
+					{
+						"internalType": "string[]",
+						"name": "_contractKeys",
+						"type": "string[]"
+					},
+					{
+						"internalType": "address[]",
+						"name": "_contractAddresses",
+						"type": "address[]"
+					}
+				],
+				"stateMutability": "nonpayable",
+				"type": "constructor"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": true,
+						"internalType": "bytes32",
+						"name": "contractKey",
+						"type": "bytes32"
+					},
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "contractAddress",
+						"type": "address"
+					}
+				],
+				"name": "ContractUpdated",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "previousOwner",
+						"type": "address"
+					},
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "newOwner",
+						"type": "address"
+					}
+				],
+				"name": "OwnershipTransferred",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": false,
+						"internalType": "address",
+						"name": "account",
+						"type": "address"
+					}
+				],
+				"name": "Paused",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": false,
+						"internalType": "address",
+						"name": "account",
+						"type": "address"
+					}
+				],
+				"name": "Unpaused",
+				"type": "event"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "bytes32",
+						"name": "_contractKey",
+						"type": "bytes32"
+					}
+				],
+				"name": "getContract",
+				"outputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "owner",
+				"outputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "paused",
+				"outputs": [
+					{
+						"internalType": "bool",
+						"name": "",
+						"type": "bool"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "string",
+						"name": "_contractKey",
+						"type": "string"
+					},
+					{
+						"internalType": "address",
+						"name": "_contractAddress",
+						"type": "address"
+					}
+				],
+				"name": "setContract",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "string[]",
+						"name": "_contractKeys",
+						"type": "string[]"
+					},
+					{
+						"internalType": "address[]",
+						"name": "_contractAddresses",
+						"type": "address[]"
+					}
+				],
+				"name": "setContracts",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "_newOwner",
+						"type": "address"
+					}
+				],
+				"name": "transferOwnership",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			}
+		],
+		"devdoc": {
+			"author": "NFTfi",
+			"details": "Registry for the contracts supported by NFTfi protocol.",
+			"events": {
+				"ContractUpdated(bytes32,address)": {
+					"params": {
+						"contractAddress": "- Address of the contract.",
+						"contractKey": "- Contract key e.g. bytes32('PERMITTED_NFTS')."
+					}
+				}
+			},
+			"kind": "dev",
+			"methods": {
+				"constructor": {
+					"details": "Initializes `contracts` with a batch of permitted contracts",
+					"params": {
+						"_admin": "- Initial admin of this contract.",
+						"_contractAddresses": "- Initial associated contract addresses.",
+						"_contractKeys": "- Initial contract keys."
+					}
+				},
+				"getContract(bytes32)": {
+					"params": {
+						"_contractKey": "- The index to the contract address."
+					}
+				},
+				"owner()": {
+					"details": "Returns the address of the current owner."
+				},
+				"paused()": {
+					"details": "Returns true if the contract is paused, and false otherwise."
+				},
+				"setContract(string,address)": {
+					"params": {
+						"_contractAddress": "- The associated contract address.",
+						"_contractKey": "- New or existing contract key."
+					}
+				},
+				"setContracts(string[],address[])": {
+					"params": {
+						"_contractAddresses": "- The associated contract addresses.",
+						"_contractKeys": "- New or existing contract keys."
+					}
+				},
+				"transferOwnership(address)": {
+					"details": "Transfers ownership of the contract to a new account (`newOwner`). Can only be called by the current owner."
+				}
+			},
+			"title": "NftfiHub",
+			"version": 1
+		},
+		"userdoc": {
+			"events": {
+				"ContractUpdated(bytes32,address)": {
+					"notice": "This event is fired whenever the admin registers a contract."
+				}
+			},
+			"kind": "user",
+			"methods": {
+				"getContract(bytes32)": {
+					"notice": "This function can be called by anyone to lookup the contract address associated with the key."
+				},
+				"setContract(string,address)": {
+					"notice": "Set or update the contract address for the given key."
+				},
+				"setContracts(string[],address[])": {
+					"notice": "Set or update the contract addresses for the given keys."
+				}
+			},
+			"version": 1
+		}
+	},
+	"settings": {
+		"compilationTarget": {
+			"contracts/NftfiHub.sol": "NftfiHub"
+		},
+		"evmVersion": "istanbul",
+		"libraries": {},
+		"metadata": {
+			"bytecodeHash": "ipfs"
+		},
+		"optimizer": {
+			"enabled": true,
+			"runs": 100
+		},
+		"remappings": []
+	},
+	"sources": {
+		"@openzeppelin/contracts/security/Pausable.sol": {
+			"keccak256": "0x0849d93b16c9940beb286a7864ed02724b248b93e0d80ef6355af5ef15c64773",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://4ddabb16009cd17eaca3143feadf450ac13e72919ebe2ca50e00f61cb78bc004",
+				"dweb:/ipfs/QmSPwPxX7d6TTWakN5jy5wsaGkS1y9TW8fuhGSraMkLk2B"
+			]
+		},
+		"@openzeppelin/contracts/security/ReentrancyGuard.sol": {
+			"keccak256": "0x190dd6f8d592b7e4e930feb7f4313aeb8e1c4ad3154c27ce1cf6a512fc30d8cc",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://4ce8dfb62d0c4fa260d6eec8f1cd47f5f2a044e11bde5b31d18072fa6e7d9010",
+				"dweb:/ipfs/QmTyFztU3tLEcEDnqqiaW4UJetqsU77LXc6pjc9oTXCK5u"
+			]
+		},
+		"@openzeppelin/contracts/utils/Context.sol": {
+			"keccak256": "0xe2e337e6dde9ef6b680e07338c493ebea1b5fd09b43424112868e9cc1706bca7",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://6df0ddf21ce9f58271bdfaa85cde98b200ef242a05a3f85c2bc10a8294800a92",
+				"dweb:/ipfs/QmRK2Y5Yc6BK7tGKkgsgn3aJEQGi5aakeSPZvS65PV8Xp3"
+			]
+		},
+		"contracts/NftfiHub.sol": {
+			"keccak256": "0x936b4de23376ce5e73ff1f7ec0da09c8c579b4f2eb1413fb9e30b87e901c03aa",
+			"license": "BUSL-1.1",
+			"urls": [
+				"bzz-raw://62c372ab92b8429ad3323d28d7f32fe85e4aeeb75878d8be07ebcb5545e7399e",
+				"dweb:/ipfs/QmaxcSZtC5NZp9a6xF6wFKxfeKNdLLAsNBoX1jbkxbvwUp"
+			]
+		},
+		"contracts/interfaces/INftfiHub.sol": {
+			"keccak256": "0x9c4c27933c916224e63d7944d2f928b713ca1f82993c1c95fcc33bbfba83ad74",
+			"license": "BUSL-1.1",
+			"urls": [
+				"bzz-raw://abddf22b64aad3062da9a6bc3b581ef14793baa306128d2e27068e8e2eaf97b4",
+				"dweb:/ipfs/QmcUMV6w6vNDu7CJSas33Ech85Pfkjxb1cowAYSMekjdf2"
+			]
+		},
+		"contracts/utils/ContractKeys.sol": {
+			"keccak256": "0x18c3f3a08195e774d39dbbeef091645330e1ec8546a9be2355bbf3fc271e547c",
+			"license": "BUSL-1.1",
+			"urls": [
+				"bzz-raw://c662ce06df0f011f6494c8119e0141254f65da860bb0294f0b4b6d599a37ec6c",
+				"dweb:/ipfs/QmZ1FtiUm6stxQNGT3PdNssqHw4D6uYUG3nazb3v7BF8zE"
+			]
+		},
+		"contracts/utils/Ownable.sol": {
+			"keccak256": "0x1b8d373c36c6429d0cf59f2e8dc40de843ec026b06bbac985928b898dd577e95",
+			"license": "BUSL-1.1",
+			"urls": [
+				"bzz-raw://d15eadcec99d6a998620138c359000bfa1a8b9be237f0ac9c171efb63dab638e",
+				"dweb:/ipfs/QmS3GKw9bXChFdD2LegDq9rkx8j6wGPAAJwyCEmEFuFyD8"
+			]
+		}
+	},
+	"version": 1
+}

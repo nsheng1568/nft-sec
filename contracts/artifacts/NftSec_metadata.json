@@ -1,0 +1,1026 @@
+{
+	"compiler": {
+		"version": "0.8.4+commit.c7e474f2"
+	},
+	"language": "Solidity",
+	"output": {
+		"abi": [
+			{
+				"inputs": [],
+				"stateMutability": "nonpayable",
+				"type": "constructor"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "account",
+						"type": "address"
+					},
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "operator",
+						"type": "address"
+					},
+					{
+						"indexed": false,
+						"internalType": "bool",
+						"name": "approved",
+						"type": "bool"
+					}
+				],
+				"name": "ApprovalForAll",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "operator",
+						"type": "address"
+					},
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "from",
+						"type": "address"
+					},
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "to",
+						"type": "address"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256[]",
+						"name": "ids",
+						"type": "uint256[]"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256[]",
+						"name": "values",
+						"type": "uint256[]"
+					}
+				],
+				"name": "TransferBatch",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "operator",
+						"type": "address"
+					},
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "from",
+						"type": "address"
+					},
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "to",
+						"type": "address"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "id",
+						"type": "uint256"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "value",
+						"type": "uint256"
+					}
+				],
+				"name": "TransferSingle",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": false,
+						"internalType": "string",
+						"name": "value",
+						"type": "string"
+					},
+					{
+						"indexed": true,
+						"internalType": "uint256",
+						"name": "id",
+						"type": "uint256"
+					}
+				],
+				"name": "URI",
+				"type": "event"
+			},
+			{
+				"inputs": [],
+				"name": "DAY_IN_SECONDS",
+				"outputs": [
+					{
+						"internalType": "uint64",
+						"name": "",
+						"type": "uint64"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "ERC721_WRAPPER",
+				"outputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "NFTFI",
+				"outputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "WETH",
+				"outputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "account",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "id",
+						"type": "uint256"
+					}
+				],
+				"name": "balanceOf",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address[]",
+						"name": "accounts",
+						"type": "address[]"
+					},
+					{
+						"internalType": "uint256[]",
+						"name": "ids",
+						"type": "uint256[]"
+					}
+				],
+				"name": "balanceOfBatch",
+				"outputs": [
+					{
+						"internalType": "uint256[]",
+						"name": "",
+						"type": "uint256[]"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint32",
+						"name": "productId",
+						"type": "uint32"
+					},
+					{
+						"internalType": "uint8",
+						"name": "trancheId",
+						"type": "uint8"
+					},
+					{
+						"internalType": "uint256",
+						"name": "amount",
+						"type": "uint256"
+					}
+				],
+				"name": "buyTokens",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "currentProductId",
+				"outputs": [
+					{
+						"internalType": "uint32",
+						"name": "",
+						"type": "uint32"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "currentTokenOffset",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "id",
+						"type": "uint256"
+					}
+				],
+				"name": "exists",
+				"outputs": [
+					{
+						"internalType": "bool",
+						"name": "",
+						"type": "bool"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "nftContract",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "nftId",
+						"type": "uint256"
+					}
+				],
+				"name": "getNftPrice",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint32",
+						"name": "productId",
+						"type": "uint32"
+					},
+					{
+						"internalType": "uint8",
+						"name": "trancheId",
+						"type": "uint8"
+					}
+				],
+				"name": "getTokenPrice",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "account",
+						"type": "address"
+					},
+					{
+						"internalType": "address",
+						"name": "operator",
+						"type": "address"
+					}
+				],
+				"name": "isApprovedForAll",
+				"outputs": [
+					{
+						"internalType": "bool",
+						"name": "",
+						"type": "bool"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "nftContract",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "nftId",
+						"type": "uint256"
+					}
+				],
+				"name": "liquidateNft",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256[]",
+						"name": "trancheInterestRates",
+						"type": "uint256[]"
+					},
+					{
+						"internalType": "uint256[]",
+						"name": "trancheNotionals",
+						"type": "uint256[]"
+					},
+					{
+						"internalType": "uint32[]",
+						"name": "loanIds",
+						"type": "uint32[]"
+					}
+				],
+				"name": "mint",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"name": "nftIdToLookup",
+				"outputs": [
+					{
+						"internalType": "uint32",
+						"name": "productId",
+						"type": "uint32"
+					},
+					{
+						"internalType": "uint32",
+						"name": "underlyingIndex",
+						"type": "uint32"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint32",
+						"name": "",
+						"type": "uint32"
+					}
+				],
+				"name": "productIdToProduct",
+				"outputs": [
+					{
+						"internalType": "address",
+						"name": "owner",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "tokenOffset",
+						"type": "uint256"
+					},
+					{
+						"internalType": "bool",
+						"name": "payoutsComputed",
+						"type": "bool"
+					},
+					{
+						"internalType": "uint256",
+						"name": "startTime",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint32",
+						"name": "productId",
+						"type": "uint32"
+					}
+				],
+				"name": "redeemTokens",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "from",
+						"type": "address"
+					},
+					{
+						"internalType": "address",
+						"name": "to",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256[]",
+						"name": "ids",
+						"type": "uint256[]"
+					},
+					{
+						"internalType": "uint256[]",
+						"name": "amounts",
+						"type": "uint256[]"
+					},
+					{
+						"internalType": "bytes",
+						"name": "data",
+						"type": "bytes"
+					}
+				],
+				"name": "safeBatchTransferFrom",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "from",
+						"type": "address"
+					},
+					{
+						"internalType": "address",
+						"name": "to",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "id",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "amount",
+						"type": "uint256"
+					},
+					{
+						"internalType": "bytes",
+						"name": "data",
+						"type": "bytes"
+					}
+				],
+				"name": "safeTransferFrom",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "operator",
+						"type": "address"
+					},
+					{
+						"internalType": "bool",
+						"name": "approved",
+						"type": "bool"
+					}
+				],
+				"name": "setApprovalForAll",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "bytes4",
+						"name": "interfaceId",
+						"type": "bytes4"
+					}
+				],
+				"name": "supportsInterface",
+				"outputs": [
+					{
+						"internalType": "bool",
+						"name": "",
+						"type": "bool"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "id",
+						"type": "uint256"
+					}
+				],
+				"name": "totalSupply",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"name": "uri",
+				"outputs": [
+					{
+						"internalType": "string",
+						"name": "",
+						"type": "string"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			}
+		],
+		"devdoc": {
+			"kind": "dev",
+			"methods": {
+				"balanceOf(address,uint256)": {
+					"details": "See {IERC1155-balanceOf}. Requirements: - `account` cannot be the zero address."
+				},
+				"balanceOfBatch(address[],uint256[])": {
+					"details": "See {IERC1155-balanceOfBatch}. Requirements: - `accounts` and `ids` must have the same length."
+				},
+				"exists(uint256)": {
+					"details": "Indicates whether any token exist with a given id, or not."
+				},
+				"isApprovedForAll(address,address)": {
+					"details": "See {IERC1155-isApprovedForAll}."
+				},
+				"safeBatchTransferFrom(address,address,uint256[],uint256[],bytes)": {
+					"details": "See {IERC1155-safeBatchTransferFrom}."
+				},
+				"safeTransferFrom(address,address,uint256,uint256,bytes)": {
+					"details": "See {IERC1155-safeTransferFrom}."
+				},
+				"setApprovalForAll(address,bool)": {
+					"details": "See {IERC1155-setApprovalForAll}."
+				},
+				"supportsInterface(bytes4)": {
+					"details": "See {IERC165-supportsInterface}."
+				},
+				"totalSupply(uint256)": {
+					"details": "Total amount of tokens in with a given id."
+				},
+				"uri(uint256)": {
+					"details": "See {IERC1155MetadataURI-uri}. This implementation returns the same URI for *all* token types. It relies on the token type ID substitution mechanism https://eips.ethereum.org/EIPS/eip-1155#metadata[defined in the EIP]. Clients calling this function must replace the `\\{id\\}` substring with the actual token type ID."
+				}
+			},
+			"version": 1
+		},
+		"userdoc": {
+			"kind": "user",
+			"methods": {},
+			"version": 1
+		}
+	},
+	"settings": {
+		"compilationTarget": {
+			"contracts/NftSec.sol": "NftSec"
+		},
+		"evmVersion": "istanbul",
+		"libraries": {},
+		"metadata": {
+			"bytecodeHash": "ipfs"
+		},
+		"optimizer": {
+			"enabled": false,
+			"runs": 200
+		},
+		"remappings": []
+	},
+	"sources": {
+		"@openzeppelin/contracts/interfaces/IERC1271.sol": {
+			"keccak256": "0x0705a4b1b86d7b0bd8432118f226ba139c44b9dcaba0a6eafba2dd7d0639c544",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://c45b821ef9e882e57c256697a152e108f0f2ad6997609af8904cae99c9bd422e",
+				"dweb:/ipfs/QmRKCJW6jjzR5UYZcLpGnhEJ75UVbH6EHkEa49sWx2SKng"
+			]
+		},
+		"@openzeppelin/contracts/security/Pausable.sol": {
+			"keccak256": "0x0849d93b16c9940beb286a7864ed02724b248b93e0d80ef6355af5ef15c64773",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://4ddabb16009cd17eaca3143feadf450ac13e72919ebe2ca50e00f61cb78bc004",
+				"dweb:/ipfs/QmSPwPxX7d6TTWakN5jy5wsaGkS1y9TW8fuhGSraMkLk2B"
+			]
+		},
+		"@openzeppelin/contracts/security/ReentrancyGuard.sol": {
+			"keccak256": "0x190dd6f8d592b7e4e930feb7f4313aeb8e1c4ad3154c27ce1cf6a512fc30d8cc",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://4ce8dfb62d0c4fa260d6eec8f1cd47f5f2a044e11bde5b31d18072fa6e7d9010",
+				"dweb:/ipfs/QmTyFztU3tLEcEDnqqiaW4UJetqsU77LXc6pjc9oTXCK5u"
+			]
+		},
+		"@openzeppelin/contracts/token/ERC1155/ERC1155.sol": {
+			"keccak256": "0xd917747dc87f189c6779b894f367a028f9dca4be930283cccec8f312966af820",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://7a5e5b99830cf233f77aa3b1bd1f57561faee103beeee88e6a6f86d044817bbb",
+				"dweb:/ipfs/QmREYidSDpHPig3AhxzsMHg3w2ZtMeGfRhcokXxEZyj6fC"
+			]
+		},
+		"@openzeppelin/contracts/token/ERC1155/IERC1155.sol": {
+			"keccak256": "0x6392f2cfe3a5ee802227fe7a2dfd47096d881aec89bddd214b35c5b46d3cd941",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://bd9c47a375639888e726a99da718890ba16d17d7ad9eacb0ccc892d46d1b3ee0",
+				"dweb:/ipfs/Qmb41W5RUjy2sWg49A2rMnxekSeEk6SvGyJL5tyCCSr7un"
+			]
+		},
+		"@openzeppelin/contracts/token/ERC1155/IERC1155Receiver.sol": {
+			"keccak256": "0xeb373f1fdc7b755c6a750123a9b9e3a8a02c1470042fd6505d875000a80bde0b",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://0e28648f994abf1d6bc345644a361cc0b7efa544f8bc0c8ec26011fed85a91ec",
+				"dweb:/ipfs/QmVVE7AiRjKaQYYji7TkjmTeVzGpNmms5eoxqTCfvvpj6D"
+			]
+		},
+		"@openzeppelin/contracts/token/ERC1155/extensions/ERC1155Supply.sol": {
+			"keccak256": "0xe3deb5f3b0c9d12944f62ab680f041bbf1910d9d3ac6b545b4b8e399643c538d",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://e1f5bc920c2f9859b02dce02d7d0211608398287c643d42ad048555c9b204dc8",
+				"dweb:/ipfs/QmSu2MFkCSPNG6pRsXxMai7Do7EDqLwpnnHVDB7q2wHJnr"
+			]
+		},
+		"@openzeppelin/contracts/token/ERC1155/extensions/IERC1155MetadataURI.sol": {
+			"keccak256": "0xa66d18b9a85458d28fc3304717964502ae36f7f8a2ff35bc83f6f85d74b03574",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://e46c80ea068989111d6103e5521223f9ef337e93de76deed8b03f75c6f7b2797",
+				"dweb:/ipfs/QmNoSE6knNfFncdDDLTb3fGR6oSQty1srG96Vsx3E9wQdw"
+			]
+		},
+		"@openzeppelin/contracts/token/ERC20/IERC20.sol": {
+			"keccak256": "0x9750c6b834f7b43000631af5cc30001c5f547b3ceb3635488f140f60e897ea6b",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://5a7d5b1ef5d8d5889ad2ed89d8619c09383b80b72ab226e0fe7bde1636481e34",
+				"dweb:/ipfs/QmebXWgtEfumQGBdVeM6c71McLixYXQP5Bk6kKXuoY4Bmr"
+			]
+		},
+		"@openzeppelin/contracts/token/ERC20/extensions/draft-IERC20Permit.sol": {
+			"keccak256": "0xf41ca991f30855bf80ffd11e9347856a517b977f0a6c2d52e6421a99b7840329",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://b2717fd2bdac99daa960a6de500754ea1b932093c946388c381da48658234b95",
+				"dweb:/ipfs/QmP6QVMn6UeA3ByahyJbYQr5M6coHKBKsf3ySZSfbyA8R7"
+			]
+		},
+		"@openzeppelin/contracts/token/ERC20/utils/SafeERC20.sol": {
+			"keccak256": "0x9b72f93be69ca894d8492c244259615c4a742afc8d63720dbc8bb81087d9b238",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://f5a7b96e511be78d5cdf635c784e6ab8cdd38625bb8cafb8a80914a1c89cf0f6",
+				"dweb:/ipfs/QmVzTCwJxQAkjRQHboT5QrvsVJGWQHgfEjeTbvyxoKBrds"
+			]
+		},
+		"@openzeppelin/contracts/token/ERC721/IERC721.sol": {
+			"keccak256": "0xab28a56179c1db258c9bf5235b382698cb650debecb51b23d12be9e241374b68",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://daae589a9d6fa7e55f99f86c0a16796ca490f243fb3693632c3711c0646c1d56",
+				"dweb:/ipfs/QmR3zpd7wNw3rcUdekwiv6FYHJqksuTCXLVioTxu6Fbxk3"
+			]
+		},
+		"@openzeppelin/contracts/token/ERC721/IERC721Receiver.sol": {
+			"keccak256": "0xa82b58eca1ee256be466e536706850163d2ec7821945abd6b4778cfb3bee37da",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://6e75cf83beb757b8855791088546b8337e9d4684e169400c20d44a515353b708",
+				"dweb:/ipfs/QmYvPafLfoquiDMEj7CKHtvbgHu7TJNPSVPSCjrtjV8HjV"
+			]
+		},
+		"@openzeppelin/contracts/token/ERC721/utils/ERC721Holder.sol": {
+			"keccak256": "0x0108bf6a6ebd5f96678bed33a35947537263f96766131ee91461fb6485805028",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://ae2d274bf3d56a6d49a9bbd0a4871c54997a82551eb3eb1c0c39dc98698ff8bf",
+				"dweb:/ipfs/QmTT7ty5DPGAmRnx94Xu3TUDYGSPDVLN2bppJAjjedrg1e"
+			]
+		},
+		"@openzeppelin/contracts/utils/Address.sol": {
+			"keccak256": "0xf96f969e24029d43d0df89e59d365f277021dac62b48e1c1e3ebe0acdd7f1ca1",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://ec772b45a624be516f1c81970caa8a2e144301e9d0921cbc1a2789fef39a1269",
+				"dweb:/ipfs/QmNyjwxCrGhQMyzLD93oUobJXVe9ceJvRvfXwbEtuxPiEj"
+			]
+		},
+		"@openzeppelin/contracts/utils/Context.sol": {
+			"keccak256": "0xe2e337e6dde9ef6b680e07338c493ebea1b5fd09b43424112868e9cc1706bca7",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://6df0ddf21ce9f58271bdfaa85cde98b200ef242a05a3f85c2bc10a8294800a92",
+				"dweb:/ipfs/QmRK2Y5Yc6BK7tGKkgsgn3aJEQGi5aakeSPZvS65PV8Xp3"
+			]
+		},
+		"@openzeppelin/contracts/utils/Strings.sol": {
+			"keccak256": "0xa4d1d62251f8574deb032a35fc948386a9b4de74b812d4f545a1ac120486b48a",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://8c969013129ba9e651a20735ef659fef6d8a1139ea3607bd4b26ddea2d645634",
+				"dweb:/ipfs/QmVhVa6LGuzAcB8qgDtVHRkucn4ihj5UZr8xBLcJkP6ucb"
+			]
+		},
+		"@openzeppelin/contracts/utils/cryptography/ECDSA.sol": {
+			"keccak256": "0xda898fa084aa1ddfdb346e6a40459e00a59d87071cce7c315a46d648dd71d0ba",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://ce501a941f4aa1555c04dabb5e07992503bb6a9b32ff8f7cdcefdb4a742210cb",
+				"dweb:/ipfs/QmeScPrUpdrGYs9BytV3Z5ZWJcBXtuAgCW4BLHua4xFUxx"
+			]
+		},
+		"@openzeppelin/contracts/utils/cryptography/SignatureChecker.sol": {
+			"keccak256": "0xbc8d1f66b26e211a1f6f40a17453e9d5020ec96749014379205cff100809884c",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://b9c056a3068bb6fe41b28239bd71acd3a5249d23ed089c874182a4e3d7e47df1",
+				"dweb:/ipfs/QmdFFG7dxiZ5jBaaYDXPMiKVG9rNoMhvR7cBt5997E2pat"
+			]
+		},
+		"@openzeppelin/contracts/utils/introspection/ERC165.sol": {
+			"keccak256": "0xd10975de010d89fd1c78dc5e8a9a7e7f496198085c151648f20cba166b32582b",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://fb0048dee081f6fffa5f74afc3fb328483c2a30504e94a0ddd2a5114d731ec4d",
+				"dweb:/ipfs/QmZptt1nmYoA5SgjwnSgWqgUSDgm4q52Yos3xhnMv3MV43"
+			]
+		},
+		"@openzeppelin/contracts/utils/introspection/IERC165.sol": {
+			"keccak256": "0x447a5f3ddc18419d41ff92b3773fb86471b1db25773e07f877f548918a185bf1",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://be161e54f24e5c6fae81a12db1a8ae87bc5ae1b0ddc805d82a1440a68455088f",
+				"dweb:/ipfs/QmP7C3CHdY9urF4dEMb9wmsp1wMxHF6nhA2yQE5SKiPAdy"
+			]
+		},
+		"@openzeppelin/contracts/utils/math/Math.sol": {
+			"keccak256": "0xa1e8e83cd0087785df04ac79fb395d9f3684caeaf973d9e2c71caef723a3a5d6",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://33bbf48cc069be677705037ba7520c22b1b622c23b33e1a71495f2d36549d40b",
+				"dweb:/ipfs/Qmct36zWXv3j7LZB83uwbg7TXwnZSN1fqHNDZ93GG98bGz"
+			]
+		},
+		"contracts/NftSec.sol": {
+			"keccak256": "0x9af51fa6a384c010d90a2f404a2811f3d82fbb4f93083d1d32c66e8cd81961b3",
+			"license": "BUSL-1.1",
+			"urls": [
+				"bzz-raw://65da905c3424a11ebdbba092d8c346a75f48a2783e09664f3e03af107d37d808",
+				"dweb:/ipfs/QmaYTdHApmR2gNv8tAwjChb3mrzWtLeFNLodNKM2XfUpd4"
+			]
+		},
+		"contracts/airdrop/IAirdropReceiverFactory.sol": {
+			"keccak256": "0x0982de59ac31bb365f6d9c513a8463b5d33b5e6e42fb996387abfe308b57976b",
+			"license": "BUSL-1.1",
+			"urls": [
+				"bzz-raw://be426faa11180e42c3d604297f5c1f8aef859a37c8bda935a123540434e419d9",
+				"dweb:/ipfs/QmYjAPWD2cFa8qpczb852bFea6BRVyPj8sZWcSZADeBLV8"
+			]
+		},
+		"contracts/interfaces/IAirdropFlashLoan.sol": {
+			"keccak256": "0xd5bbd9a6ae2ebcef7b81a3b541b4ea886a18d9d2961c9226dd93b4f2a0070f76",
+			"license": "BUSL-1.1",
+			"urls": [
+				"bzz-raw://45fd9447f4e6e0b9fde3a88c4f3eeabfdbf8c4f7d90fbb73de73691071032441",
+				"dweb:/ipfs/QmYGv9xvK4A7qrRJD8rA2Uud1q9VGUCvLnE6JdVAYhMe1Z"
+			]
+		},
+		"contracts/interfaces/IBundleBuilder.sol": {
+			"keccak256": "0x3f36e20376a2f9ff304aed7b4a92a0020ad0321ca5bed7e7e6735f7e9f4a8421",
+			"license": "BUSL-1.1",
+			"urls": [
+				"bzz-raw://1e30e6737d7b1887b63138b0021d9f82305e7bb81bc7f59b5fdc65b384497a9b",
+				"dweb:/ipfs/QmarrUdjBzbubCGoH6VzvXWfMbrNqeJ7ar2LdUAPLSG1G9"
+			]
+		},
+		"contracts/interfaces/IDirectLoanCoordinator.sol": {
+			"keccak256": "0x339345316e124ed604da1016a8dafd30d21b1eded18febd5b7340df67515d6ac",
+			"license": "BUSL-1.1",
+			"urls": [
+				"bzz-raw://a2640b96aa66dd620ad1117e4239243b1ad44fc09c02ddcbc6a009725b3a55b8",
+				"dweb:/ipfs/QmZuhsxkyLKhg7NAoDTJYwt8dbQebpqiGUkrkigzmzRKdR"
+			]
+		},
+		"contracts/interfaces/INftWrapper.sol": {
+			"keccak256": "0x7440c44808528e967386521a0b934b8d7159c37c4ee033a08bb9e4128b023a66",
+			"license": "BUSL-1.1",
+			"urls": [
+				"bzz-raw://42cc276ee0ab407582365e0beac28fcbe49e06acb6432435285f23f6f10eb517",
+				"dweb:/ipfs/Qmdzq5pqqNCdh1JBsZhzU1pAQh6Xvnhccek2LWJvyemHEH"
+			]
+		},
+		"contracts/interfaces/INftfiHub.sol": {
+			"keccak256": "0x9c4c27933c916224e63d7944d2f928b713ca1f82993c1c95fcc33bbfba83ad74",
+			"license": "BUSL-1.1",
+			"urls": [
+				"bzz-raw://abddf22b64aad3062da9a6bc3b581ef14793baa306128d2e27068e8e2eaf97b4",
+				"dweb:/ipfs/QmcUMV6w6vNDu7CJSas33Ech85Pfkjxb1cowAYSMekjdf2"
+			]
+		},
+		"contracts/interfaces/IPermittedERC20s.sol": {
+			"keccak256": "0xef2644814ed4d4f33429af34879dc3d533142194bce601969e8f95e39c8d868e",
+			"license": "BUSL-1.1",
+			"urls": [
+				"bzz-raw://165e1398e3683589fc4fc0cd366c8d122cda22ceef8749623c6551f9ac74112a",
+				"dweb:/ipfs/QmaaAJhBffjwdGgTgHhAHDBbBWi9xHJZhoj9hS6LVWuPA2"
+			]
+		},
+		"contracts/interfaces/IPermittedNFTs.sol": {
+			"keccak256": "0x0eb676dad47c26800c3b6d6b64c227dc2e54eb1afcd2119f82e79b5435e28ab2",
+			"license": "BUSL-1.1",
+			"urls": [
+				"bzz-raw://a0a055c496c0212854ae7c4c55bfdfc3f3377531eae2ea950cdb639c94bee7af",
+				"dweb:/ipfs/QmZRecY9miLKaLvGLX5kRYEsBFRzLryduKgsMEGjvCnnCv"
+			]
+		},
+		"contracts/interfaces/IPermittedPartners.sol": {
+			"keccak256": "0xc719dbcd40671582855db3282f96666fe908e73cf68c75c5fe1d28925053c53a",
+			"license": "BUSL-1.1",
+			"urls": [
+				"bzz-raw://d0b14257805f4688d44e6e88d65639698c7539f17cd69da88d991416f3c37850",
+				"dweb:/ipfs/QmRZpqfBNVXtUMUV8WW4CTGVRp3u8ugRhe9X3YBNCKHsER"
+			]
+		},
+		"contracts/loans/BaseLoan.sol": {
+			"keccak256": "0x0caeb8141368f3c6c04e53d26e3ed0c3fa74532592bb5761b93c5079a8d66a7b",
+			"license": "BUSL-1.1",
+			"urls": [
+				"bzz-raw://730f677d331ee4261336c4babd8292d642ad8246dbd02540a9b16ecc8e74e589",
+				"dweb:/ipfs/QmPyak1asVAc6JcgGSPAydbqJV3ziHDuk74hSwHaDjsE94"
+			]
+		},
+		"contracts/loans/direct/loanTypes/DirectLoanBaseMinimal.sol": {
+			"keccak256": "0x1283225860d63e32086be09b11ac726ee6020750c1a836bfb51b60c0b2ea86d8",
+			"license": "BUSL-1.1",
+			"urls": [
+				"bzz-raw://cbc73228ec847cd71e136bdd77b2c4c789fff727d4c6c865efbc68fadb51809e",
+				"dweb:/ipfs/QmeVvT5LrEDwE9hJ8J8DvTw9F4ZXmtMdSxkfSyaMYAKTYq"
+			]
+		},
+		"contracts/loans/direct/loanTypes/IDirectLoanBase.sol": {
+			"keccak256": "0x3501b4d79b43f7e228db49d93ab6932cd6f56ce6463990adfceb0acac776ca5a",
+			"license": "BUSL-1.1",
+			"urls": [
+				"bzz-raw://f4d99dc7eaf58fb380df68e419760a58f088d702c2aa912a8634a6c1be45069a",
+				"dweb:/ipfs/QmNvgLXfxDZ81mhGDHTnSYzhPveKzNaVJFypggAvntSFX8"
+			]
+		},
+		"contracts/loans/direct/loanTypes/LoanAirdropUtils.sol": {
+			"keccak256": "0x0caa309216a6d32d5f88f97742a56d0530fc8b1880ad14b79ce83478f7a97fc4",
+			"license": "BUSL-1.1",
+			"urls": [
+				"bzz-raw://11667d66dcc0064c13a3913b3266fa4fc8a9a05f1fe6decfb32ee438305b1cbb",
+				"dweb:/ipfs/QmZWY87AjpJicq9eJ6ysCMoW4fw88DhmYD9tpvfngma2B9"
+			]
+		},
+		"contracts/loans/direct/loanTypes/LoanChecksAndCalculations.sol": {
+			"keccak256": "0xd93b06d4ee9ee1f3e0266373bb09b27cc94ad175ce69efd5e0d8c39cc430c82e",
+			"license": "BUSL-1.1",
+			"urls": [
+				"bzz-raw://dc2cfcbb5b1dd7629487b9bc3b5da5ceb8078813ea0443fbc13b9462f88ce4bd",
+				"dweb:/ipfs/QmSs139nZznjatwzL9KrwTMJX5P7MBt8MPcpTA6MgtkApB"
+			]
+		},
+		"contracts/loans/direct/loanTypes/LoanData.sol": {
+			"keccak256": "0x68e0a45abaafeb9bdbf235ea1b045927cfc2750111c08cdc2e273bcb19e1551c",
+			"license": "BUSL-1.1",
+			"urls": [
+				"bzz-raw://c563378388b5bbaacc7c18c33578c5bfd91043ffdcb4e7d7954a6188425ca109",
+				"dweb:/ipfs/QmWs3w56gKPRUsJ9jXqwaX7SaMhs6Hd4YZyxMtQwsk4J3C"
+			]
+		},
+		"contracts/utils/ContractKeys.sol": {
+			"keccak256": "0x823cec7ea6116ad5f001d955d9a9e52411c48791721dd36a2f8581b95cc9629a",
+			"license": "BUSL-1.1",
+			"urls": [
+				"bzz-raw://3e98e9241bcb8557a8d89f62fcba10f4afe8c88a8219c93f9791efe6d8d28c96",
+				"dweb:/ipfs/QmaCJ38yHuj9E33F2hJzkLukk9o23yiVEmDq16xrMSNRUJ"
+			]
+		},
+		"contracts/utils/NFTfiSigningUtils.sol": {
+			"keccak256": "0x3cdc46ea5982697f8eef9bdfae571c07b5617737a4959148c3c7d0f333e8b941",
+			"license": "BUSL-1.1",
+			"urls": [
+				"bzz-raw://9c4ad60d8eb2dc590cb708486a5f2d86908cad0d7672f6fa0ebb064686ce7d08",
+				"dweb:/ipfs/QmXdHWEcrAjXGqtKLysiZtNEGWnTxLZShPL7Ycdum8opVp"
+			]
+		},
+		"contracts/utils/NftReceiver.sol": {
+			"keccak256": "0xde0ace3f976bdf5e023b8eb9d85f5d1db12c14b7ee68a9aa3728e6ddf263fc6f",
+			"license": "BUSL-1.1",
+			"urls": [
+				"bzz-raw://5d4da05b3741f4083b024052acedd5826853387abd8d57a93e81c702c3d6404e",
+				"dweb:/ipfs/QmQ2djjR9sBDygG9pYBFb9YLXbwSsHEJLeBZRpy79GyRzy"
+			]
+		},
+		"contracts/utils/Ownable.sol": {
+			"keccak256": "0x1b8d373c36c6429d0cf59f2e8dc40de843ec026b06bbac985928b898dd577e95",
+			"license": "BUSL-1.1",
+			"urls": [
+				"bzz-raw://d15eadcec99d6a998620138c359000bfa1a8b9be237f0ac9c171efb63dab638e",
+				"dweb:/ipfs/QmS3GKw9bXChFdD2LegDq9rkx8j6wGPAAJwyCEmEFuFyD8"
+			]
+		}
+	},
+	"version": 1
+}

@@ -1,0 +1,459 @@
+{
+	"compiler": {
+		"version": "0.8.4+commit.c7e474f2"
+	},
+	"language": "Solidity",
+	"output": {
+		"abi": [
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "_admin",
+						"type": "address"
+					},
+					{
+						"internalType": "address",
+						"name": "_nftfiHub",
+						"type": "address"
+					},
+					{
+						"internalType": "string[]",
+						"name": "_definedNftTypes",
+						"type": "string[]"
+					},
+					{
+						"internalType": "address[]",
+						"name": "_definedNftWrappers",
+						"type": "address[]"
+					},
+					{
+						"internalType": "address[]",
+						"name": "_permittedNftContracts",
+						"type": "address[]"
+					},
+					{
+						"internalType": "string[]",
+						"name": "_permittedNftTypes",
+						"type": "string[]"
+					}
+				],
+				"stateMutability": "nonpayable",
+				"type": "constructor"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "nftContract",
+						"type": "address"
+					},
+					{
+						"indexed": true,
+						"internalType": "bytes32",
+						"name": "nftType",
+						"type": "bytes32"
+					}
+				],
+				"name": "NFTPermit",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "previousOwner",
+						"type": "address"
+					},
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "newOwner",
+						"type": "address"
+					}
+				],
+				"name": "OwnershipTransferred",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": true,
+						"internalType": "bytes32",
+						"name": "nftType",
+						"type": "bytes32"
+					},
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "nftWrapper",
+						"type": "address"
+					}
+				],
+				"name": "TypeUpdated",
+				"type": "event"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "_nftContract",
+						"type": "address"
+					}
+				],
+				"name": "getNFTPermit",
+				"outputs": [
+					{
+						"internalType": "bytes32",
+						"name": "",
+						"type": "bytes32"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "_nftContract",
+						"type": "address"
+					}
+				],
+				"name": "getNFTWrapper",
+				"outputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "bytes32",
+						"name": "_nftType",
+						"type": "bytes32"
+					}
+				],
+				"name": "getNftTypeWrapper",
+				"outputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "hub",
+				"outputs": [
+					{
+						"internalType": "contract INftfiHub",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "owner",
+				"outputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "_nftContract",
+						"type": "address"
+					},
+					{
+						"internalType": "string",
+						"name": "_nftType",
+						"type": "string"
+					}
+				],
+				"name": "setNFTPermit",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address[]",
+						"name": "_nftContracts",
+						"type": "address[]"
+					},
+					{
+						"internalType": "string[]",
+						"name": "_nftTypes",
+						"type": "string[]"
+					}
+				],
+				"name": "setNFTPermits",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "string",
+						"name": "_nftType",
+						"type": "string"
+					},
+					{
+						"internalType": "address",
+						"name": "_nftWrapper",
+						"type": "address"
+					}
+				],
+				"name": "setNftType",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "string[]",
+						"name": "_nftTypes",
+						"type": "string[]"
+					},
+					{
+						"internalType": "address[]",
+						"name": "_nftWrappers",
+						"type": "address[]"
+					}
+				],
+				"name": "setNftTypes",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "_newOwner",
+						"type": "address"
+					}
+				],
+				"name": "transferOwnership",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			}
+		],
+		"devdoc": {
+			"author": "NFTfi",
+			"details": "Registry for NFT contracts supported by NFTfi. Each NFT is associated with an NFT Type.",
+			"events": {
+				"NFTPermit(address,bytes32)": {
+					"params": {
+						"nftContract": "- Address of the NFT contract.",
+						"nftType": "- NTF type e.g. bytes32(\"CRYPTO_KITTIES\")"
+					}
+				},
+				"TypeUpdated(bytes32,address)": {
+					"params": {
+						"nftType": "- Nft type represented by keccak256('nft type').",
+						"nftWrapper": "- Address of the wrapper contract."
+					}
+				}
+			},
+			"kind": "dev",
+			"methods": {
+				"constructor": {
+					"details": "Sets `nftTypeRegistry` Initialize `nftPermits` with a batch of permitted NFTs",
+					"params": {
+						"_admin": "- Initial admin of this contract.",
+						"_definedNftTypes": "- All the ossible nft types",
+						"_definedNftWrappers": "- All the possible wrappers for the types",
+						"_nftfiHub": "- Address of the NftfiHub contract",
+						"_permittedNftContracts": "- The addresses of the NFT contracts.",
+						"_permittedNftTypes": "- The NFT Types. e.g. \"CRYPTO_KITTIES\" - \"\" means \"disable this permit\" - != \"\" means \"enable permit with the given NFT Type\""
+					}
+				},
+				"getNFTPermit(address)": {
+					"params": {
+						"_nftContract": "- The address of the NFT contract."
+					}
+				},
+				"getNFTWrapper(address)": {
+					"params": {
+						"_nftContract": "- The address of the NFT contract."
+					}
+				},
+				"getNftTypeWrapper(bytes32)": {
+					"params": {
+						"_nftType": "- The nft type, e.g. bytes32(\"ERC721\"), or bytes32(\"ERC1155\")."
+					}
+				},
+				"owner()": {
+					"details": "Returns the address of the current owner."
+				},
+				"setNFTPermit(address,string)": {
+					"params": {
+						"_nftContract": "- The address of the NFT contract.",
+						"_nftType": "- The NFT Type. e.g. \"CRYPTO_KITTIES\" - \"\" means \"disable this permit\" - != \"\" means \"enable permit with the given NFT Type\""
+					}
+				},
+				"setNFTPermits(address[],string[])": {
+					"params": {
+						"_nftContracts": "- The addresses of the NFT contracts.",
+						"_nftTypes": "- The NFT Types. e.g. \"CRYPTO_KITTIES\" - \"\" means \"disable this permit\" - != \"\" means \"enable permit with the given NFT Type\""
+					}
+				},
+				"setNftType(string,address)": {
+					"params": {
+						"_nftType": "- The nft type, e.g. \"ERC721\", or \"ERC1155\".",
+						"_nftWrapper": "- The address of the wrapper contract that implements INftWrapper behaviour for dealing with NFTs."
+					}
+				},
+				"setNftTypes(string[],address[])": {
+					"params": {
+						"_nftTypes": "- The nft types, e.g. \"ERC721\", or \"ERC1155\".",
+						"_nftWrappers": "- The addresses of the wrapper contract that implements INftWrapper behaviour for dealing with NFTs."
+					}
+				},
+				"transferOwnership(address)": {
+					"details": "Transfers ownership of the contract to a new account (`newOwner`). Can only be called by the current owner."
+				}
+			},
+			"title": "PermittedNFTsAndTypeRegistry",
+			"version": 1
+		},
+		"userdoc": {
+			"events": {
+				"NFTPermit(address,bytes32)": {
+					"notice": "This event is fired whenever the admin sets a NFT's permit."
+				},
+				"TypeUpdated(bytes32,address)": {
+					"notice": "This event is fired whenever the admins register a ntf type."
+				}
+			},
+			"kind": "user",
+			"methods": {
+				"getNFTPermit(address)": {
+					"notice": "This function can be called by anyone to lookup the Nft Type associated with the contract.Returns the NFT Type: - bytes32(\"\") means \"not permitted\" - != bytes32(\"\") means \"permitted with the given NFT Type\""
+				},
+				"getNFTWrapper(address)": {
+					"notice": "This function can be called by anyone to lookup the address of the NftWrapper associated to the `_nftContract` type."
+				},
+				"getNftTypeWrapper(bytes32)": {
+					"notice": "This function can be called by anyone to get the contract address that implements the given nft type."
+				},
+				"setNFTPermit(address,string)": {
+					"notice": "This function can be called by admins to change the permitted list status of an NFT contract. This includes both adding an NFT contract to the permitted list and removing it. `_nftContract` can not be zero address."
+				},
+				"setNFTPermits(address[],string[])": {
+					"notice": "This function can be called by admins to change the permitted list status of a batch NFT contracts. This includes both adding an NFT contract to the permitted list and removing it. `_nftContract` can not be zero address."
+				},
+				"setNftType(string,address)": {
+					"notice": "Set or update the wrapper contract address for the given NFT Type. Set address(0) for a nft type for un-register such type."
+				},
+				"setNftTypes(string[],address[])": {
+					"notice": "Batch set or update the wrappers contract address for the given batch of NFT Types. Set address(0) for a nft type for un-register such type."
+				}
+			},
+			"version": 1
+		}
+	},
+	"settings": {
+		"compilationTarget": {
+			"contracts/PermittedNFTsAndTypeRegistry.sol": "PermittedNFTsAndTypeRegistry"
+		},
+		"evmVersion": "istanbul",
+		"libraries": {},
+		"metadata": {
+			"bytecodeHash": "ipfs"
+		},
+		"optimizer": {
+			"enabled": true,
+			"runs": 100
+		},
+		"remappings": []
+	},
+	"sources": {
+		"@openzeppelin/contracts/utils/Context.sol": {
+			"keccak256": "0xe2e337e6dde9ef6b680e07338c493ebea1b5fd09b43424112868e9cc1706bca7",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://6df0ddf21ce9f58271bdfaa85cde98b200ef242a05a3f85c2bc10a8294800a92",
+				"dweb:/ipfs/QmRK2Y5Yc6BK7tGKkgsgn3aJEQGi5aakeSPZvS65PV8Xp3"
+			]
+		},
+		"contracts/PermittedNFTsAndTypeRegistry.sol": {
+			"keccak256": "0xe0c318fd694920af812aaf908f8a36c929c59c6c92a359dd698027a5da6320ab",
+			"license": "BUSL-1.1",
+			"urls": [
+				"bzz-raw://71330ec6fb6340c1fb0aee3399d5945a81cb088920531cc8d642532e73af14fe",
+				"dweb:/ipfs/QmSfMWFsAVeGMbdJtRer2jYXNSu7vnqfPLLt27oxDasxn4"
+			]
+		},
+		"contracts/interfaces/INftTypeRegistry.sol": {
+			"keccak256": "0x8b44cd0a43a4d793116016b977a48cc9ee6cd7e72b05d2aa479ae8da38711538",
+			"license": "BUSL-1.1",
+			"urls": [
+				"bzz-raw://3e789f750b28f6516260d62b0e8523a9351d1b9ca5ca6d91dc4930b341e107ec",
+				"dweb:/ipfs/QmXsdi3XxTDus4vF783VZEtdYf9peuGiawFSKvWTRyMtUS"
+			]
+		},
+		"contracts/interfaces/INftfiHub.sol": {
+			"keccak256": "0x9c4c27933c916224e63d7944d2f928b713ca1f82993c1c95fcc33bbfba83ad74",
+			"license": "BUSL-1.1",
+			"urls": [
+				"bzz-raw://abddf22b64aad3062da9a6bc3b581ef14793baa306128d2e27068e8e2eaf97b4",
+				"dweb:/ipfs/QmcUMV6w6vNDu7CJSas33Ech85Pfkjxb1cowAYSMekjdf2"
+			]
+		},
+		"contracts/interfaces/IPermittedNFTs.sol": {
+			"keccak256": "0x0eb676dad47c26800c3b6d6b64c227dc2e54eb1afcd2119f82e79b5435e28ab2",
+			"license": "BUSL-1.1",
+			"urls": [
+				"bzz-raw://a0a055c496c0212854ae7c4c55bfdfc3f3377531eae2ea950cdb639c94bee7af",
+				"dweb:/ipfs/QmZRecY9miLKaLvGLX5kRYEsBFRzLryduKgsMEGjvCnnCv"
+			]
+		},
+		"contracts/utils/ContractKeys.sol": {
+			"keccak256": "0x18c3f3a08195e774d39dbbeef091645330e1ec8546a9be2355bbf3fc271e547c",
+			"license": "BUSL-1.1",
+			"urls": [
+				"bzz-raw://c662ce06df0f011f6494c8119e0141254f65da860bb0294f0b4b6d599a37ec6c",
+				"dweb:/ipfs/QmZ1FtiUm6stxQNGT3PdNssqHw4D6uYUG3nazb3v7BF8zE"
+			]
+		},
+		"contracts/utils/Ownable.sol": {
+			"keccak256": "0x1b8d373c36c6429d0cf59f2e8dc40de843ec026b06bbac985928b898dd577e95",
+			"license": "BUSL-1.1",
+			"urls": [
+				"bzz-raw://d15eadcec99d6a998620138c359000bfa1a8b9be237f0ac9c171efb63dab638e",
+				"dweb:/ipfs/QmS3GKw9bXChFdD2LegDq9rkx8j6wGPAAJwyCEmEFuFyD8"
+			]
+		}
+	},
+	"version": 1
+}

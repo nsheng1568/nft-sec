@@ -1,0 +1,350 @@
+{
+	"id": "98300b5d3887f46440f5ad9e816be92d",
+	"_format": "hh-sol-build-info-1",
+	"solcVersion": "0.8.4",
+	"solcLongVersion": "0.8.4+commit.c7e474f2",
+	"input": {
+		"language": "Solidity",
+		"sources": {
+			"Users/nsheng/Documents/Winter 23/AFP/src/NFTfi/contracts/interfaces/INftTypeRegistry.sol": {
+				"content": "// SPDX-License-Identifier: BUSL-1.1\n\npragma solidity 0.8.4;\n\n/**\n * @title INftTypeRegistry\n * @author NFTfi\n * @dev Interface for NFT Types Registry supported by NFTfi.\n */\ninterface INftTypeRegistry {\n    function setNftType(bytes32 _nftType, address _nftWrapper) external;\n\n    function getNftTypeWrapper(bytes32 _nftType) external view returns (address);\n}"
+			}
+		},
+		"settings": {
+			"optimizer": {
+				"enabled": true,
+				"runs": 100
+			},
+			"outputSelection": {
+				"*": {
+					"": [
+						"ast"
+					],
+					"*": [
+						"abi",
+						"metadata",
+						"devdoc",
+						"userdoc",
+						"storageLayout",
+						"evm.legacyAssembly",
+						"evm.bytecode",
+						"evm.deployedBytecode",
+						"evm.methodIdentifiers",
+						"evm.gasEstimates",
+						"evm.assembly"
+					]
+				}
+			}
+		}
+	},
+	"output": {
+		"contracts": {
+			"Users/nsheng/Documents/Winter 23/AFP/src/NFTfi/contracts/interfaces/INftTypeRegistry.sol": {
+				"INftTypeRegistry": {
+					"abi": [
+						{
+							"inputs": [
+								{
+									"internalType": "bytes32",
+									"name": "_nftType",
+									"type": "bytes32"
+								}
+							],
+							"name": "getNftTypeWrapper",
+							"outputs": [
+								{
+									"internalType": "address",
+									"name": "",
+									"type": "address"
+								}
+							],
+							"stateMutability": "view",
+							"type": "function"
+						},
+						{
+							"inputs": [
+								{
+									"internalType": "bytes32",
+									"name": "_nftType",
+									"type": "bytes32"
+								},
+								{
+									"internalType": "address",
+									"name": "_nftWrapper",
+									"type": "address"
+								}
+							],
+							"name": "setNftType",
+							"outputs": [],
+							"stateMutability": "nonpayable",
+							"type": "function"
+						}
+					],
+					"devdoc": {
+						"author": "NFTfi",
+						"details": "Interface for NFT Types Registry supported by NFTfi.",
+						"kind": "dev",
+						"methods": {},
+						"title": "INftTypeRegistry",
+						"version": 1
+					},
+					"evm": {
+						"assembly": "",
+						"bytecode": {
+							"generatedSources": [],
+							"linkReferences": {},
+							"object": "",
+							"opcodes": "",
+							"sourceMap": ""
+						},
+						"deployedBytecode": {
+							"generatedSources": [],
+							"immutableReferences": {},
+							"linkReferences": {},
+							"object": "",
+							"opcodes": "",
+							"sourceMap": ""
+						},
+						"gasEstimates": null,
+						"legacyAssembly": null,
+						"methodIdentifiers": {
+							"getNftTypeWrapper(bytes32)": "1a3dd0a5",
+							"setNftType(bytes32,address)": "65f79615"
+						}
+					},
+					"metadata": "{\"compiler\":{\"version\":\"0.8.4+commit.c7e474f2\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"_nftType\",\"type\":\"bytes32\"}],\"name\":\"getNftTypeWrapper\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"_nftType\",\"type\":\"bytes32\"},{\"internalType\":\"address\",\"name\":\"_nftWrapper\",\"type\":\"address\"}],\"name\":\"setNftType\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"}],\"devdoc\":{\"author\":\"NFTfi\",\"details\":\"Interface for NFT Types Registry supported by NFTfi.\",\"kind\":\"dev\",\"methods\":{},\"title\":\"INftTypeRegistry\",\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{},\"version\":1}},\"settings\":{\"compilationTarget\":{\"Users/nsheng/Documents/Winter 23/AFP/src/NFTfi/contracts/interfaces/INftTypeRegistry.sol\":\"INftTypeRegistry\"},\"evmVersion\":\"istanbul\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":true,\"runs\":100},\"remappings\":[]},\"sources\":{\"Users/nsheng/Documents/Winter 23/AFP/src/NFTfi/contracts/interfaces/INftTypeRegistry.sol\":{\"keccak256\":\"0x8b44cd0a43a4d793116016b977a48cc9ee6cd7e72b05d2aa479ae8da38711538\",\"license\":\"BUSL-1.1\",\"urls\":[\"bzz-raw://3e789f750b28f6516260d62b0e8523a9351d1b9ca5ca6d91dc4930b341e107ec\",\"dweb:/ipfs/QmXsdi3XxTDus4vF783VZEtdYf9peuGiawFSKvWTRyMtUS\"]}},\"version\":1}",
+					"storageLayout": {
+						"storage": [],
+						"types": null
+					},
+					"userdoc": {
+						"kind": "user",
+						"methods": {},
+						"version": 1
+					}
+				}
+			}
+		},
+		"sources": {
+			"Users/nsheng/Documents/Winter 23/AFP/src/NFTfi/contracts/interfaces/INftTypeRegistry.sol": {
+				"ast": {
+					"absolutePath": "Users/nsheng/Documents/Winter 23/AFP/src/NFTfi/contracts/interfaces/INftTypeRegistry.sol",
+					"exportedSymbols": {
+						"INftTypeRegistry": [
+							17
+						]
+					},
+					"id": 18,
+					"license": "BUSL-1.1",
+					"nodeType": "SourceUnit",
+					"nodes": [
+						{
+							"id": 1,
+							"literals": [
+								"solidity",
+								"0.8",
+								".4"
+							],
+							"nodeType": "PragmaDirective",
+							"src": "38:22:0"
+						},
+						{
+							"abstract": false,
+							"baseContracts": [],
+							"contractDependencies": [],
+							"contractKind": "interface",
+							"documentation": {
+								"id": 2,
+								"nodeType": "StructuredDocumentation",
+								"src": "62:112:0",
+								"text": " @title INftTypeRegistry\n @author NFTfi\n @dev Interface for NFT Types Registry supported by NFTfi."
+							},
+							"fullyImplemented": false,
+							"id": 17,
+							"linearizedBaseContracts": [
+								17
+							],
+							"name": "INftTypeRegistry",
+							"nameLocation": "185:16:0",
+							"nodeType": "ContractDefinition",
+							"nodes": [
+								{
+									"functionSelector": "65f79615",
+									"id": 9,
+									"implemented": false,
+									"kind": "function",
+									"modifiers": [],
+									"name": "setNftType",
+									"nameLocation": "217:10:0",
+									"nodeType": "FunctionDefinition",
+									"parameters": {
+										"id": 7,
+										"nodeType": "ParameterList",
+										"parameters": [
+											{
+												"constant": false,
+												"id": 4,
+												"mutability": "mutable",
+												"name": "_nftType",
+												"nameLocation": "236:8:0",
+												"nodeType": "VariableDeclaration",
+												"scope": 9,
+												"src": "228:16:0",
+												"stateVariable": false,
+												"storageLocation": "default",
+												"typeDescriptions": {
+													"typeIdentifier": "t_bytes32",
+													"typeString": "bytes32"
+												},
+												"typeName": {
+													"id": 3,
+													"name": "bytes32",
+													"nodeType": "ElementaryTypeName",
+													"src": "228:7:0",
+													"typeDescriptions": {
+														"typeIdentifier": "t_bytes32",
+														"typeString": "bytes32"
+													}
+												},
+												"visibility": "internal"
+											},
+											{
+												"constant": false,
+												"id": 6,
+												"mutability": "mutable",
+												"name": "_nftWrapper",
+												"nameLocation": "254:11:0",
+												"nodeType": "VariableDeclaration",
+												"scope": 9,
+												"src": "246:19:0",
+												"stateVariable": false,
+												"storageLocation": "default",
+												"typeDescriptions": {
+													"typeIdentifier": "t_address",
+													"typeString": "address"
+												},
+												"typeName": {
+													"id": 5,
+													"name": "address",
+													"nodeType": "ElementaryTypeName",
+													"src": "246:7:0",
+													"stateMutability": "nonpayable",
+													"typeDescriptions": {
+														"typeIdentifier": "t_address",
+														"typeString": "address"
+													}
+												},
+												"visibility": "internal"
+											}
+										],
+										"src": "227:39:0"
+									},
+									"returnParameters": {
+										"id": 8,
+										"nodeType": "ParameterList",
+										"parameters": [],
+										"src": "275:0:0"
+									},
+									"scope": 17,
+									"src": "208:68:0",
+									"stateMutability": "nonpayable",
+									"virtual": false,
+									"visibility": "external"
+								},
+								{
+									"functionSelector": "1a3dd0a5",
+									"id": 16,
+									"implemented": false,
+									"kind": "function",
+									"modifiers": [],
+									"name": "getNftTypeWrapper",
+									"nameLocation": "291:17:0",
+									"nodeType": "FunctionDefinition",
+									"parameters": {
+										"id": 12,
+										"nodeType": "ParameterList",
+										"parameters": [
+											{
+												"constant": false,
+												"id": 11,
+												"mutability": "mutable",
+												"name": "_nftType",
+												"nameLocation": "317:8:0",
+												"nodeType": "VariableDeclaration",
+												"scope": 16,
+												"src": "309:16:0",
+												"stateVariable": false,
+												"storageLocation": "default",
+												"typeDescriptions": {
+													"typeIdentifier": "t_bytes32",
+													"typeString": "bytes32"
+												},
+												"typeName": {
+													"id": 10,
+													"name": "bytes32",
+													"nodeType": "ElementaryTypeName",
+													"src": "309:7:0",
+													"typeDescriptions": {
+														"typeIdentifier": "t_bytes32",
+														"typeString": "bytes32"
+													}
+												},
+												"visibility": "internal"
+											}
+										],
+										"src": "308:18:0"
+									},
+									"returnParameters": {
+										"id": 15,
+										"nodeType": "ParameterList",
+										"parameters": [
+											{
+												"constant": false,
+												"id": 14,
+												"mutability": "mutable",
+												"name": "",
+												"nameLocation": "-1:-1:-1",
+												"nodeType": "VariableDeclaration",
+												"scope": 16,
+												"src": "350:7:0",
+												"stateVariable": false,
+												"storageLocation": "default",
+												"typeDescriptions": {
+													"typeIdentifier": "t_address",
+													"typeString": "address"
+												},
+												"typeName": {
+													"id": 13,
+													"name": "address",
+													"nodeType": "ElementaryTypeName",
+													"src": "350:7:0",
+													"stateMutability": "nonpayable",
+													"typeDescriptions": {
+														"typeIdentifier": "t_address",
+														"typeString": "address"
+													}
+												},
+												"visibility": "internal"
+											}
+										],
+										"src": "349:9:0"
+									},
+									"scope": 17,
+									"src": "282:77:0",
+									"stateMutability": "view",
+									"virtual": false,
+									"visibility": "external"
+								}
+							],
+							"scope": 18,
+							"src": "175:186:0",
+							"usedErrors": []
+						}
+					],
+					"src": "38:323:0"
+				},
+				"id": 0
+			}
+		}
+	}
+}

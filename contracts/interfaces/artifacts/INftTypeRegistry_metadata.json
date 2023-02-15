@@ -1,0 +1,86 @@
+{
+	"compiler": {
+		"version": "0.8.4+commit.c7e474f2"
+	},
+	"language": "Solidity",
+	"output": {
+		"abi": [
+			{
+				"inputs": [
+					{
+						"internalType": "bytes32",
+						"name": "_nftType",
+						"type": "bytes32"
+					}
+				],
+				"name": "getNftTypeWrapper",
+				"outputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "bytes32",
+						"name": "_nftType",
+						"type": "bytes32"
+					},
+					{
+						"internalType": "address",
+						"name": "_nftWrapper",
+						"type": "address"
+					}
+				],
+				"name": "setNftType",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			}
+		],
+		"devdoc": {
+			"author": "NFTfi",
+			"details": "Interface for NFT Types Registry supported by NFTfi.",
+			"kind": "dev",
+			"methods": {},
+			"title": "INftTypeRegistry",
+			"version": 1
+		},
+		"userdoc": {
+			"kind": "user",
+			"methods": {},
+			"version": 1
+		}
+	},
+	"settings": {
+		"compilationTarget": {
+			"Users/nsheng/Documents/Winter 23/AFP/src/NFTfi/contracts/interfaces/INftTypeRegistry.sol": "INftTypeRegistry"
+		},
+		"evmVersion": "istanbul",
+		"libraries": {},
+		"metadata": {
+			"bytecodeHash": "ipfs"
+		},
+		"optimizer": {
+			"enabled": true,
+			"runs": 100
+		},
+		"remappings": []
+	},
+	"sources": {
+		"Users/nsheng/Documents/Winter 23/AFP/src/NFTfi/contracts/interfaces/INftTypeRegistry.sol": {
+			"keccak256": "0x8b44cd0a43a4d793116016b977a48cc9ee6cd7e72b05d2aa479ae8da38711538",
+			"license": "BUSL-1.1",
+			"urls": [
+				"bzz-raw://3e789f750b28f6516260d62b0e8523a9351d1b9ca5ca6d91dc4930b341e107ec",
+				"dweb:/ipfs/QmXsdi3XxTDus4vF783VZEtdYf9peuGiawFSKvWTRyMtUS"
+			]
+		}
+	},
+	"version": 1
+}
