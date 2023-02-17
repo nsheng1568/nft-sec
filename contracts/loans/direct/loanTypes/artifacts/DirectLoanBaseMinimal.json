@@ -1,0 +1,1171 @@
+{
+	"deploy": {
+		"VM:-": {
+			"linkReferences": {},
+			"autoDeployLib": true
+		},
+		"main:1": {
+			"linkReferences": {},
+			"autoDeployLib": true
+		},
+		"ropsten:3": {
+			"linkReferences": {},
+			"autoDeployLib": true
+		},
+		"rinkeby:4": {
+			"linkReferences": {},
+			"autoDeployLib": true
+		},
+		"kovan:42": {
+			"linkReferences": {},
+			"autoDeployLib": true
+		},
+		"goerli:5": {
+			"linkReferences": {},
+			"autoDeployLib": true
+		},
+		"Custom": {
+			"linkReferences": {},
+			"autoDeployLib": true
+		}
+	},
+	"data": {
+		"bytecode": {
+			"generatedSources": [],
+			"linkReferences": {},
+			"object": "",
+			"opcodes": "",
+			"sourceMap": ""
+		},
+		"deployedBytecode": {
+			"generatedSources": [],
+			"immutableReferences": {},
+			"linkReferences": {},
+			"object": "",
+			"opcodes": "",
+			"sourceMap": ""
+		},
+		"gasEstimates": null,
+		"methodIdentifiers": {
+			"HUNDRED_PERCENT()": "6ed93dd0",
+			"LOAN_COORDINATOR()": "77cfa991",
+			"adminFeeInBasisPoints()": "a4441a6f",
+			"cancelLoanCommitmentBeforeLoanHasBegun(uint256)": "9658e405",
+			"drainERC1155Airdrop(address,uint256,address)": "ac4e35ea",
+			"drainERC20Airdrop(address,address)": "05b406cf",
+			"drainERC721Airdrop(address,uint256,address)": "5163a1c3",
+			"getERC20Permit(address)": "872873be",
+			"getPayoffAmount(uint32)": "ab3b1280",
+			"getWhetherNonceHasBeenUsedForUser(address,uint256)": "328404b0",
+			"hub()": "365a86fc",
+			"liquidateOverdueLoan(uint32)": "b31ec1d4",
+			"loanIdToLoan(uint32)": "227cda18",
+			"loanIdToLoanExtras(uint32)": "0ff81c3f",
+			"loanRepaidOrLiquidated(uint32)": "0717f3aa",
+			"maximumLoanDuration()": "192b355d",
+			"mintObligationReceipt(uint32)": "bce42e42",
+			"onERC1155BatchReceived(address,address,uint256[],uint256[],bytes)": "bc197c81",
+			"onERC1155Received(address,address,uint256,uint256,bytes)": "f23a6e61",
+			"onERC721Received(address,address,uint256,bytes)": "150b7a02",
+			"owner()": "8da5cb5b",
+			"pause()": "8456cb59",
+			"paused()": "5c975abb",
+			"payBackLoan(uint32)": "2b218022",
+			"pullAirdrop(uint32,address,bytes,address,uint256,bool,uint256)": "318dacd3",
+			"renegotiateLoan(uint32,uint32,uint256,uint256,uint256,uint256,bytes)": "b18e7772",
+			"setERC20Permit(address,bool)": "7836baf1",
+			"setERC20Permits(address[],bool[])": "79b64040",
+			"supportsInterface(bytes4)": "01ffc9a7",
+			"transferOwnership(address)": "f2fde38b",
+			"unpause()": "3f4ba83a",
+			"updateAdminFee(uint16)": "1c6caf41",
+			"updateMaximumLoanDuration(uint256)": "47948d92",
+			"wrapCollateral(uint32)": "59a72734"
+		}
+	},
+	"abi": [
+		{
+			"anonymous": false,
+			"inputs": [
+				{
+					"indexed": false,
+					"internalType": "uint16",
+					"name": "newAdminFee",
+					"type": "uint16"
+				}
+			],
+			"name": "AdminFeeUpdated",
+			"type": "event"
+		},
+		{
+			"anonymous": false,
+			"inputs": [
+				{
+					"indexed": true,
+					"internalType": "address",
+					"name": "erc20Contract",
+					"type": "address"
+				},
+				{
+					"indexed": false,
+					"internalType": "bool",
+					"name": "isPermitted",
+					"type": "bool"
+				}
+			],
+			"name": "ERC20Permit",
+			"type": "event"
+		},
+		{
+			"anonymous": false,
+			"inputs": [
+				{
+					"indexed": true,
+					"internalType": "uint32",
+					"name": "loanId",
+					"type": "uint32"
+				},
+				{
+					"indexed": true,
+					"internalType": "address",
+					"name": "borrower",
+					"type": "address"
+				},
+				{
+					"indexed": true,
+					"internalType": "address",
+					"name": "lender",
+					"type": "address"
+				},
+				{
+					"indexed": false,
+					"internalType": "uint256",
+					"name": "loanPrincipalAmount",
+					"type": "uint256"
+				},
+				{
+					"indexed": false,
+					"internalType": "uint256",
+					"name": "nftCollateralId",
+					"type": "uint256"
+				},
+				{
+					"indexed": false,
+					"internalType": "uint256",
+					"name": "loanMaturityDate",
+					"type": "uint256"
+				},
+				{
+					"indexed": false,
+					"internalType": "uint256",
+					"name": "loanLiquidationDate",
+					"type": "uint256"
+				},
+				{
+					"indexed": false,
+					"internalType": "address",
+					"name": "nftCollateralContract",
+					"type": "address"
+				}
+			],
+			"name": "LoanLiquidated",
+			"type": "event"
+		},
+		{
+			"anonymous": false,
+			"inputs": [
+				{
+					"indexed": true,
+					"internalType": "uint32",
+					"name": "loanId",
+					"type": "uint32"
+				},
+				{
+					"indexed": true,
+					"internalType": "address",
+					"name": "borrower",
+					"type": "address"
+				},
+				{
+					"indexed": true,
+					"internalType": "address",
+					"name": "lender",
+					"type": "address"
+				},
+				{
+					"indexed": false,
+					"internalType": "uint32",
+					"name": "newLoanDuration",
+					"type": "uint32"
+				},
+				{
+					"indexed": false,
+					"internalType": "uint256",
+					"name": "newMaximumRepaymentAmount",
+					"type": "uint256"
+				},
+				{
+					"indexed": false,
+					"internalType": "uint256",
+					"name": "renegotiationFee",
+					"type": "uint256"
+				},
+				{
+					"indexed": false,
+					"internalType": "uint256",
+					"name": "renegotiationAdminFee",
+					"type": "uint256"
+				}
+			],
+			"name": "LoanRenegotiated",
+			"type": "event"
+		},
+		{
+			"anonymous": false,
+			"inputs": [
+				{
+					"indexed": true,
+					"internalType": "uint32",
+					"name": "loanId",
+					"type": "uint32"
+				},
+				{
+					"indexed": true,
+					"internalType": "address",
+					"name": "borrower",
+					"type": "address"
+				},
+				{
+					"indexed": true,
+					"internalType": "address",
+					"name": "lender",
+					"type": "address"
+				},
+				{
+					"indexed": false,
+					"internalType": "uint256",
+					"name": "loanPrincipalAmount",
+					"type": "uint256"
+				},
+				{
+					"indexed": false,
+					"internalType": "uint256",
+					"name": "nftCollateralId",
+					"type": "uint256"
+				},
+				{
+					"indexed": false,
+					"internalType": "uint256",
+					"name": "amountPaidToLender",
+					"type": "uint256"
+				},
+				{
+					"indexed": false,
+					"internalType": "uint256",
+					"name": "adminFee",
+					"type": "uint256"
+				},
+				{
+					"indexed": false,
+					"internalType": "uint256",
+					"name": "revenueShare",
+					"type": "uint256"
+				},
+				{
+					"indexed": false,
+					"internalType": "address",
+					"name": "revenueSharePartner",
+					"type": "address"
+				},
+				{
+					"indexed": false,
+					"internalType": "address",
+					"name": "nftCollateralContract",
+					"type": "address"
+				},
+				{
+					"indexed": false,
+					"internalType": "address",
+					"name": "loanERC20Denomination",
+					"type": "address"
+				}
+			],
+			"name": "LoanRepaid",
+			"type": "event"
+		},
+		{
+			"anonymous": false,
+			"inputs": [
+				{
+					"indexed": true,
+					"internalType": "uint32",
+					"name": "loanId",
+					"type": "uint32"
+				},
+				{
+					"indexed": true,
+					"internalType": "address",
+					"name": "borrower",
+					"type": "address"
+				},
+				{
+					"indexed": true,
+					"internalType": "address",
+					"name": "lender",
+					"type": "address"
+				},
+				{
+					"components": [
+						{
+							"internalType": "uint256",
+							"name": "loanPrincipalAmount",
+							"type": "uint256"
+						},
+						{
+							"internalType": "uint256",
+							"name": "maximumRepaymentAmount",
+							"type": "uint256"
+						},
+						{
+							"internalType": "uint256",
+							"name": "nftCollateralId",
+							"type": "uint256"
+						},
+						{
+							"internalType": "address",
+							"name": "loanERC20Denomination",
+							"type": "address"
+						},
+						{
+							"internalType": "uint32",
+							"name": "loanDuration",
+							"type": "uint32"
+						},
+						{
+							"internalType": "uint16",
+							"name": "loanInterestRateForDurationInBasisPoints",
+							"type": "uint16"
+						},
+						{
+							"internalType": "uint16",
+							"name": "loanAdminFeeInBasisPoints",
+							"type": "uint16"
+						},
+						{
+							"internalType": "address",
+							"name": "nftCollateralWrapper",
+							"type": "address"
+						},
+						{
+							"internalType": "uint64",
+							"name": "loanStartTime",
+							"type": "uint64"
+						},
+						{
+							"internalType": "address",
+							"name": "nftCollateralContract",
+							"type": "address"
+						},
+						{
+							"internalType": "address",
+							"name": "borrower",
+							"type": "address"
+						}
+					],
+					"indexed": false,
+					"internalType": "struct LoanData.LoanTerms",
+					"name": "loanTerms",
+					"type": "tuple"
+				},
+				{
+					"components": [
+						{
+							"internalType": "address",
+							"name": "revenueSharePartner",
+							"type": "address"
+						},
+						{
+							"internalType": "uint16",
+							"name": "revenueShareInBasisPoints",
+							"type": "uint16"
+						},
+						{
+							"internalType": "uint16",
+							"name": "referralFeeInBasisPoints",
+							"type": "uint16"
+						}
+					],
+					"indexed": false,
+					"internalType": "struct LoanData.LoanExtras",
+					"name": "loanExtras",
+					"type": "tuple"
+				}
+			],
+			"name": "LoanStarted",
+			"type": "event"
+		},
+		{
+			"anonymous": false,
+			"inputs": [
+				{
+					"indexed": false,
+					"internalType": "uint256",
+					"name": "newMaximumLoanDuration",
+					"type": "uint256"
+				}
+			],
+			"name": "MaximumLoanDurationUpdated",
+			"type": "event"
+		},
+		{
+			"anonymous": false,
+			"inputs": [
+				{
+					"indexed": true,
+					"internalType": "address",
+					"name": "previousOwner",
+					"type": "address"
+				},
+				{
+					"indexed": true,
+					"internalType": "address",
+					"name": "newOwner",
+					"type": "address"
+				}
+			],
+			"name": "OwnershipTransferred",
+			"type": "event"
+		},
+		{
+			"anonymous": false,
+			"inputs": [
+				{
+					"indexed": false,
+					"internalType": "address",
+					"name": "account",
+					"type": "address"
+				}
+			],
+			"name": "Paused",
+			"type": "event"
+		},
+		{
+			"anonymous": false,
+			"inputs": [
+				{
+					"indexed": false,
+					"internalType": "address",
+					"name": "account",
+					"type": "address"
+				}
+			],
+			"name": "Unpaused",
+			"type": "event"
+		},
+		{
+			"inputs": [],
+			"name": "HUNDRED_PERCENT",
+			"outputs": [
+				{
+					"internalType": "uint16",
+					"name": "",
+					"type": "uint16"
+				}
+			],
+			"stateMutability": "view",
+			"type": "function"
+		},
+		{
+			"inputs": [],
+			"name": "LOAN_COORDINATOR",
+			"outputs": [
+				{
+					"internalType": "bytes32",
+					"name": "",
+					"type": "bytes32"
+				}
+			],
+			"stateMutability": "view",
+			"type": "function"
+		},
+		{
+			"inputs": [],
+			"name": "adminFeeInBasisPoints",
+			"outputs": [
+				{
+					"internalType": "uint16",
+					"name": "",
+					"type": "uint16"
+				}
+			],
+			"stateMutability": "view",
+			"type": "function"
+		},
+		{
+			"inputs": [
+				{
+					"internalType": "uint256",
+					"name": "_nonce",
+					"type": "uint256"
+				}
+			],
+			"name": "cancelLoanCommitmentBeforeLoanHasBegun",
+			"outputs": [],
+			"stateMutability": "nonpayable",
+			"type": "function"
+		},
+		{
+			"inputs": [
+				{
+					"internalType": "address",
+					"name": "_tokenAddress",
+					"type": "address"
+				},
+				{
+					"internalType": "uint256",
+					"name": "_tokenId",
+					"type": "uint256"
+				},
+				{
+					"internalType": "address",
+					"name": "_receiver",
+					"type": "address"
+				}
+			],
+			"name": "drainERC1155Airdrop",
+			"outputs": [],
+			"stateMutability": "nonpayable",
+			"type": "function"
+		},
+		{
+			"inputs": [
+				{
+					"internalType": "address",
+					"name": "_tokenAddress",
+					"type": "address"
+				},
+				{
+					"internalType": "address",
+					"name": "_receiver",
+					"type": "address"
+				}
+			],
+			"name": "drainERC20Airdrop",
+			"outputs": [],
+			"stateMutability": "nonpayable",
+			"type": "function"
+		},
+		{
+			"inputs": [
+				{
+					"internalType": "address",
+					"name": "_tokenAddress",
+					"type": "address"
+				},
+				{
+					"internalType": "uint256",
+					"name": "_tokenId",
+					"type": "uint256"
+				},
+				{
+					"internalType": "address",
+					"name": "_receiver",
+					"type": "address"
+				}
+			],
+			"name": "drainERC721Airdrop",
+			"outputs": [],
+			"stateMutability": "nonpayable",
+			"type": "function"
+		},
+		{
+			"inputs": [
+				{
+					"internalType": "address",
+					"name": "_erc20",
+					"type": "address"
+				}
+			],
+			"name": "getERC20Permit",
+			"outputs": [
+				{
+					"internalType": "bool",
+					"name": "",
+					"type": "bool"
+				}
+			],
+			"stateMutability": "view",
+			"type": "function"
+		},
+		{
+			"inputs": [
+				{
+					"internalType": "uint32",
+					"name": "_loanId",
+					"type": "uint32"
+				}
+			],
+			"name": "getPayoffAmount",
+			"outputs": [
+				{
+					"internalType": "uint256",
+					"name": "",
+					"type": "uint256"
+				}
+			],
+			"stateMutability": "view",
+			"type": "function"
+		},
+		{
+			"inputs": [
+				{
+					"internalType": "address",
+					"name": "_user",
+					"type": "address"
+				},
+				{
+					"internalType": "uint256",
+					"name": "_nonce",
+					"type": "uint256"
+				}
+			],
+			"name": "getWhetherNonceHasBeenUsedForUser",
+			"outputs": [
+				{
+					"internalType": "bool",
+					"name": "",
+					"type": "bool"
+				}
+			],
+			"stateMutability": "view",
+			"type": "function"
+		},
+		{
+			"inputs": [],
+			"name": "hub",
+			"outputs": [
+				{
+					"internalType": "contract INftfiHub",
+					"name": "",
+					"type": "address"
+				}
+			],
+			"stateMutability": "view",
+			"type": "function"
+		},
+		{
+			"inputs": [
+				{
+					"internalType": "uint32",
+					"name": "_loanId",
+					"type": "uint32"
+				}
+			],
+			"name": "liquidateOverdueLoan",
+			"outputs": [],
+			"stateMutability": "nonpayable",
+			"type": "function"
+		},
+		{
+			"inputs": [
+				{
+					"internalType": "uint32",
+					"name": "",
+					"type": "uint32"
+				}
+			],
+			"name": "loanIdToLoan",
+			"outputs": [
+				{
+					"internalType": "uint256",
+					"name": "loanPrincipalAmount",
+					"type": "uint256"
+				},
+				{
+					"internalType": "uint256",
+					"name": "maximumRepaymentAmount",
+					"type": "uint256"
+				},
+				{
+					"internalType": "uint256",
+					"name": "nftCollateralId",
+					"type": "uint256"
+				},
+				{
+					"internalType": "address",
+					"name": "loanERC20Denomination",
+					"type": "address"
+				},
+				{
+					"internalType": "uint32",
+					"name": "loanDuration",
+					"type": "uint32"
+				},
+				{
+					"internalType": "uint16",
+					"name": "loanInterestRateForDurationInBasisPoints",
+					"type": "uint16"
+				},
+				{
+					"internalType": "uint16",
+					"name": "loanAdminFeeInBasisPoints",
+					"type": "uint16"
+				},
+				{
+					"internalType": "address",
+					"name": "nftCollateralWrapper",
+					"type": "address"
+				},
+				{
+					"internalType": "uint64",
+					"name": "loanStartTime",
+					"type": "uint64"
+				},
+				{
+					"internalType": "address",
+					"name": "nftCollateralContract",
+					"type": "address"
+				},
+				{
+					"internalType": "address",
+					"name": "borrower",
+					"type": "address"
+				}
+			],
+			"stateMutability": "view",
+			"type": "function"
+		},
+		{
+			"inputs": [
+				{
+					"internalType": "uint32",
+					"name": "",
+					"type": "uint32"
+				}
+			],
+			"name": "loanIdToLoanExtras",
+			"outputs": [
+				{
+					"internalType": "address",
+					"name": "revenueSharePartner",
+					"type": "address"
+				},
+				{
+					"internalType": "uint16",
+					"name": "revenueShareInBasisPoints",
+					"type": "uint16"
+				},
+				{
+					"internalType": "uint16",
+					"name": "referralFeeInBasisPoints",
+					"type": "uint16"
+				}
+			],
+			"stateMutability": "view",
+			"type": "function"
+		},
+		{
+			"inputs": [
+				{
+					"internalType": "uint32",
+					"name": "",
+					"type": "uint32"
+				}
+			],
+			"name": "loanRepaidOrLiquidated",
+			"outputs": [
+				{
+					"internalType": "bool",
+					"name": "",
+					"type": "bool"
+				}
+			],
+			"stateMutability": "view",
+			"type": "function"
+		},
+		{
+			"inputs": [],
+			"name": "maximumLoanDuration",
+			"outputs": [
+				{
+					"internalType": "uint256",
+					"name": "",
+					"type": "uint256"
+				}
+			],
+			"stateMutability": "view",
+			"type": "function"
+		},
+		{
+			"inputs": [
+				{
+					"internalType": "uint32",
+					"name": "_loanId",
+					"type": "uint32"
+				}
+			],
+			"name": "mintObligationReceipt",
+			"outputs": [],
+			"stateMutability": "nonpayable",
+			"type": "function"
+		},
+		{
+			"inputs": [
+				{
+					"internalType": "address",
+					"name": "",
+					"type": "address"
+				},
+				{
+					"internalType": "address",
+					"name": "",
+					"type": "address"
+				},
+				{
+					"internalType": "uint256[]",
+					"name": "",
+					"type": "uint256[]"
+				},
+				{
+					"internalType": "uint256[]",
+					"name": "",
+					"type": "uint256[]"
+				},
+				{
+					"internalType": "bytes",
+					"name": "",
+					"type": "bytes"
+				}
+			],
+			"name": "onERC1155BatchReceived",
+			"outputs": [
+				{
+					"internalType": "bytes4",
+					"name": "",
+					"type": "bytes4"
+				}
+			],
+			"stateMutability": "nonpayable",
+			"type": "function"
+		},
+		{
+			"inputs": [
+				{
+					"internalType": "address",
+					"name": "",
+					"type": "address"
+				},
+				{
+					"internalType": "address",
+					"name": "",
+					"type": "address"
+				},
+				{
+					"internalType": "uint256",
+					"name": "",
+					"type": "uint256"
+				},
+				{
+					"internalType": "uint256",
+					"name": "",
+					"type": "uint256"
+				},
+				{
+					"internalType": "bytes",
+					"name": "",
+					"type": "bytes"
+				}
+			],
+			"name": "onERC1155Received",
+			"outputs": [
+				{
+					"internalType": "bytes4",
+					"name": "",
+					"type": "bytes4"
+				}
+			],
+			"stateMutability": "nonpayable",
+			"type": "function"
+		},
+		{
+			"inputs": [
+				{
+					"internalType": "address",
+					"name": "",
+					"type": "address"
+				},
+				{
+					"internalType": "address",
+					"name": "",
+					"type": "address"
+				},
+				{
+					"internalType": "uint256",
+					"name": "",
+					"type": "uint256"
+				},
+				{
+					"internalType": "bytes",
+					"name": "",
+					"type": "bytes"
+				}
+			],
+			"name": "onERC721Received",
+			"outputs": [
+				{
+					"internalType": "bytes4",
+					"name": "",
+					"type": "bytes4"
+				}
+			],
+			"stateMutability": "nonpayable",
+			"type": "function"
+		},
+		{
+			"inputs": [],
+			"name": "owner",
+			"outputs": [
+				{
+					"internalType": "address",
+					"name": "",
+					"type": "address"
+				}
+			],
+			"stateMutability": "view",
+			"type": "function"
+		},
+		{
+			"inputs": [],
+			"name": "pause",
+			"outputs": [],
+			"stateMutability": "nonpayable",
+			"type": "function"
+		},
+		{
+			"inputs": [],
+			"name": "paused",
+			"outputs": [
+				{
+					"internalType": "bool",
+					"name": "",
+					"type": "bool"
+				}
+			],
+			"stateMutability": "view",
+			"type": "function"
+		},
+		{
+			"inputs": [
+				{
+					"internalType": "uint32",
+					"name": "_loanId",
+					"type": "uint32"
+				}
+			],
+			"name": "payBackLoan",
+			"outputs": [],
+			"stateMutability": "nonpayable",
+			"type": "function"
+		},
+		{
+			"inputs": [
+				{
+					"internalType": "uint32",
+					"name": "_loanId",
+					"type": "uint32"
+				},
+				{
+					"internalType": "address",
+					"name": "_target",
+					"type": "address"
+				},
+				{
+					"internalType": "bytes",
+					"name": "_data",
+					"type": "bytes"
+				},
+				{
+					"internalType": "address",
+					"name": "_nftAirdrop",
+					"type": "address"
+				},
+				{
+					"internalType": "uint256",
+					"name": "_nftAirdropId",
+					"type": "uint256"
+				},
+				{
+					"internalType": "bool",
+					"name": "_is1155",
+					"type": "bool"
+				},
+				{
+					"internalType": "uint256",
+					"name": "_nftAirdropAmount",
+					"type": "uint256"
+				}
+			],
+			"name": "pullAirdrop",
+			"outputs": [],
+			"stateMutability": "nonpayable",
+			"type": "function"
+		},
+		{
+			"inputs": [
+				{
+					"internalType": "uint32",
+					"name": "_loanId",
+					"type": "uint32"
+				},
+				{
+					"internalType": "uint32",
+					"name": "_newLoanDuration",
+					"type": "uint32"
+				},
+				{
+					"internalType": "uint256",
+					"name": "_newMaximumRepaymentAmount",
+					"type": "uint256"
+				},
+				{
+					"internalType": "uint256",
+					"name": "_renegotiationFee",
+					"type": "uint256"
+				},
+				{
+					"internalType": "uint256",
+					"name": "_lenderNonce",
+					"type": "uint256"
+				},
+				{
+					"internalType": "uint256",
+					"name": "_expiry",
+					"type": "uint256"
+				},
+				{
+					"internalType": "bytes",
+					"name": "_lenderSignature",
+					"type": "bytes"
+				}
+			],
+			"name": "renegotiateLoan",
+			"outputs": [],
+			"stateMutability": "nonpayable",
+			"type": "function"
+		},
+		{
+			"inputs": [
+				{
+					"internalType": "address",
+					"name": "_erc20",
+					"type": "address"
+				},
+				{
+					"internalType": "bool",
+					"name": "_permit",
+					"type": "bool"
+				}
+			],
+			"name": "setERC20Permit",
+			"outputs": [],
+			"stateMutability": "nonpayable",
+			"type": "function"
+		},
+		{
+			"inputs": [
+				{
+					"internalType": "address[]",
+					"name": "_erc20s",
+					"type": "address[]"
+				},
+				{
+					"internalType": "bool[]",
+					"name": "_permits",
+					"type": "bool[]"
+				}
+			],
+			"name": "setERC20Permits",
+			"outputs": [],
+			"stateMutability": "nonpayable",
+			"type": "function"
+		},
+		{
+			"inputs": [
+				{
+					"internalType": "bytes4",
+					"name": "_interfaceId",
+					"type": "bytes4"
+				}
+			],
+			"name": "supportsInterface",
+			"outputs": [
+				{
+					"internalType": "bool",
+					"name": "",
+					"type": "bool"
+				}
+			],
+			"stateMutability": "view",
+			"type": "function"
+		},
+		{
+			"inputs": [
+				{
+					"internalType": "address",
+					"name": "_newOwner",
+					"type": "address"
+				}
+			],
+			"name": "transferOwnership",
+			"outputs": [],
+			"stateMutability": "nonpayable",
+			"type": "function"
+		},
+		{
+			"inputs": [],
+			"name": "unpause",
+			"outputs": [],
+			"stateMutability": "nonpayable",
+			"type": "function"
+		},
+		{
+			"inputs": [
+				{
+					"internalType": "uint16",
+					"name": "_newAdminFeeInBasisPoints",
+					"type": "uint16"
+				}
+			],
+			"name": "updateAdminFee",
+			"outputs": [],
+			"stateMutability": "nonpayable",
+			"type": "function"
+		},
+		{
+			"inputs": [
+				{
+					"internalType": "uint256",
+					"name": "_newMaximumLoanDuration",
+					"type": "uint256"
+				}
+			],
+			"name": "updateMaximumLoanDuration",
+			"outputs": [],
+			"stateMutability": "nonpayable",
+			"type": "function"
+		},
+		{
+			"inputs": [
+				{
+					"internalType": "uint32",
+					"name": "_loanId",
+					"type": "uint32"
+				}
+			],
+			"name": "wrapCollateral",
+			"outputs": [],
+			"stateMutability": "nonpayable",
+			"type": "function"
+		}
+	]
+}
