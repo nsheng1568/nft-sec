@@ -1,0 +1,1359 @@
+{
+	"compiler": {
+		"version": "0.8.4+commit.c7e474f2"
+	},
+	"language": "Solidity",
+	"output": {
+		"abi": [
+			{
+				"inputs": [],
+				"name": "getChainID",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"components": [
+							{
+								"internalType": "uint256",
+								"name": "minLoanPrincipalAmount",
+								"type": "uint256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "maxLoanPrincipalAmount",
+								"type": "uint256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "nftCollateralId",
+								"type": "uint256"
+							},
+							{
+								"internalType": "address",
+								"name": "nftCollateralContract",
+								"type": "address"
+							},
+							{
+								"internalType": "uint32",
+								"name": "minLoanDuration",
+								"type": "uint32"
+							},
+							{
+								"internalType": "uint32",
+								"name": "maxLoanDuration",
+								"type": "uint32"
+							},
+							{
+								"internalType": "uint16",
+								"name": "maxInterestRateForDurationInBasisPoints",
+								"type": "uint16"
+							},
+							{
+								"internalType": "uint16",
+								"name": "referralFeeInBasisPoints",
+								"type": "uint16"
+							},
+							{
+								"internalType": "address",
+								"name": "revenueSharePartner",
+								"type": "address"
+							},
+							{
+								"internalType": "address",
+								"name": "loanERC20Denomination",
+								"type": "address"
+							}
+						],
+						"internalType": "struct LoanData.ListingTerms",
+						"name": "_listingTerms",
+						"type": "tuple"
+					},
+					{
+						"components": [
+							{
+								"internalType": "uint256",
+								"name": "nonce",
+								"type": "uint256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "expiry",
+								"type": "uint256"
+							},
+							{
+								"internalType": "address",
+								"name": "signer",
+								"type": "address"
+							},
+							{
+								"internalType": "bytes",
+								"name": "signature",
+								"type": "bytes"
+							}
+						],
+						"internalType": "struct LoanData.Signature",
+						"name": "_signature",
+						"type": "tuple"
+					}
+				],
+				"name": "isValidBorrowerSignature",
+				"outputs": [
+					{
+						"internalType": "bool",
+						"name": "",
+						"type": "bool"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"components": [
+							{
+								"internalType": "uint256",
+								"name": "minLoanPrincipalAmount",
+								"type": "uint256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "maxLoanPrincipalAmount",
+								"type": "uint256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "nftCollateralId",
+								"type": "uint256"
+							},
+							{
+								"internalType": "address",
+								"name": "nftCollateralContract",
+								"type": "address"
+							},
+							{
+								"internalType": "uint32",
+								"name": "minLoanDuration",
+								"type": "uint32"
+							},
+							{
+								"internalType": "uint32",
+								"name": "maxLoanDuration",
+								"type": "uint32"
+							},
+							{
+								"internalType": "uint16",
+								"name": "maxInterestRateForDurationInBasisPoints",
+								"type": "uint16"
+							},
+							{
+								"internalType": "uint16",
+								"name": "referralFeeInBasisPoints",
+								"type": "uint16"
+							},
+							{
+								"internalType": "address",
+								"name": "revenueSharePartner",
+								"type": "address"
+							},
+							{
+								"internalType": "address",
+								"name": "loanERC20Denomination",
+								"type": "address"
+							}
+						],
+						"internalType": "struct LoanData.ListingTerms",
+						"name": "_listingTerms",
+						"type": "tuple"
+					},
+					{
+						"components": [
+							{
+								"internalType": "uint256",
+								"name": "nonce",
+								"type": "uint256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "expiry",
+								"type": "uint256"
+							},
+							{
+								"internalType": "address",
+								"name": "signer",
+								"type": "address"
+							},
+							{
+								"internalType": "bytes",
+								"name": "signature",
+								"type": "bytes"
+							}
+						],
+						"internalType": "struct LoanData.Signature",
+						"name": "_signature",
+						"type": "tuple"
+					},
+					{
+						"internalType": "address",
+						"name": "_loanContract",
+						"type": "address"
+					}
+				],
+				"name": "isValidBorrowerSignature",
+				"outputs": [
+					{
+						"internalType": "bool",
+						"name": "",
+						"type": "bool"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"components": [
+							{
+								"internalType": "uint256",
+								"name": "minLoanPrincipalAmount",
+								"type": "uint256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "maxLoanPrincipalAmount",
+								"type": "uint256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "nftCollateralId",
+								"type": "uint256"
+							},
+							{
+								"internalType": "address",
+								"name": "nftCollateralContract",
+								"type": "address"
+							},
+							{
+								"internalType": "uint32",
+								"name": "minLoanDuration",
+								"type": "uint32"
+							},
+							{
+								"internalType": "uint32",
+								"name": "maxLoanDuration",
+								"type": "uint32"
+							},
+							{
+								"internalType": "uint16",
+								"name": "maxInterestRateForDurationInBasisPoints",
+								"type": "uint16"
+							},
+							{
+								"internalType": "uint16",
+								"name": "referralFeeInBasisPoints",
+								"type": "uint16"
+							},
+							{
+								"internalType": "address",
+								"name": "revenueSharePartner",
+								"type": "address"
+							},
+							{
+								"internalType": "address",
+								"name": "loanERC20Denomination",
+								"type": "address"
+							}
+						],
+						"internalType": "struct LoanData.ListingTerms",
+						"name": "_listingTerms",
+						"type": "tuple"
+					},
+					{
+						"components": [
+							{
+								"components": [
+									{
+										"internalType": "address",
+										"name": "tokenContract",
+										"type": "address"
+									},
+									{
+										"internalType": "uint256",
+										"name": "id",
+										"type": "uint256"
+									},
+									{
+										"internalType": "bool",
+										"name": "safeTransferable",
+										"type": "bool"
+									}
+								],
+								"internalType": "struct IBundleBuilder.BundleElementERC721[]",
+								"name": "erc721s",
+								"type": "tuple[]"
+							},
+							{
+								"components": [
+									{
+										"internalType": "address",
+										"name": "tokenContract",
+										"type": "address"
+									},
+									{
+										"internalType": "uint256",
+										"name": "amount",
+										"type": "uint256"
+									}
+								],
+								"internalType": "struct IBundleBuilder.BundleElementERC20[]",
+								"name": "erc20s",
+								"type": "tuple[]"
+							},
+							{
+								"components": [
+									{
+										"internalType": "address",
+										"name": "tokenContract",
+										"type": "address"
+									},
+									{
+										"internalType": "uint256[]",
+										"name": "ids",
+										"type": "uint256[]"
+									},
+									{
+										"internalType": "uint256[]",
+										"name": "amounts",
+										"type": "uint256[]"
+									}
+								],
+								"internalType": "struct IBundleBuilder.BundleElementERC1155[]",
+								"name": "erc1155s",
+								"type": "tuple[]"
+							}
+						],
+						"internalType": "struct IBundleBuilder.BundleElements",
+						"name": "_bundleElements",
+						"type": "tuple"
+					},
+					{
+						"components": [
+							{
+								"internalType": "uint256",
+								"name": "nonce",
+								"type": "uint256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "expiry",
+								"type": "uint256"
+							},
+							{
+								"internalType": "address",
+								"name": "signer",
+								"type": "address"
+							},
+							{
+								"internalType": "bytes",
+								"name": "signature",
+								"type": "bytes"
+							}
+						],
+						"internalType": "struct LoanData.Signature",
+						"name": "_signature",
+						"type": "tuple"
+					}
+				],
+				"name": "isValidBorrowerSignatureBundle",
+				"outputs": [
+					{
+						"internalType": "bool",
+						"name": "",
+						"type": "bool"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"components": [
+							{
+								"internalType": "uint256",
+								"name": "minLoanPrincipalAmount",
+								"type": "uint256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "maxLoanPrincipalAmount",
+								"type": "uint256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "nftCollateralId",
+								"type": "uint256"
+							},
+							{
+								"internalType": "address",
+								"name": "nftCollateralContract",
+								"type": "address"
+							},
+							{
+								"internalType": "uint32",
+								"name": "minLoanDuration",
+								"type": "uint32"
+							},
+							{
+								"internalType": "uint32",
+								"name": "maxLoanDuration",
+								"type": "uint32"
+							},
+							{
+								"internalType": "uint16",
+								"name": "maxInterestRateForDurationInBasisPoints",
+								"type": "uint16"
+							},
+							{
+								"internalType": "uint16",
+								"name": "referralFeeInBasisPoints",
+								"type": "uint16"
+							},
+							{
+								"internalType": "address",
+								"name": "revenueSharePartner",
+								"type": "address"
+							},
+							{
+								"internalType": "address",
+								"name": "loanERC20Denomination",
+								"type": "address"
+							}
+						],
+						"internalType": "struct LoanData.ListingTerms",
+						"name": "_listingTerms",
+						"type": "tuple"
+					},
+					{
+						"components": [
+							{
+								"components": [
+									{
+										"internalType": "address",
+										"name": "tokenContract",
+										"type": "address"
+									},
+									{
+										"internalType": "uint256",
+										"name": "id",
+										"type": "uint256"
+									},
+									{
+										"internalType": "bool",
+										"name": "safeTransferable",
+										"type": "bool"
+									}
+								],
+								"internalType": "struct IBundleBuilder.BundleElementERC721[]",
+								"name": "erc721s",
+								"type": "tuple[]"
+							},
+							{
+								"components": [
+									{
+										"internalType": "address",
+										"name": "tokenContract",
+										"type": "address"
+									},
+									{
+										"internalType": "uint256",
+										"name": "amount",
+										"type": "uint256"
+									}
+								],
+								"internalType": "struct IBundleBuilder.BundleElementERC20[]",
+								"name": "erc20s",
+								"type": "tuple[]"
+							},
+							{
+								"components": [
+									{
+										"internalType": "address",
+										"name": "tokenContract",
+										"type": "address"
+									},
+									{
+										"internalType": "uint256[]",
+										"name": "ids",
+										"type": "uint256[]"
+									},
+									{
+										"internalType": "uint256[]",
+										"name": "amounts",
+										"type": "uint256[]"
+									}
+								],
+								"internalType": "struct IBundleBuilder.BundleElementERC1155[]",
+								"name": "erc1155s",
+								"type": "tuple[]"
+							}
+						],
+						"internalType": "struct IBundleBuilder.BundleElements",
+						"name": "_bundleElements",
+						"type": "tuple"
+					},
+					{
+						"components": [
+							{
+								"internalType": "uint256",
+								"name": "nonce",
+								"type": "uint256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "expiry",
+								"type": "uint256"
+							},
+							{
+								"internalType": "address",
+								"name": "signer",
+								"type": "address"
+							},
+							{
+								"internalType": "bytes",
+								"name": "signature",
+								"type": "bytes"
+							}
+						],
+						"internalType": "struct LoanData.Signature",
+						"name": "_signature",
+						"type": "tuple"
+					},
+					{
+						"internalType": "address",
+						"name": "_loanContract",
+						"type": "address"
+					}
+				],
+				"name": "isValidBorrowerSignatureBundle",
+				"outputs": [
+					{
+						"internalType": "bool",
+						"name": "",
+						"type": "bool"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "_loanId",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint32",
+						"name": "_newLoanDuration",
+						"type": "uint32"
+					},
+					{
+						"internalType": "uint256",
+						"name": "_newMaximumRepaymentAmount",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "_renegotiationFee",
+						"type": "uint256"
+					},
+					{
+						"components": [
+							{
+								"internalType": "uint256",
+								"name": "nonce",
+								"type": "uint256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "expiry",
+								"type": "uint256"
+							},
+							{
+								"internalType": "address",
+								"name": "signer",
+								"type": "address"
+							},
+							{
+								"internalType": "bytes",
+								"name": "signature",
+								"type": "bytes"
+							}
+						],
+						"internalType": "struct LoanData.Signature",
+						"name": "_signature",
+						"type": "tuple"
+					},
+					{
+						"internalType": "address",
+						"name": "_loanContract",
+						"type": "address"
+					}
+				],
+				"name": "isValidLenderRenegotiationSignature",
+				"outputs": [
+					{
+						"internalType": "bool",
+						"name": "",
+						"type": "bool"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "_loanId",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint32",
+						"name": "_newLoanDuration",
+						"type": "uint32"
+					},
+					{
+						"internalType": "uint256",
+						"name": "_newMaximumRepaymentAmount",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "_renegotiationFee",
+						"type": "uint256"
+					},
+					{
+						"components": [
+							{
+								"internalType": "uint256",
+								"name": "nonce",
+								"type": "uint256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "expiry",
+								"type": "uint256"
+							},
+							{
+								"internalType": "address",
+								"name": "signer",
+								"type": "address"
+							},
+							{
+								"internalType": "bytes",
+								"name": "signature",
+								"type": "bytes"
+							}
+						],
+						"internalType": "struct LoanData.Signature",
+						"name": "_signature",
+						"type": "tuple"
+					}
+				],
+				"name": "isValidLenderRenegotiationSignature",
+				"outputs": [
+					{
+						"internalType": "bool",
+						"name": "",
+						"type": "bool"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"components": [
+							{
+								"internalType": "uint256",
+								"name": "loanPrincipalAmount",
+								"type": "uint256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "maximumRepaymentAmount",
+								"type": "uint256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "nftCollateralId",
+								"type": "uint256"
+							},
+							{
+								"internalType": "address",
+								"name": "nftCollateralContract",
+								"type": "address"
+							},
+							{
+								"internalType": "uint32",
+								"name": "loanDuration",
+								"type": "uint32"
+							},
+							{
+								"internalType": "uint16",
+								"name": "loanAdminFeeInBasisPoints",
+								"type": "uint16"
+							},
+							{
+								"internalType": "address",
+								"name": "loanERC20Denomination",
+								"type": "address"
+							},
+							{
+								"internalType": "address",
+								"name": "referrer",
+								"type": "address"
+							}
+						],
+						"internalType": "struct LoanData.Offer",
+						"name": "_offer",
+						"type": "tuple"
+					},
+					{
+						"components": [
+							{
+								"internalType": "uint256",
+								"name": "nonce",
+								"type": "uint256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "expiry",
+								"type": "uint256"
+							},
+							{
+								"internalType": "address",
+								"name": "signer",
+								"type": "address"
+							},
+							{
+								"internalType": "bytes",
+								"name": "signature",
+								"type": "bytes"
+							}
+						],
+						"internalType": "struct LoanData.Signature",
+						"name": "_signature",
+						"type": "tuple"
+					},
+					{
+						"internalType": "address",
+						"name": "_loanContract",
+						"type": "address"
+					}
+				],
+				"name": "isValidLenderSignature",
+				"outputs": [
+					{
+						"internalType": "bool",
+						"name": "",
+						"type": "bool"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"components": [
+							{
+								"internalType": "uint256",
+								"name": "loanPrincipalAmount",
+								"type": "uint256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "maximumRepaymentAmount",
+								"type": "uint256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "nftCollateralId",
+								"type": "uint256"
+							},
+							{
+								"internalType": "address",
+								"name": "nftCollateralContract",
+								"type": "address"
+							},
+							{
+								"internalType": "uint32",
+								"name": "loanDuration",
+								"type": "uint32"
+							},
+							{
+								"internalType": "uint16",
+								"name": "loanAdminFeeInBasisPoints",
+								"type": "uint16"
+							},
+							{
+								"internalType": "address",
+								"name": "loanERC20Denomination",
+								"type": "address"
+							},
+							{
+								"internalType": "address",
+								"name": "referrer",
+								"type": "address"
+							}
+						],
+						"internalType": "struct LoanData.Offer",
+						"name": "_offer",
+						"type": "tuple"
+					},
+					{
+						"components": [
+							{
+								"internalType": "uint256",
+								"name": "nonce",
+								"type": "uint256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "expiry",
+								"type": "uint256"
+							},
+							{
+								"internalType": "address",
+								"name": "signer",
+								"type": "address"
+							},
+							{
+								"internalType": "bytes",
+								"name": "signature",
+								"type": "bytes"
+							}
+						],
+						"internalType": "struct LoanData.Signature",
+						"name": "_signature",
+						"type": "tuple"
+					}
+				],
+				"name": "isValidLenderSignature",
+				"outputs": [
+					{
+						"internalType": "bool",
+						"name": "",
+						"type": "bool"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"components": [
+							{
+								"internalType": "uint256",
+								"name": "loanPrincipalAmount",
+								"type": "uint256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "maximumRepaymentAmount",
+								"type": "uint256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "nftCollateralId",
+								"type": "uint256"
+							},
+							{
+								"internalType": "address",
+								"name": "nftCollateralContract",
+								"type": "address"
+							},
+							{
+								"internalType": "uint32",
+								"name": "loanDuration",
+								"type": "uint32"
+							},
+							{
+								"internalType": "uint16",
+								"name": "loanAdminFeeInBasisPoints",
+								"type": "uint16"
+							},
+							{
+								"internalType": "address",
+								"name": "loanERC20Denomination",
+								"type": "address"
+							},
+							{
+								"internalType": "address",
+								"name": "referrer",
+								"type": "address"
+							}
+						],
+						"internalType": "struct LoanData.Offer",
+						"name": "_offer",
+						"type": "tuple"
+					},
+					{
+						"components": [
+							{
+								"components": [
+									{
+										"internalType": "address",
+										"name": "tokenContract",
+										"type": "address"
+									},
+									{
+										"internalType": "uint256",
+										"name": "id",
+										"type": "uint256"
+									},
+									{
+										"internalType": "bool",
+										"name": "safeTransferable",
+										"type": "bool"
+									}
+								],
+								"internalType": "struct IBundleBuilder.BundleElementERC721[]",
+								"name": "erc721s",
+								"type": "tuple[]"
+							},
+							{
+								"components": [
+									{
+										"internalType": "address",
+										"name": "tokenContract",
+										"type": "address"
+									},
+									{
+										"internalType": "uint256",
+										"name": "amount",
+										"type": "uint256"
+									}
+								],
+								"internalType": "struct IBundleBuilder.BundleElementERC20[]",
+								"name": "erc20s",
+								"type": "tuple[]"
+							},
+							{
+								"components": [
+									{
+										"internalType": "address",
+										"name": "tokenContract",
+										"type": "address"
+									},
+									{
+										"internalType": "uint256[]",
+										"name": "ids",
+										"type": "uint256[]"
+									},
+									{
+										"internalType": "uint256[]",
+										"name": "amounts",
+										"type": "uint256[]"
+									}
+								],
+								"internalType": "struct IBundleBuilder.BundleElementERC1155[]",
+								"name": "erc1155s",
+								"type": "tuple[]"
+							}
+						],
+						"internalType": "struct IBundleBuilder.BundleElements",
+						"name": "_bundleElements",
+						"type": "tuple"
+					},
+					{
+						"components": [
+							{
+								"internalType": "uint256",
+								"name": "nonce",
+								"type": "uint256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "expiry",
+								"type": "uint256"
+							},
+							{
+								"internalType": "address",
+								"name": "signer",
+								"type": "address"
+							},
+							{
+								"internalType": "bytes",
+								"name": "signature",
+								"type": "bytes"
+							}
+						],
+						"internalType": "struct LoanData.Signature",
+						"name": "_signature",
+						"type": "tuple"
+					},
+					{
+						"internalType": "address",
+						"name": "_loanContract",
+						"type": "address"
+					}
+				],
+				"name": "isValidLenderSignatureBundle",
+				"outputs": [
+					{
+						"internalType": "bool",
+						"name": "",
+						"type": "bool"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"components": [
+							{
+								"internalType": "uint256",
+								"name": "loanPrincipalAmount",
+								"type": "uint256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "maximumRepaymentAmount",
+								"type": "uint256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "nftCollateralId",
+								"type": "uint256"
+							},
+							{
+								"internalType": "address",
+								"name": "nftCollateralContract",
+								"type": "address"
+							},
+							{
+								"internalType": "uint32",
+								"name": "loanDuration",
+								"type": "uint32"
+							},
+							{
+								"internalType": "uint16",
+								"name": "loanAdminFeeInBasisPoints",
+								"type": "uint16"
+							},
+							{
+								"internalType": "address",
+								"name": "loanERC20Denomination",
+								"type": "address"
+							},
+							{
+								"internalType": "address",
+								"name": "referrer",
+								"type": "address"
+							}
+						],
+						"internalType": "struct LoanData.Offer",
+						"name": "_offer",
+						"type": "tuple"
+					},
+					{
+						"components": [
+							{
+								"components": [
+									{
+										"internalType": "address",
+										"name": "tokenContract",
+										"type": "address"
+									},
+									{
+										"internalType": "uint256",
+										"name": "id",
+										"type": "uint256"
+									},
+									{
+										"internalType": "bool",
+										"name": "safeTransferable",
+										"type": "bool"
+									}
+								],
+								"internalType": "struct IBundleBuilder.BundleElementERC721[]",
+								"name": "erc721s",
+								"type": "tuple[]"
+							},
+							{
+								"components": [
+									{
+										"internalType": "address",
+										"name": "tokenContract",
+										"type": "address"
+									},
+									{
+										"internalType": "uint256",
+										"name": "amount",
+										"type": "uint256"
+									}
+								],
+								"internalType": "struct IBundleBuilder.BundleElementERC20[]",
+								"name": "erc20s",
+								"type": "tuple[]"
+							},
+							{
+								"components": [
+									{
+										"internalType": "address",
+										"name": "tokenContract",
+										"type": "address"
+									},
+									{
+										"internalType": "uint256[]",
+										"name": "ids",
+										"type": "uint256[]"
+									},
+									{
+										"internalType": "uint256[]",
+										"name": "amounts",
+										"type": "uint256[]"
+									}
+								],
+								"internalType": "struct IBundleBuilder.BundleElementERC1155[]",
+								"name": "erc1155s",
+								"type": "tuple[]"
+							}
+						],
+						"internalType": "struct IBundleBuilder.BundleElements",
+						"name": "_bundleElements",
+						"type": "tuple"
+					},
+					{
+						"components": [
+							{
+								"internalType": "uint256",
+								"name": "nonce",
+								"type": "uint256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "expiry",
+								"type": "uint256"
+							},
+							{
+								"internalType": "address",
+								"name": "signer",
+								"type": "address"
+							},
+							{
+								"internalType": "bytes",
+								"name": "signature",
+								"type": "bytes"
+							}
+						],
+						"internalType": "struct LoanData.Signature",
+						"name": "_signature",
+						"type": "tuple"
+					}
+				],
+				"name": "isValidLenderSignatureBundle",
+				"outputs": [
+					{
+						"internalType": "bool",
+						"name": "",
+						"type": "bool"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			}
+		],
+		"devdoc": {
+			"author": "NFTfi",
+			"kind": "dev",
+			"methods": {
+				"getChainID()": {
+					"details": "This function gets the current chain ID."
+				},
+				"isValidBorrowerSignature(LoanData.ListingTerms,LoanData.Signature)": {
+					"params": {
+						"_listingTerms": "- The listing terms struct containing: - loanERC20Denomination: The address of the ERC20 contract of the currency being used as principal/interest for this loan. - minLoanPrincipalAmount: The minumum sum of money transferred from lender to borrower at the beginning of the loan, measured in loanERC20Denomination's smallest units. - maxLoanPrincipalAmount: The  sum of money transferred from lender to borrower at the beginning of the loan, measured in loanERC20Denomination's smallest units. - maximumRepaymentAmount: The maximum amount of money that the borrower would be required to retrieve their collateral, measured in the smallest units of the ERC20 currency used for the loan. The borrower will always have to pay this amount to retrieve their collateral, regardless of whether they repay early. - nftCollateralContract: The address of the ERC721 contract of the NFT collateral. - nftCollateralId: The ID within the NFTCollateralContract for the NFT being used as collateral for this loan. The NFT is stored within this contract during the duration of the loan. - revenueSharePartner: The address of the partner that will receive the revenue share. - minLoanDuration: The minumum amount of time (measured in seconds) that can elapse before the lender can liquidate the loan and seize the underlying collateral NFT. - maxLoanDuration: The maximum amount of time (measured in seconds) that can elapse before the lender can liquidate the loan and seize the underlying collateral NFT. - maxInterestRateForDurationInBasisPoints: This is maximum the interest rate (measured in basis points, e.g. hundreths of a percent) for the loan, that must be repaid pro-rata by the borrower at the conclusion of the loan or risk seizure of their nft collateral. Note if the type of the loan is fixed then this value  is not used and is irrelevant so it should be set to 0. - referralFeeInBasisPoints: The percent (measured in basis points) of the loan principal amount that will be taken as a fee to pay to the referrer, 0 if the lender is not paying referral fee.",
+						"_signature": "- The offer struct containing: - signer: The address of the signer. The borrower for `acceptOffer` the lender for `acceptListing`. - nonce: The nonce referred here is not the same as an Ethereum account's nonce. We are referring instead to a nonce that is used by the lender or the borrower when they are first signing off-chain NFTfi orders. These nonce can be any uint256 value that the user has not previously used to sign an off-chain order. Each nonce can be used at most once per user within NFTfi, regardless of whether they are the lender or the borrower in that situation. This serves two purposes:   - First, it prevents replay attacks where an attacker would submit a user's off-chain order more than once.   - Second, it allows a user to cancel an off-chain order by calling NFTfi.cancelLoanCommitmentBeforeLoanHasBegun(), which marks the nonce as used and prevents any future loan from using the user's off-chain order that contains that nonce. - expiry: Date when the signature expires - signature: The ECDSA signature of the borrower, obtained off-chain ahead of time, signing the following combination of parameters:   - listingTerms.loanERC20Denomination,   - listingTerms.minLoanPrincipalAmount,   - listingTerms.maxLoanPrincipalAmount,   - listingTerms.nftCollateralContract,   - listingTerms.nftCollateralId,   - listingTerms.revenueSharePartner,   - listingTerms.minLoanDuration,   - listingTerms.maxLoanDuration,   - listingTerms.maxInterestRateForDurationInBasisPoints,   - listingTerms.referralFeeInBasisPoints,   - signature.signer,   - signature.nonce,   - signature.expiry,   - address of this contract   - chainId"
+					}
+				},
+				"isValidBorrowerSignature(LoanData.ListingTerms,LoanData.Signature,address)": {
+					"details": "This function overload the previous function to allow the caller to specify the address of the contract"
+				},
+				"isValidBorrowerSignatureBundle(LoanData.ListingTerms,IBundleBuilder.BundleElements,LoanData.Signature)": {
+					"params": {
+						"_bundleElements": "- the lists of erc721-20-1155 tokens that are to be bundled",
+						"_listingTerms": "- The listing terms struct containing: - loanERC20Denomination: The address of the ERC20 contract of the currency being used as principal/interest for this loan. - minLoanPrincipalAmount: The minumum sum of money transferred from lender to borrower at the beginning of the loan, measured in loanERC20Denomination's smallest units. - maxLoanPrincipalAmount: The  sum of money transferred from lender to borrower at the beginning of the loan, measured in loanERC20Denomination's smallest units. - maximumRepaymentAmount: The maximum amount of money that the borrower would be required to retrieve their collateral, measured in the smallest units of the ERC20 currency used for the loan. The borrower will always have to pay this amount to retrieve their collateral, regardless of whether they repay early. - nftCollateralContract: The address of the ERC721 contract of the NFT collateral. - nftCollateralId: The ID within the NFTCollateralContract for the NFT being used as collateral for this loan. The NFT is stored within this contract during the duration of the loan. - revenueSharePartner: The address of the partner that will receive the revenue share. - minLoanDuration: The minumum amount of time (measured in seconds) that can elapse before the lender can liquidate the loan and seize the underlying collateral NFT. - maxLoanDuration: The maximum amount of time (measured in seconds) that can elapse before the lender can liquidate the loan and seize the underlying collateral NFT. - maxInterestRateForDurationInBasisPoints: This is maximum the interest rate (measured in basis points, e.g. hundreths of a percent) for the loan, that must be repaid pro-rata by the borrower at the conclusion of the loan or risk seizure of their nft collateral. Note if the type of the loan is fixed then this value  is not used and is irrelevant so it should be set to 0. - referralFeeInBasisPoints: The percent (measured in basis points) of the loan principal amount that will be taken as a fee to pay to the referrer, 0 if the lender is not paying referral fee.",
+						"_signature": "- The offer struct containing: - signer: The address of the signer. The borrower for `acceptOffer` the lender for `acceptListing`. - nonce: The nonce referred here is not the same as an Ethereum account's nonce. We are referring instead to a nonce that is used by the lender or the borrower when they are first signing off-chain NFTfi orders. These nonce can be any uint256 value that the user has not previously used to sign an off-chain order. Each nonce can be used at most once per user within NFTfi, regardless of whether they are the lender or the borrower in that situation. This serves two purposes:   - First, it prevents replay attacks where an attacker would submit a user's off-chain order more than once.   - Second, it allows a user to cancel an off-chain order by calling NFTfi.cancelLoanCommitmentBeforeLoanHasBegun(), which marks the nonce as used and prevents any future loan from using the user's off-chain order that contains that nonce. - expiry: Date when the signature expires - signature: The ECDSA signature of the borrower, obtained off-chain ahead of time, signing the following combination of parameters:   - listingTerms.loanERC20Denomination,   - listingTerms.minLoanPrincipalAmount,   - listingTerms.maxLoanPrincipalAmount,   - listingTerms.nftCollateralContract,   - listingTerms.nftCollateralId,   - listingTerms.revenueSharePartner,   - listingTerms.minLoanDuration,   - listingTerms.maxLoanDuration,   - listingTerms.maxInterestRateForDurationInBasisPoints,   - listingTerms.referralFeeInBasisPoints,   - bundleElements   - signature.signer,   - signature.nonce,   - signature.expiry,   - address of this contract   - chainId"
+					}
+				},
+				"isValidBorrowerSignatureBundle(LoanData.ListingTerms,IBundleBuilder.BundleElements,LoanData.Signature,address)": {
+					"details": "This function overload the previous function to allow the caller to specify the address of the contract"
+				},
+				"isValidLenderRenegotiationSignature(uint256,uint32,uint256,uint256,LoanData.Signature)": {
+					"params": {
+						"_loanId": "- The unique identifier for the loan to be renegotiated",
+						"_newLoanDuration": "- The new amount of time (measured in seconds) that can elapse before the lender can liquidate the loan and seize the underlying collateral NFT.",
+						"_newMaximumRepaymentAmount": "- The new maximum amount of money that the borrower would be required to retrieve their collateral, measured in the smallest units of the ERC20 currency used for the loan. The borrower will always have to pay this amount to retrieve their collateral, regardless of whether they repay early.",
+						"_renegotiationFee": "Agreed upon fee in ether that borrower pays for the lender for the renegitiation",
+						"_signature": "- The signature structure containing: - signer: The address of the signer. The borrower for `acceptOffer` the lender for `acceptListing`. - nonce: The nonce referred here is not the same as an Ethereum account's nonce. We are referring instead to a nonce that is used by the lender or the borrower when they are first signing off-chain NFTfi orders. These nonce can be any uint256 value that the user has not previously used to sign an off-chain order. Each nonce can be used at most once per user within NFTfi, regardless of whether they are the lender or the borrower in that situation. This serves two purposes: - First, it prevents replay attacks where an attacker would submit a user's off-chain order more than once. - Second, it allows a user to cancel an off-chain order by calling NFTfi.cancelLoanCommitmentBeforeLoanHasBegun() , which marks the nonce as used and prevents any future loan from using the user's off-chain order that contains that nonce. - expiry - The date when the renegotiation offer expires - lenderSignature - The ECDSA signature of the lender, obtained off-chain ahead of time, signing the following combination of parameters: - _loanId - _newLoanDuration - _newMaximumRepaymentAmount - _lender - _lenderNonce - _expiry - address of this contract - chainId"
+					}
+				},
+				"isValidLenderRenegotiationSignature(uint256,uint32,uint256,uint256,LoanData.Signature,address)": {
+					"details": "This function overload the previous function to allow the caller to specify the address of the contract"
+				},
+				"isValidLenderSignature(LoanData.Offer,LoanData.Signature)": {
+					"params": {
+						"_offer": "- The offer struct containing: - loanERC20Denomination: The address of the ERC20 contract of the currency being used as principal/interest for this loan. - loanPrincipalAmount: The original sum of money transferred from lender to borrower at the beginning of the loan, measured in loanERC20Denomination's smallest units. - maximumRepaymentAmount: The maximum amount of money that the borrower would be required to retrieve their collateral, measured in the smallest units of the ERC20 currency used for the loan. The borrower will always have to pay this amount to retrieve their collateral, regardless of whether they repay early. - nftCollateralContract: The address of the ERC721 contract of the NFT collateral. - nftCollateralId: The ID within the NFTCollateralContract for the NFT being used as collateral for this loan. The NFT is stored within this contract during the duration of the loan. - referrer: The address of the referrer who found the lender matching the listing, Zero address to signal this there is no referrer. - loanDuration: The amount of time (measured in seconds) that can elapse before the lender can liquidate the loan and seize the underlying collateral NFT. - loanInterestRateForDurationInBasisPoints: This is the interest rate (measured in basis points, e.g. hundreths of a percent) for the loan, that must be repaid pro-rata by the borrower at the conclusion of the loan or risk seizure of their nft collateral. Note if the type of the loan is fixed then this value  is not used and is irrelevant so it should be set to 0. - loanAdminFeeInBasisPoints: The percent (measured in basis points) of the interest earned that will be taken as a fee by the contract admins when the loan is repaid. The fee is stored in the loan struct to prevent an attack where the contract admins could adjust the fee right before a loan is repaid, and take all of the interest earned.",
+						"_signature": "- The signature structure containing: - signer: The address of the signer. The borrower for `acceptOffer` the lender for `acceptListing`. - nonce: The nonce referred here is not the same as an Ethereum account's nonce. We are referring instead to a nonce that is used by the lender or the borrower when they are first signing off-chain NFTfi orders. These nonce can be any uint256 value that the user has not previously used to sign an off-chain order. Each nonce can be used at most once per user within NFTfi, regardless of whether they are the lender or the borrower in that situation. This serves two purposes:   - First, it prevents replay attacks where an attacker would submit a user's off-chain order more than once.   - Second, it allows a user to cancel an off-chain order by calling NFTfi.cancelLoanCommitmentBeforeLoanHasBegun(), which marks the nonce as used and prevents any future loan from using the user's off-chain order that contains that nonce. - expiry: Date when the signature expires - signature: The ECDSA signature of the lender, obtained off-chain ahead of time, signing the following combination of parameters:   - offer.loanERC20Denomination   - offer.loanPrincipalAmount   - offer.maximumRepaymentAmount   - offer.nftCollateralContract   - offer.nftCollateralId   - offer.referrer   - offer.loanDuration   - offer.loanAdminFeeInBasisPoints   - signature.signer,   - signature.nonce,   - signature.expiry,   - address of this contract   - chainId"
+					}
+				},
+				"isValidLenderSignature(LoanData.Offer,LoanData.Signature,address)": {
+					"details": "This function overload the previous function to allow the caller to specify the address of the contract"
+				},
+				"isValidLenderSignatureBundle(LoanData.Offer,IBundleBuilder.BundleElements,LoanData.Signature)": {
+					"params": {
+						"_bundleElements": "- the lists of erc721-20-1155 tokens that are to be bundled",
+						"_offer": "- The offer struct containing: - loanERC20Denomination: The address of the ERC20 contract of the currency being used as principal/interest for this loan. - loanPrincipalAmount: The original sum of money transferred from lender to borrower at the beginning of the loan, measured in loanERC20Denomination's smallest units. - maximumRepaymentAmount: The maximum amount of money that the borrower would be required to retrieve their collateral, measured in the smallest units of the ERC20 currency used for the loan. The borrower will always have to pay this amount to retrieve their collateral, regardless of whether they repay early. - nftCollateralContract: The address of the ERC721 contract of the NFT collateral. - nftCollateralId: The ID within the NFTCollateralContract for the NFT being used as collateral for this loan. The NFT is stored within this contract during the duration of the loan. - referrer: The address of the referrer who found the lender matching the listing, Zero address to signal this there is no referrer. - loanDuration: The amount of time (measured in seconds) that can elapse before the lender can liquidate the loan and seize the underlying collateral NFT. - loanInterestRateForDurationInBasisPoints: This is the interest rate (measured in basis points, e.g. hundreths of a percent) for the loan, that must be repaid pro-rata by the borrower at the conclusion of the loan or risk seizure of their nft collateral. Note if the type of the loan is fixed then this value  is not used and is irrelevant so it should be set to 0. - loanAdminFeeInBasisPoints: The percent (measured in basis points) of the interest earned that will be taken as a fee by the contract admins when the loan is repaid. The fee is stored in the loan struct to prevent an attack where the contract admins could adjust the fee right before a loan is repaid, and take all of the interest earned.",
+						"_signature": "- The signature structure containing: - signer: The address of the signer. The borrower for `acceptOffer` the lender for `acceptListing`. - nonce: The nonce referred here is not the same as an Ethereum account's nonce. We are referring instead to a nonce that is used by the lender or the borrower when they are first signing off-chain NFTfi orders. These nonce can be any uint256 value that the user has not previously used to sign an off-chain order. Each nonce can be used at most once per user within NFTfi, regardless of whether they are the lender or the borrower in that situation. This serves two purposes:   - First, it prevents replay attacks where an attacker would submit a user's off-chain order more than once.   - Second, it allows a user to cancel an off-chain order by calling NFTfi.cancelLoanCommitmentBeforeLoanHasBegun(), which marks the nonce as used and prevents any future loan from using the user's off-chain order that contains that nonce. - expiry: Date when the signature expires - signature: The ECDSA signature of the lender, obtained off-chain ahead of time, signing the following combination of parameters:   - offer.loanERC20Denomination   - offer.loanPrincipalAmount   - offer.maximumRepaymentAmount   - offer.nftCollateralContract   - offer.nftCollateralId   - offer.referrer   - offer.loanDuration   - offer.loanAdminFeeInBasisPoints   - bundleElements   - signature.signer,   - signature.nonce,   - signature.expiry,   - address of this contract   - chainId"
+					}
+				},
+				"isValidLenderSignatureBundle(LoanData.Offer,IBundleBuilder.BundleElements,LoanData.Signature,address)": {
+					"details": "This function overload the previous function to allow the caller to specify the address of the contract"
+				}
+			},
+			"title": "NFTfiSigningUtils",
+			"version": 1
+		},
+		"userdoc": {
+			"kind": "user",
+			"methods": {
+				"isValidBorrowerSignature(LoanData.ListingTerms,LoanData.Signature)": {
+					"notice": "This function is when the lender accepts a borrower's binding listing terms, to validate the lender's signature that the borrower provided off-chain to verify that it did indeed made such listing."
+				},
+				"isValidBorrowerSignatureBundle(LoanData.ListingTerms,IBundleBuilder.BundleElements,LoanData.Signature)": {
+					"notice": "This function is when the lender accepts a borrower's binding listing terms, to validate the lender's signature that the borrower provided off-chain to verify that it did indeed made such listing."
+				},
+				"isValidLenderRenegotiationSignature(uint256,uint32,uint256,uint256,LoanData.Signature)": {
+					"notice": "This function is called in renegotiateLoan() to validate the lender's signature that the lender provided off-chain to verify that they did indeed want to agree to this loan renegotiation according to these terms."
+				},
+				"isValidLenderSignature(LoanData.Offer,LoanData.Signature)": {
+					"notice": "This function is when the borrower accepts a lender's offer, to validate the lender's signature that the lender provided off-chain to verify that it did indeed made such offer."
+				},
+				"isValidLenderSignatureBundle(LoanData.Offer,IBundleBuilder.BundleElements,LoanData.Signature)": {
+					"notice": "This function is when the borrower accepts a lender's offer, to validate the lender's signature that the lender provided off-chain to verify that it did indeed made such offer."
+				}
+			},
+			"notice": "Helper contract for NFTfi. This contract manages verifying signatures from off-chain NFTfi orders. Based on the version of this same contract used on NFTfi V1",
+			"version": 1
+		}
+	},
+	"settings": {
+		"compilationTarget": {
+			"contracts/utils/NFTfiSigningUtils.sol": "NFTfiSigningUtils"
+		},
+		"evmVersion": "istanbul",
+		"libraries": {},
+		"metadata": {
+			"bytecodeHash": "ipfs"
+		},
+		"optimizer": {
+			"enabled": false,
+			"runs": 200
+		},
+		"remappings": []
+	},
+	"sources": {
+		"@openzeppelin/contracts/interfaces/IERC1271.sol": {
+			"keccak256": "0x0705a4b1b86d7b0bd8432118f226ba139c44b9dcaba0a6eafba2dd7d0639c544",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://c45b821ef9e882e57c256697a152e108f0f2ad6997609af8904cae99c9bd422e",
+				"dweb:/ipfs/QmRKCJW6jjzR5UYZcLpGnhEJ75UVbH6EHkEa49sWx2SKng"
+			]
+		},
+		"@openzeppelin/contracts/utils/Address.sol": {
+			"keccak256": "0xf96f969e24029d43d0df89e59d365f277021dac62b48e1c1e3ebe0acdd7f1ca1",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://ec772b45a624be516f1c81970caa8a2e144301e9d0921cbc1a2789fef39a1269",
+				"dweb:/ipfs/QmNyjwxCrGhQMyzLD93oUobJXVe9ceJvRvfXwbEtuxPiEj"
+			]
+		},
+		"@openzeppelin/contracts/utils/Strings.sol": {
+			"keccak256": "0xa4d1d62251f8574deb032a35fc948386a9b4de74b812d4f545a1ac120486b48a",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://8c969013129ba9e651a20735ef659fef6d8a1139ea3607bd4b26ddea2d645634",
+				"dweb:/ipfs/QmVhVa6LGuzAcB8qgDtVHRkucn4ihj5UZr8xBLcJkP6ucb"
+			]
+		},
+		"@openzeppelin/contracts/utils/cryptography/ECDSA.sol": {
+			"keccak256": "0xda898fa084aa1ddfdb346e6a40459e00a59d87071cce7c315a46d648dd71d0ba",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://ce501a941f4aa1555c04dabb5e07992503bb6a9b32ff8f7cdcefdb4a742210cb",
+				"dweb:/ipfs/QmeScPrUpdrGYs9BytV3Z5ZWJcBXtuAgCW4BLHua4xFUxx"
+			]
+		},
+		"@openzeppelin/contracts/utils/cryptography/SignatureChecker.sol": {
+			"keccak256": "0xbc8d1f66b26e211a1f6f40a17453e9d5020ec96749014379205cff100809884c",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://b9c056a3068bb6fe41b28239bd71acd3a5249d23ed089c874182a4e3d7e47df1",
+				"dweb:/ipfs/QmdFFG7dxiZ5jBaaYDXPMiKVG9rNoMhvR7cBt5997E2pat"
+			]
+		},
+		"@openzeppelin/contracts/utils/math/Math.sol": {
+			"keccak256": "0xa1e8e83cd0087785df04ac79fb395d9f3684caeaf973d9e2c71caef723a3a5d6",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://33bbf48cc069be677705037ba7520c22b1b622c23b33e1a71495f2d36549d40b",
+				"dweb:/ipfs/Qmct36zWXv3j7LZB83uwbg7TXwnZSN1fqHNDZ93GG98bGz"
+			]
+		},
+		"contracts/interfaces/IBundleBuilder.sol": {
+			"keccak256": "0x3f36e20376a2f9ff304aed7b4a92a0020ad0321ca5bed7e7e6735f7e9f4a8421",
+			"license": "BUSL-1.1",
+			"urls": [
+				"bzz-raw://1e30e6737d7b1887b63138b0021d9f82305e7bb81bc7f59b5fdc65b384497a9b",
+				"dweb:/ipfs/QmarrUdjBzbubCGoH6VzvXWfMbrNqeJ7ar2LdUAPLSG1G9"
+			]
+		},
+		"contracts/loans/direct/loanTypes/LoanData.sol": {
+			"keccak256": "0x68e0a45abaafeb9bdbf235ea1b045927cfc2750111c08cdc2e273bcb19e1551c",
+			"license": "BUSL-1.1",
+			"urls": [
+				"bzz-raw://c563378388b5bbaacc7c18c33578c5bfd91043ffdcb4e7d7954a6188425ca109",
+				"dweb:/ipfs/QmWs3w56gKPRUsJ9jXqwaX7SaMhs6Hd4YZyxMtQwsk4J3C"
+			]
+		},
+		"contracts/utils/NFTfiSigningUtils.sol": {
+			"keccak256": "0x3cdc46ea5982697f8eef9bdfae571c07b5617737a4959148c3c7d0f333e8b941",
+			"license": "BUSL-1.1",
+			"urls": [
+				"bzz-raw://9c4ad60d8eb2dc590cb708486a5f2d86908cad0d7672f6fa0ebb064686ce7d08",
+				"dweb:/ipfs/QmXdHWEcrAjXGqtKLysiZtNEGWnTxLZShPL7Ycdum8opVp"
+			]
+		}
+	},
+	"version": 1
+}

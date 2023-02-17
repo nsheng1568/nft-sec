@@ -6,7 +6,23 @@
 	"output": {
 		"abi": [
 			{
-				"inputs": [],
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "weth",
+						"type": "address"
+					},
+					{
+						"internalType": "address",
+						"name": "nftfi",
+						"type": "address"
+					},
+					{
+						"internalType": "address",
+						"name": "erc721Wrapper",
+						"type": "address"
+					}
+				],
 				"stateMutability": "nonpayable",
 				"type": "constructor"
 			},
@@ -129,58 +145,6 @@
 				"type": "event"
 			},
 			{
-				"inputs": [],
-				"name": "DAY_IN_SECONDS",
-				"outputs": [
-					{
-						"internalType": "uint64",
-						"name": "",
-						"type": "uint64"
-					}
-				],
-				"stateMutability": "view",
-				"type": "function"
-			},
-			{
-				"inputs": [],
-				"name": "ERC721_WRAPPER",
-				"outputs": [
-					{
-						"internalType": "address",
-						"name": "",
-						"type": "address"
-					}
-				],
-				"stateMutability": "view",
-				"type": "function"
-			},
-			{
-				"inputs": [],
-				"name": "NFTFI",
-				"outputs": [
-					{
-						"internalType": "address",
-						"name": "",
-						"type": "address"
-					}
-				],
-				"stateMutability": "view",
-				"type": "function"
-			},
-			{
-				"inputs": [],
-				"name": "WETH",
-				"outputs": [
-					{
-						"internalType": "address",
-						"name": "",
-						"type": "address"
-					}
-				],
-				"stateMutability": "view",
-				"type": "function"
-			},
-			{
 				"inputs": [
 					{
 						"internalType": "address",
@@ -249,32 +213,6 @@
 				"name": "buyTokens",
 				"outputs": [],
 				"stateMutability": "nonpayable",
-				"type": "function"
-			},
-			{
-				"inputs": [],
-				"name": "currentProductId",
-				"outputs": [
-					{
-						"internalType": "uint32",
-						"name": "",
-						"type": "uint32"
-					}
-				],
-				"stateMutability": "view",
-				"type": "function"
-			},
-			{
-				"inputs": [],
-				"name": "currentTokenOffset",
-				"outputs": [
-					{
-						"internalType": "uint256",
-						"name": "",
-						"type": "uint256"
-					}
-				],
-				"stateMutability": "view",
 				"type": "function"
 			},
 			{
@@ -347,6 +285,30 @@
 			{
 				"inputs": [
 					{
+						"internalType": "uint32",
+						"name": "productId",
+						"type": "uint32"
+					},
+					{
+						"internalType": "uint8",
+						"name": "trancheId",
+						"type": "uint8"
+					}
+				],
+				"name": "getTokenQuantity",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
 						"internalType": "address",
 						"name": "account",
 						"type": "address"
@@ -402,6 +364,16 @@
 						"internalType": "uint32[]",
 						"name": "loanIds",
 						"type": "uint32[]"
+					},
+					{
+						"internalType": "uint256",
+						"name": "duration",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "residualPrice",
+						"type": "uint256"
 					}
 				],
 				"name": "mint",
@@ -417,59 +389,74 @@
 						"type": "address"
 					},
 					{
-						"internalType": "uint256",
+						"internalType": "address",
 						"name": "",
-						"type": "uint256"
-					}
-				],
-				"name": "nftIdToLookup",
-				"outputs": [
-					{
-						"internalType": "uint32",
-						"name": "productId",
-						"type": "uint32"
+						"type": "address"
 					},
 					{
-						"internalType": "uint32",
-						"name": "underlyingIndex",
-						"type": "uint32"
+						"internalType": "uint256[]",
+						"name": "",
+						"type": "uint256[]"
+					},
+					{
+						"internalType": "uint256[]",
+						"name": "",
+						"type": "uint256[]"
+					},
+					{
+						"internalType": "bytes",
+						"name": "",
+						"type": "bytes"
 					}
 				],
-				"stateMutability": "view",
+				"name": "onERC1155BatchReceived",
+				"outputs": [
+					{
+						"internalType": "bytes4",
+						"name": "",
+						"type": "bytes4"
+					}
+				],
+				"stateMutability": "nonpayable",
 				"type": "function"
 			},
 			{
 				"inputs": [
 					{
-						"internalType": "uint32",
+						"internalType": "address",
 						"name": "",
-						"type": "uint32"
-					}
-				],
-				"name": "productIdToProduct",
-				"outputs": [
+						"type": "address"
+					},
 					{
 						"internalType": "address",
-						"name": "owner",
+						"name": "",
 						"type": "address"
 					},
 					{
 						"internalType": "uint256",
-						"name": "tokenOffset",
+						"name": "",
 						"type": "uint256"
-					},
-					{
-						"internalType": "bool",
-						"name": "payoutsComputed",
-						"type": "bool"
 					},
 					{
 						"internalType": "uint256",
-						"name": "startTime",
+						"name": "",
 						"type": "uint256"
+					},
+					{
+						"internalType": "bytes",
+						"name": "",
+						"type": "bytes"
 					}
 				],
-				"stateMutability": "view",
+				"name": "onERC1155Received",
+				"outputs": [
+					{
+						"internalType": "bytes4",
+						"name": "",
+						"type": "bytes4"
+					}
+				],
+				"stateMutability": "nonpayable",
 				"type": "function"
 			},
 			{
@@ -589,6 +576,19 @@
 				"type": "function"
 			},
 			{
+				"inputs": [],
+				"name": "test",
+				"outputs": [
+					{
+						"internalType": "bytes32",
+						"name": "",
+						"type": "bytes32"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
 				"inputs": [
 					{
 						"internalType": "uint256",
@@ -679,8 +679,8 @@
 			"bytecodeHash": "ipfs"
 		},
 		"optimizer": {
-			"enabled": false,
-			"runs": 200
+			"enabled": true,
+			"runs": 100
 		},
 		"remappings": []
 	},
@@ -862,11 +862,11 @@
 			]
 		},
 		"contracts/NftSec.sol": {
-			"keccak256": "0x9af51fa6a384c010d90a2f404a2811f3d82fbb4f93083d1d32c66e8cd81961b3",
+			"keccak256": "0xf7c8bcd379178d8a22cea08d70300c4c2f2571f75888c2dab5201b78c2bf84d0",
 			"license": "BUSL-1.1",
 			"urls": [
-				"bzz-raw://65da905c3424a11ebdbba092d8c346a75f48a2783e09664f3e03af107d37d808",
-				"dweb:/ipfs/QmaYTdHApmR2gNv8tAwjChb3mrzWtLeFNLodNKM2XfUpd4"
+				"bzz-raw://e77ae02cfe469e7a41cc72821fecd615746ef7235d204912027515789c7e8839",
+				"dweb:/ipfs/QmWF8BFjzyaPMXwbby2yeSwHdPys4AmcttE87enNrSSkK9"
 			]
 		},
 		"contracts/airdrop/IAirdropReceiverFactory.sol": {

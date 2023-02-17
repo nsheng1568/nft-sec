@@ -1761,19 +1761,19 @@
 			]
 		},
 		"contracts/loans/direct/loanTypes/LoanAirdropUtils.sol": {
-			"keccak256": "0xd0cb73293f8aedbce3a1d69d74c8e0ef7812930cc2be4dcaa25bba96558eed00",
+			"keccak256": "0x0caa309216a6d32d5f88f97742a56d0530fc8b1880ad14b79ce83478f7a97fc4",
 			"license": "BUSL-1.1",
 			"urls": [
-				"bzz-raw://71b44d47ae23d744e9461c6aa521703f640499e4b0613a74487b7cde3899a0ca",
-				"dweb:/ipfs/QmPJbze2G5qNx7dWSt2QzqqBNY2GMhRexNT4cNEZYN6DiL"
+				"bzz-raw://11667d66dcc0064c13a3913b3266fa4fc8a9a05f1fe6decfb32ee438305b1cbb",
+				"dweb:/ipfs/QmZWY87AjpJicq9eJ6ysCMoW4fw88DhmYD9tpvfngma2B9"
 			]
 		},
 		"contracts/loans/direct/loanTypes/LoanChecksAndCalculations.sol": {
-			"keccak256": "0xb1924649246c54e7c713be1a50f7a15444d1127b52cde78923f892203692d230",
+			"keccak256": "0xd93b06d4ee9ee1f3e0266373bb09b27cc94ad175ce69efd5e0d8c39cc430c82e",
 			"license": "BUSL-1.1",
 			"urls": [
-				"bzz-raw://d2cb38ace7cd3426cb29d5bafa7a265a8462ddcf6de6af670cb0776bc6e42f6f",
-				"dweb:/ipfs/QmXE3bfbK62doho75sG9Ayw1nkLJQ98H5uUFFPyFpWDhhh"
+				"bzz-raw://dc2cfcbb5b1dd7629487b9bc3b5da5ceb8078813ea0443fbc13b9462f88ce4bd",
+				"dweb:/ipfs/QmSs139nZznjatwzL9KrwTMJX5P7MBt8MPcpTA6MgtkApB"
 			]
 		},
 		"contracts/loans/direct/loanTypes/LoanData.sol": {
@@ -1785,19 +1785,19 @@
 			]
 		},
 		"contracts/utils/ContractKeys.sol": {
-			"keccak256": "0x18c3f3a08195e774d39dbbeef091645330e1ec8546a9be2355bbf3fc271e547c",
+			"keccak256": "0x823cec7ea6116ad5f001d955d9a9e52411c48791721dd36a2f8581b95cc9629a",
 			"license": "BUSL-1.1",
 			"urls": [
-				"bzz-raw://c662ce06df0f011f6494c8119e0141254f65da860bb0294f0b4b6d599a37ec6c",
-				"dweb:/ipfs/QmZ1FtiUm6stxQNGT3PdNssqHw4D6uYUG3nazb3v7BF8zE"
+				"bzz-raw://3e98e9241bcb8557a8d89f62fcba10f4afe8c88a8219c93f9791efe6d8d28c96",
+				"dweb:/ipfs/QmaCJ38yHuj9E33F2hJzkLukk9o23yiVEmDq16xrMSNRUJ"
 			]
 		},
 		"contracts/utils/NFTfiSigningUtils.sol": {
-			"keccak256": "0x30a70f6cbda8b3d7b0dc099820cc2d287e7a6af3fee956428d4b66a3f925d9b1",
+			"keccak256": "0x3cdc46ea5982697f8eef9bdfae571c07b5617737a4959148c3c7d0f333e8b941",
 			"license": "BUSL-1.1",
 			"urls": [
-				"bzz-raw://ca549293931d86f50328630952d12ec9ace57cf3dee648e013919e3487c596c5",
-				"dweb:/ipfs/QmUTtPWHvcmsHpbd4MRhhkq5JD2VuwonDD8LDnFoLwta4M"
+				"bzz-raw://9c4ad60d8eb2dc590cb708486a5f2d86908cad0d7672f6fa0ebb064686ce7d08",
+				"dweb:/ipfs/QmXdHWEcrAjXGqtKLysiZtNEGWnTxLZShPL7Ycdum8opVp"
 			]
 		},
 		"contracts/utils/NftReceiver.sol": {

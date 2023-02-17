@@ -18,14 +18,14 @@ import "@openzeppelin/contracts/token/ERC721/IERC721.sol";
  * @notice Helper library for LoanBase
  */
 library LoanChecksAndCalculations {
-    uint16 internal constant HUNDRED_PERCENT = 10000;
+    uint16 private constant HUNDRED_PERCENT = 10000;
 
     /**
      * @dev Function that performs some validation checks before trying to repay a loan
      *
      * @param _loanId - The id of the loan being repaid
      */
-    function payBackChecks(uint32 _loanId, INftfiHub _hub) internal view {
+    function payBackChecks(uint32 _loanId, INftfiHub _hub) external view {
         checkLoanIdValidity(_loanId, _hub);
         // Sanity check that payBackLoan() and liquidateOverdueLoan() have never been called on this loanId.
         // Depending on how the rest of the code turns out, this check may be unnecessary.
@@ -41,7 +41,7 @@ library LoanChecksAndCalculations {
         require(block.timestamp <= (uint256(loanStartTime) + uint256(loanDuration)), "Loan is expired");
     }
 
-    function checkLoanIdValidity(uint32 _loanId, INftfiHub _hub) internal view {
+    function checkLoanIdValidity(uint32 _loanId, INftfiHub _hub) public view {
         require(
             IDirectLoanCoordinator(_hub.getContract(IDirectLoanBase(address(this)).LOAN_COORDINATOR())).isValidLoanId(
                 _loanId,
@@ -58,7 +58,7 @@ library LoanChecksAndCalculations {
      *
      * @return The revenue share percent for the partner.
      */
-    function getRevenueSharePercent(address _revenueSharePartner, INftfiHub _hub) internal view returns (uint16) {
+    function getRevenueSharePercent(address _revenueSharePartner, INftfiHub _hub) external view returns (uint16) {
         // return soon if no partner is set to avoid a public call
         if (_revenueSharePartner == address(0)) {
             return 0;
@@ -100,7 +100,7 @@ library LoanChecksAndCalculations {
         uint256 _newMaximumRepaymentAmount,
         uint256 _lenderNonce,
         INftfiHub _hub
-    ) internal view returns (address, address) {
+    ) external view returns (address, address) {
         checkLoanIdValidity(_loanId, _hub);
         IDirectLoanCoordinator loanCoordinator = IDirectLoanCoordinator(
             _hub.getContract(IDirectLoanBase(address(this)).LOAN_COORDINATOR())
@@ -151,7 +151,7 @@ library LoanChecksAndCalculations {
      * the `revenueSharePartner`.
      */
     function computeRevenueShare(uint256 _adminFee, uint256 _revenueShareInBasisPoints)
-        internal
+        external
         pure
         returns (uint256)
     {
@@ -171,7 +171,7 @@ library LoanChecksAndCalculations {
      * @return The quantity of ERC20 currency (measured in smalled units of that ERC20 currency) that is due as an admin
      * fee.
      */
-    function computeAdminFee(uint256 _interestDue, uint256 _adminFeeInBasisPoints) internal pure returns (uint256) {
+    function computeAdminFee(uint256 _interestDue, uint256 _adminFeeInBasisPoints) external pure returns (uint256) {
         return (_interestDue * _adminFeeInBasisPoints) / HUNDRED_PERCENT;
     }
 
@@ -193,7 +193,7 @@ library LoanChecksAndCalculations {
         uint256 _loanPrincipalAmount,
         uint256 _referralFeeInBasisPoints,
         address _referrer
-    ) internal pure returns (uint256) {
+    ) external pure returns (uint256) {
         if (_referralFeeInBasisPoints == 0 || _referrer == address(0)) {
             return 0;
         }

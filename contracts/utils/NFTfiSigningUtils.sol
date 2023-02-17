@@ -20,7 +20,7 @@ library NFTfiSigningUtils {
     /**
      * @dev This function gets the current chain ID.
      */
-    function getChainID() internal view returns (uint256) {
+    function getChainID() public view returns (uint256) {
         uint256 id;
         // solhint-disable-next-line no-inline-assembly
         assembly {
@@ -88,7 +88,7 @@ library NFTfiSigningUtils {
      *   - chainId
      */
     function isValidBorrowerSignature(LoanData.ListingTerms memory _listingTerms, LoanData.Signature memory _signature)
-        internal
+        external
         view
         returns (bool)
     {
@@ -103,7 +103,7 @@ library NFTfiSigningUtils {
         LoanData.ListingTerms memory _listingTerms,
         LoanData.Signature memory _signature,
         address _loanContract
-    ) internal view returns (bool) {
+    ) public view returns (bool) {
         require(block.timestamp <= _signature.expiry, "Borrower Signature has expired");
         require(_loanContract != address(0), "Loan is zero address");
         if (_signature.signer == address(0)) {
@@ -191,7 +191,7 @@ library NFTfiSigningUtils {
         LoanData.ListingTerms memory _listingTerms,
         IBundleBuilder.BundleElements memory _bundleElements,
         LoanData.Signature memory _signature
-    ) internal view returns (bool) {
+    ) external view returns (bool) {
         return isValidBorrowerSignatureBundle(_listingTerms, _bundleElements, _signature, address(this));
     }
 
@@ -204,7 +204,7 @@ library NFTfiSigningUtils {
         IBundleBuilder.BundleElements memory _bundleElements,
         LoanData.Signature memory _signature,
         address _loanContract
-    ) internal view returns (bool) {
+    ) public view returns (bool) {
         require(block.timestamp <= _signature.expiry, "Borrower Signature has expired");
         require(_loanContract != address(0), "Loan is zero address");
         if (_signature.signer == address(0)) {
@@ -285,7 +285,7 @@ library NFTfiSigningUtils {
      *   - chainId
      */
     function isValidLenderSignature(LoanData.Offer memory _offer, LoanData.Signature memory _signature)
-        internal
+        external
         view
         returns (bool)
     {
@@ -300,7 +300,7 @@ library NFTfiSigningUtils {
         LoanData.Offer memory _offer,
         LoanData.Signature memory _signature,
         address _loanContract
-    ) internal view returns (bool) {
+    ) public view returns (bool) {
         require(block.timestamp <= _signature.expiry, "Lender Signature has expired");
         require(_loanContract != address(0), "Loan is zero address");
         if (_signature.signer == address(0)) {
@@ -380,7 +380,7 @@ library NFTfiSigningUtils {
         LoanData.Offer memory _offer,
         IBundleBuilder.BundleElements memory _bundleElements,
         LoanData.Signature memory _signature
-    ) internal view returns (bool) {
+    ) external view returns (bool) {
         return isValidLenderSignatureBundle(_offer, _bundleElements, _signature, address(this));
     }
 
@@ -393,7 +393,7 @@ library NFTfiSigningUtils {
         IBundleBuilder.BundleElements memory _bundleElements,
         LoanData.Signature memory _signature,
         address _loanContract
-    ) internal view returns (bool) {
+    ) public view returns (bool) {
         require(block.timestamp <= _signature.expiry, "Lender Signature has expired");
         require(_loanContract != address(0), "Loan is zero address");
         if (_signature.signer == address(0)) {
@@ -459,7 +459,7 @@ library NFTfiSigningUtils {
         uint256 _newMaximumRepaymentAmount,
         uint256 _renegotiationFee,
         LoanData.Signature memory _signature
-    ) internal view returns (bool) {
+    ) external view returns (bool) {
         return
             isValidLenderRenegotiationSignature(
                 _loanId,
@@ -482,7 +482,7 @@ library NFTfiSigningUtils {
         uint256 _renegotiationFee,
         LoanData.Signature memory _signature,
         address _loanContract
-    ) internal view returns (bool) {
+    ) public view returns (bool) {
         require(block.timestamp <= _signature.expiry, "Renegotiation Signature has expired");
         require(_loanContract != address(0), "Loan is zero address");
         if (_signature.signer == address(0)) {

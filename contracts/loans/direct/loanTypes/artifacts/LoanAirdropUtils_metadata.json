@@ -1,0 +1,269 @@
+{
+	"compiler": {
+		"version": "0.8.4+commit.c7e474f2"
+	},
+	"language": "Solidity",
+	"output": {
+		"abi": [
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": true,
+						"internalType": "uint256",
+						"name": "loanId",
+						"type": "uint256"
+					},
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "borrower",
+						"type": "address"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "nftCollateralId",
+						"type": "uint256"
+					},
+					{
+						"indexed": false,
+						"internalType": "address",
+						"name": "nftCollateralContract",
+						"type": "address"
+					},
+					{
+						"indexed": false,
+						"internalType": "address",
+						"name": "target",
+						"type": "address"
+					},
+					{
+						"indexed": false,
+						"internalType": "bytes",
+						"name": "data",
+						"type": "bytes"
+					}
+				],
+				"name": "AirdropPulledFlashloan",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": true,
+						"internalType": "uint256",
+						"name": "loanId",
+						"type": "uint256"
+					},
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "borrower",
+						"type": "address"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "nftCollateralId",
+						"type": "uint256"
+					},
+					{
+						"indexed": false,
+						"internalType": "address",
+						"name": "nftCollateralContract",
+						"type": "address"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "receiverId",
+						"type": "uint256"
+					},
+					{
+						"indexed": false,
+						"internalType": "address",
+						"name": "receiverInstance",
+						"type": "address"
+					}
+				],
+				"name": "CollateralWrapped",
+				"type": "event"
+			}
+		],
+		"devdoc": {
+			"author": "NFTfi",
+			"events": {
+				"AirdropPulledFlashloan(uint256,address,uint256,address,address,bytes)": {
+					"params": {
+						"borrower": "- The address of the borrower.",
+						"data": "- function selector to be called",
+						"loanId": "- A unique identifier for this particular loan, sourced from the Loan Coordinator.",
+						"nftCollateralContract": "- The ERC721 contract of the NFT collateral",
+						"nftCollateralId": "- The ID within the AirdropReceiver for the NFT being used as collateral for this loan.",
+						"target": "- address of the airdropping contract"
+					}
+				},
+				"CollateralWrapped(uint256,address,uint256,address,uint256,address)": {
+					"params": {
+						"borrower": "- The address of the borrower.",
+						"loanId": "- A unique identifier for this particular loan, sourced from the Loan Coordinator.",
+						"nftCollateralContract": "- The contract of the NFT collateral",
+						"nftCollateralId": "- The ID within the AirdropReceiver for the NFT being used as collateral for this loan.",
+						"receiverId": "- id of the created AirdropReceiver, takes the place of nftCollateralId on the loan",
+						"receiverInstance": "- address of the created AirdropReceiver"
+					}
+				}
+			},
+			"kind": "dev",
+			"methods": {},
+			"title": "LoanAirdropUtils",
+			"version": 1
+		},
+		"userdoc": {
+			"events": {
+				"AirdropPulledFlashloan(uint256,address,uint256,address,address,bytes)": {
+					"notice": "This event is fired whenever a flashloan is initiated to pull an airdrop"
+				},
+				"CollateralWrapped(uint256,address,uint256,address,uint256,address)": {
+					"notice": "This event is fired whenever the collateral gets wrapped in an airdrop receiver"
+				}
+			},
+			"kind": "user",
+			"methods": {},
+			"notice": "Helper library for LoanBase",
+			"version": 1
+		}
+	},
+	"settings": {
+		"compilationTarget": {
+			"contracts/loans/direct/loanTypes/LoanAirdropUtils.sol": "LoanAirdropUtils"
+		},
+		"evmVersion": "istanbul",
+		"libraries": {},
+		"metadata": {
+			"bytecodeHash": "ipfs"
+		},
+		"optimizer": {
+			"enabled": false,
+			"runs": 200
+		},
+		"remappings": []
+	},
+	"sources": {
+		"@openzeppelin/contracts/token/ERC721/IERC721.sol": {
+			"keccak256": "0xab28a56179c1db258c9bf5235b382698cb650debecb51b23d12be9e241374b68",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://daae589a9d6fa7e55f99f86c0a16796ca490f243fb3693632c3711c0646c1d56",
+				"dweb:/ipfs/QmR3zpd7wNw3rcUdekwiv6FYHJqksuTCXLVioTxu6Fbxk3"
+			]
+		},
+		"@openzeppelin/contracts/utils/Address.sol": {
+			"keccak256": "0xf96f969e24029d43d0df89e59d365f277021dac62b48e1c1e3ebe0acdd7f1ca1",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://ec772b45a624be516f1c81970caa8a2e144301e9d0921cbc1a2789fef39a1269",
+				"dweb:/ipfs/QmNyjwxCrGhQMyzLD93oUobJXVe9ceJvRvfXwbEtuxPiEj"
+			]
+		},
+		"@openzeppelin/contracts/utils/introspection/IERC165.sol": {
+			"keccak256": "0x447a5f3ddc18419d41ff92b3773fb86471b1db25773e07f877f548918a185bf1",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://be161e54f24e5c6fae81a12db1a8ae87bc5ae1b0ddc805d82a1440a68455088f",
+				"dweb:/ipfs/QmP7C3CHdY9urF4dEMb9wmsp1wMxHF6nhA2yQE5SKiPAdy"
+			]
+		},
+		"contracts/airdrop/IAirdropReceiverFactory.sol": {
+			"keccak256": "0x0982de59ac31bb365f6d9c513a8463b5d33b5e6e42fb996387abfe308b57976b",
+			"license": "BUSL-1.1",
+			"urls": [
+				"bzz-raw://be426faa11180e42c3d604297f5c1f8aef859a37c8bda935a123540434e419d9",
+				"dweb:/ipfs/QmYjAPWD2cFa8qpczb852bFea6BRVyPj8sZWcSZADeBLV8"
+			]
+		},
+		"contracts/interfaces/IAirdropFlashLoan.sol": {
+			"keccak256": "0xd5bbd9a6ae2ebcef7b81a3b541b4ea886a18d9d2961c9226dd93b4f2a0070f76",
+			"license": "BUSL-1.1",
+			"urls": [
+				"bzz-raw://45fd9447f4e6e0b9fde3a88c4f3eeabfdbf8c4f7d90fbb73de73691071032441",
+				"dweb:/ipfs/QmYGv9xvK4A7qrRJD8rA2Uud1q9VGUCvLnE6JdVAYhMe1Z"
+			]
+		},
+		"contracts/interfaces/IDirectLoanCoordinator.sol": {
+			"keccak256": "0x339345316e124ed604da1016a8dafd30d21b1eded18febd5b7340df67515d6ac",
+			"license": "BUSL-1.1",
+			"urls": [
+				"bzz-raw://a2640b96aa66dd620ad1117e4239243b1ad44fc09c02ddcbc6a009725b3a55b8",
+				"dweb:/ipfs/QmZuhsxkyLKhg7NAoDTJYwt8dbQebpqiGUkrkigzmzRKdR"
+			]
+		},
+		"contracts/interfaces/INftWrapper.sol": {
+			"keccak256": "0x7440c44808528e967386521a0b934b8d7159c37c4ee033a08bb9e4128b023a66",
+			"license": "BUSL-1.1",
+			"urls": [
+				"bzz-raw://42cc276ee0ab407582365e0beac28fcbe49e06acb6432435285f23f6f10eb517",
+				"dweb:/ipfs/Qmdzq5pqqNCdh1JBsZhzU1pAQh6Xvnhccek2LWJvyemHEH"
+			]
+		},
+		"contracts/interfaces/INftfiHub.sol": {
+			"keccak256": "0x9c4c27933c916224e63d7944d2f928b713ca1f82993c1c95fcc33bbfba83ad74",
+			"license": "BUSL-1.1",
+			"urls": [
+				"bzz-raw://abddf22b64aad3062da9a6bc3b581ef14793baa306128d2e27068e8e2eaf97b4",
+				"dweb:/ipfs/QmcUMV6w6vNDu7CJSas33Ech85Pfkjxb1cowAYSMekjdf2"
+			]
+		},
+		"contracts/interfaces/IPermittedERC20s.sol": {
+			"keccak256": "0xef2644814ed4d4f33429af34879dc3d533142194bce601969e8f95e39c8d868e",
+			"license": "BUSL-1.1",
+			"urls": [
+				"bzz-raw://165e1398e3683589fc4fc0cd366c8d122cda22ceef8749623c6551f9ac74112a",
+				"dweb:/ipfs/QmaaAJhBffjwdGgTgHhAHDBbBWi9xHJZhoj9hS6LVWuPA2"
+			]
+		},
+		"contracts/interfaces/IPermittedPartners.sol": {
+			"keccak256": "0xc719dbcd40671582855db3282f96666fe908e73cf68c75c5fe1d28925053c53a",
+			"license": "BUSL-1.1",
+			"urls": [
+				"bzz-raw://d0b14257805f4688d44e6e88d65639698c7539f17cd69da88d991416f3c37850",
+				"dweb:/ipfs/QmRZpqfBNVXtUMUV8WW4CTGVRp3u8ugRhe9X3YBNCKHsER"
+			]
+		},
+		"contracts/loans/direct/loanTypes/IDirectLoanBase.sol": {
+			"keccak256": "0x3501b4d79b43f7e228db49d93ab6932cd6f56ce6463990adfceb0acac776ca5a",
+			"license": "BUSL-1.1",
+			"urls": [
+				"bzz-raw://f4d99dc7eaf58fb380df68e419760a58f088d702c2aa912a8634a6c1be45069a",
+				"dweb:/ipfs/QmNvgLXfxDZ81mhGDHTnSYzhPveKzNaVJFypggAvntSFX8"
+			]
+		},
+		"contracts/loans/direct/loanTypes/LoanAirdropUtils.sol": {
+			"keccak256": "0x0caa309216a6d32d5f88f97742a56d0530fc8b1880ad14b79ce83478f7a97fc4",
+			"license": "BUSL-1.1",
+			"urls": [
+				"bzz-raw://11667d66dcc0064c13a3913b3266fa4fc8a9a05f1fe6decfb32ee438305b1cbb",
+				"dweb:/ipfs/QmZWY87AjpJicq9eJ6ysCMoW4fw88DhmYD9tpvfngma2B9"
+			]
+		},
+		"contracts/loans/direct/loanTypes/LoanData.sol": {
+			"keccak256": "0x68e0a45abaafeb9bdbf235ea1b045927cfc2750111c08cdc2e273bcb19e1551c",
+			"license": "BUSL-1.1",
+			"urls": [
+				"bzz-raw://c563378388b5bbaacc7c18c33578c5bfd91043ffdcb4e7d7954a6188425ca109",
+				"dweb:/ipfs/QmWs3w56gKPRUsJ9jXqwaX7SaMhs6Hd4YZyxMtQwsk4J3C"
+			]
+		},
+		"contracts/utils/ContractKeys.sol": {
+			"keccak256": "0x823cec7ea6116ad5f001d955d9a9e52411c48791721dd36a2f8581b95cc9629a",
+			"license": "BUSL-1.1",
+			"urls": [
+				"bzz-raw://3e98e9241bcb8557a8d89f62fcba10f4afe8c88a8219c93f9791efe6d8d28c96",
+				"dweb:/ipfs/QmaCJ38yHuj9E33F2hJzkLukk9o23yiVEmDq16xrMSNRUJ"
+			]
+		}
+	},
+	"version": 1
+}

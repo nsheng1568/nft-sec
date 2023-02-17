@@ -72,7 +72,7 @@ library LoanAirdropUtils {
         bool _is1155,
         uint256 _nftAirdropAmount,
         INftfiHub _hub
-    ) internal {
+    ) external {
         IDirectLoanCoordinator loanCoordinator = IDirectLoanCoordinator(
             _hub.getContract(IDirectLoanBase(address(this)).LOAN_COORDINATOR())
         );
@@ -135,7 +135,7 @@ library LoanAirdropUtils {
         uint32 _loanId,
         LoanData.LoanTerms storage _loan,
         INftfiHub _hub
-    ) internal returns (address instance, uint256 receiverId) {
+    ) external returns (address instance, uint256 receiverId) {
         IDirectLoanCoordinator loanCoordinator = IDirectLoanCoordinator(
             _hub.getContract(IDirectLoanBase(address(this)).LOAN_COORDINATOR())
         );
