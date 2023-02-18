@@ -14,8 +14,11 @@ const INVESTOR1_ACC = 5
 const INVESTOR2_ACC = 6
 const INVESTOR3_ACC = 7
 const INVESTOR4_ACC = 8
+const INVESTOR5_ACC = 9
 
 const APE_PRICE = '80000000000000000'; // 0.08 ETH, the initial BAYC release price
+const TEN_ETH = '10000000000000000000';
+const TWENTY_ETH = '20000000000000000000';
 const ADMIN_FEE = 500 // 500 bps, the current NFTfi admin fee
 const CHAINID = 1;
 
@@ -26,6 +29,19 @@ interface Contracts {
     nftfiLoanCoord: Contract,
     nftfiPromNote: Contract,
     nftSec: Contract,
+}
+
+interface Accounts {
+    misc: string,
+    nftfi: string,
+    borrower1: string,
+    borrower2: string,
+    structurer: string,
+    investor1: string,
+    investor2: string,
+    investor3: string,
+    investor4: string,
+    investor5: string,
 }
 
 // #region Helper methods
@@ -87,23 +103,23 @@ const deploy = async (
 // #region Initializing contracts
 
 /* Deploy BoredApeYachtClub contract and have the two borrowers each buy one */
-const initBayc = async (miscAcc: string, borrower1Acc: string, borrower2Acc: string): Promise<Contract> => {
-    const bayc = await deploy('BoredApeYachtClub', ['BoredApeYachtClub', 'BAYC', 10000, 0], miscAcc)
-    await bayc.methods.flipSaleState().send({from: miscAcc}) // Begin sale of apes
+const initBayc = async (accounts: Accounts): Promise<Contract> => {
+    const bayc = await deploy('BoredApeYachtClub', ['BoredApeYachtClub', 'BAYC', 10000, 0], accounts.misc)
+    await bayc.methods.flipSaleState().send({from: accounts.misc}) // Begin sale of apes
 
     // Borrowers buy apes
-    await bayc.methods.mintApe(1).send({from: borrower1Acc, value: APE_PRICE})
-    await bayc.methods.mintApe(1).send({from: borrower2Acc, value: APE_PRICE})
+    await bayc.methods.mintApe(1).send({from: accounts.borrower1, value: APE_PRICE})
+    await bayc.methods.mintApe(1).send({from: accounts.borrower2, value: APE_PRICE})
 
     // Verify the apes are bought
     const [bayc0Acc, bayc1Acc] = await Promise.all([
         bayc.methods.ownerOf(0).call(),
         bayc.methods.ownerOf(1).call(),
     ])
-    if (bayc0Acc === borrower1Acc) {
+    if (bayc0Acc === accounts.borrower1) {
         console.log(`Bored Ape 0 purchased by Borrower 1`)
     }
-    if (bayc1Acc === borrower2Acc) {
+    if (bayc1Acc === accounts.borrower2) {
         console.log(`Bored Ape 1 purchased by Borrower 2`)
     }
 
@@ -111,28 +127,28 @@ const initBayc = async (miscAcc: string, borrower1Acc: string, borrower2Acc: str
 }
 
 /* Deploy wETH contract */
-const initWeth = async (miscAcc: string): Promise<Contract> => {
-    return deploy('WETH9', [], miscAcc)
+const initWeth = async (accounts: Accounts): Promise<Contract> => {
+    return deploy('WETH9', [], accounts.misc)
 }
 
 /* Deploy NFTfi libraries */
-const initNftfiLibs = async (nftfiAcc: string): Promise<void> => {
+const initNftfiLibs = async (accounts: Accounts): Promise<void> => {
     await Promise.all([
-        deployLibrary('contracts/loans/direct/loanTypes', 'LoanAirdropUtils', nftfiAcc),
-        deployLibrary('contracts/loans/direct/loanTypes', 'LoanChecksAndCalculations', nftfiAcc),
-        deployLibrary('contracts/utils', 'ContractKeys', nftfiAcc),
-        deployLibrary('contracts/utils', 'NFTfiSigningUtils', nftfiAcc),
+        deployLibrary('contracts/loans/direct/loanTypes', 'LoanAirdropUtils', accounts.nftfi),
+        deployLibrary('contracts/loans/direct/loanTypes', 'LoanChecksAndCalculations', accounts.nftfi),
+        deployLibrary('contracts/utils', 'ContractKeys', accounts.nftfi),
+        deployLibrary('contracts/utils', 'NFTfiSigningUtils', accounts.nftfi),
     ])
 }
 
 /* Deploy NFTfi hub for keeping track of NFTfi-related contracts */
-const initNftfiHub = async (nftfiAcc: string): Promise<Contract> => {
-    return deploy('NftfiHub', [nftfiAcc, [], []], nftfiAcc)
+const initNftfiHub = async (accounts: Accounts): Promise<Contract> => {
+    return deploy('NftfiHub', [accounts.nftfi, [], []], accounts.nftfi)
 }
 
 /* Deploy NFTfi ERC721 wrapper contract for abstracting collateral transactions */
-const initNftfiErc721Wrapper = async(nftfiAcc: string): Promise<Contract> => {
-    return deploy('ERC721Wrapper', [], nftfiAcc)
+const initNftfiErc721Wrapper = async(accounts: Accounts): Promise<Contract> => {
+    return deploy('ERC721Wrapper', [], accounts.nftfi)
 }
 
 /* Deploy NFTfi Permitted NFTs contract for registering collection permissions, and track it in the hub */
@@ -140,21 +156,21 @@ const initNftfiPermNfts = async (
     nftfiErc721Wrapper: Contract,
     nftfiHub: Contract,
     bayc: Contract,
-    nftfiAcc: string,
+    accounts: Accounts,
 ): Promise<void> => {
     const nftfiPermNfts = await deploy(
         'PermittedNFTsAndTypeRegistry',
         [
-            nftfiAcc,
+            accounts.nftfi,
             nftfiHub.options.address,
             ['BoredApeYachtClub'],
             [nftfiErc721Wrapper.options.address],
             [bayc.options.address],
             ['BoredApeYachtClub'],
         ],
-        nftfiAcc,
+        accounts.nftfi,
     )
-    await nftfiHub.methods.setContract('PERMITTED_NFTS', nftfiPermNfts.options.address).send({from: nftfiAcc})
+    await nftfiHub.methods.setContract('PERMITTED_NFTS', nftfiPermNfts.options.address).send({from: accounts.nftfi})
 }
 
 /**
@@ -165,47 +181,47 @@ const initNftfiPermNfts = async (
 const initNftfiLoanCoord = async (
     nftfiHub: Contract,
     nftfi: Contract,
-    nftfiAcc: string,
+    accounts: Accounts,
 ): Promise<[Contract, Contract]> => {
     const nftfiLoanCoord = await deploy(
         'DirectLoanCoordinator',
         [
             nftfiHub.options.address,
-            nftfiAcc,
+            accounts.nftfi,
             ['DIRECT_LOAN_FIXED_REDEPLOY'],
             [nftfi.options.address],
         ],
-        nftfiAcc,
+        accounts.nftfi,
     )
     const [nftfiPromNote, nftfiObliNote] = await Promise.all([
         deploy(
             'SmartNft',
             [
-                nftfiAcc,
+                accounts.nftfi,
                 nftfiHub.options.address,
                 nftfiLoanCoord.options.address,
                 'NFTfi Promissory Note',
                 'PNNFI',
                 'https://metadata.nftfi.com/loans/v2/promissory/1/',
             ],
-            nftfiAcc,
+            accounts.nftfi,
         ),
         deploy(
             'SmartNft',
             [
-                nftfiAcc,
+                accounts.nftfi,
                 nftfiHub.options.address,
                 nftfiLoanCoord.options.address,
                 'NFTfi Obligation Receipt',
                 'ORNFI',
                 'https://metadata.nftfi.com/loans/v2/obligation/1/',
             ],
-            nftfiAcc,
+            accounts.nftfi,
         ),
     ])
     await Promise.all([
-        nftfiLoanCoord.methods.initialize(nftfiPromNote.options.address, nftfiObliNote.options.address).send({from: nftfiAcc}),
-        nftfiHub.methods.setContract('DIRECT_LOAN_COORDINATOR', nftfiLoanCoord.options.address).send({from: nftfiAcc}),
+        nftfiLoanCoord.methods.initialize(nftfiPromNote.options.address, nftfiObliNote.options.address).send({from: accounts.nftfi}),
+        nftfiHub.methods.setContract('DIRECT_LOAN_COORDINATOR', nftfiLoanCoord.options.address).send({from: accounts.nftfi}),
     ])
     return [nftfiLoanCoord, nftfiPromNote]
 }
@@ -214,39 +230,49 @@ const initNftfiLoanCoord = async (
 const initNiftfi = async (
     nftfiHub: Contract,
     weth: Contract,
-    nftfiAcc: string,
+    accounts: Accounts,
 ): Promise<Contract> => {
-    const nftfi = await deploy('DirectLoanFixedOfferRedeploy', [nftfiAcc, nftfiHub.options.address, [weth.options.address]], nftfiAcc)
-    await nftfi.methods.updateAdminFee(ADMIN_FEE).send({from: nftfiAcc})
+    const nftfi = await deploy('DirectLoanFixedOfferRedeploy', [accounts.nftfi, nftfiHub.options.address, [weth.options.address]], accounts.nftfi)
+    await nftfi.methods.updateAdminFee(ADMIN_FEE).send({from: accounts.nftfi})
     return nftfi
 }
 
 /* Deploy NftSec contract, containing our securitized product logic */
-const initNftSec = async (weth: Contract, nftfi: Contract, nftfiErc721Wrapper: Contract, miscAcc: string): Promise<Contract> => {
-    return deploy('NftSec', [weth.options.address, nftfi.options.address, nftfiErc721Wrapper.options.address], miscAcc)
+const initNftSec = async (
+    weth: Contract,
+    nftfi: Contract,
+    nftfiErc721Wrapper: Contract,
+    accounts: Accounts
+): Promise<Contract> => {
+    return deploy(
+        'NftSec',
+        [
+            weth.options.address,
+            nftfi.options.address,
+            nftfiErc721Wrapper.options.address,
+            10000,
+            1000,
+        ],
+        accounts.misc,
+    )
 }
 
 /* Initialize all contracts and return a bundle of them for future use */
-const init = async (
-    miscAcc: string,
-    nftfiAcc: string,
-    borrower1Acc: string,
-    borrower2Acc: string
-): Promise<Contracts> => {
-    console.log('\nInitializing contracts...')
-    await initNftfiLibs(nftfiAcc)
+const init = async (accounts: Accounts): Promise<Contracts> => {
+    console.log('\nStep 0: Initializing contracts...')
+    await initNftfiLibs(accounts)
     const [bayc, weth, nftfiHub, nftfiErc721Wrapper] = await Promise.all([
-        initBayc(miscAcc, borrower1Acc, borrower2Acc),
-        initWeth(miscAcc),
-        initNftfiHub(nftfiAcc),
-        initNftfiErc721Wrapper(nftfiAcc),
+        initBayc(accounts),
+        initWeth(accounts),
+        initNftfiHub(accounts),
+        initNftfiErc721Wrapper(accounts),
     ])
-    const nftfi = await initNiftfi(nftfiHub, weth, nftfiAcc)
+    const nftfi = await initNiftfi(nftfiHub, weth, accounts)
     const [[nftfiLoanCoord, nftfiPromNote],] = await Promise.all([
-        initNftfiLoanCoord(nftfiHub, nftfi, nftfiAcc),
-        initNftfiPermNfts(nftfiErc721Wrapper, nftfiHub, bayc, nftfiAcc),
+        initNftfiLoanCoord(nftfiHub, nftfi, accounts),
+        initNftfiPermNfts(nftfiErc721Wrapper, nftfiHub, bayc, accounts),
     ])
-    const nftSec = await initNftSec(weth, nftfi, nftfiErc721Wrapper, miscAcc)
+    const nftSec = await initNftSec(weth, nftfi, nftfiErc721Wrapper, accounts)
     return {
         bayc: bayc,
         weth: weth,
@@ -257,7 +283,7 @@ const init = async (
     }
 }
 
-// #region Sourcing and structuring tranches
+// #region Sourcing loans
 
 /* Sign and accept an offer to initiate a loan on NFTfi */
 const acceptOffer = async (
@@ -316,44 +342,42 @@ const acceptOffer = async (
 }
 
 /* Obtain wETH for account by depositing ETH */
-const obtainWeth = async (contracts: Contracts, amount: string, acc: string): Promise<void> => {
-    await contracts.weth.methods.deposit().send({from: acc, value: amount})
+const obtainWeth = async (contracts: Contracts, amount: string, account: string): Promise<void> => {
+    await contracts.weth.methods.deposit().send({from: account, value: amount})
 }
 
 /* Get current wETH balance for account */
-const getWethBalance = async (contracts: Contracts, acc: string): Promise<number> => {
-    return contracts.weth.methods.balanceOf(acc).call()
+const getWethBalance = async (contracts: Contracts, account: string): Promise<number> => {
+    return contracts.weth.methods.balanceOf(account).call()
 }
 
 /* Approve transfer of wETH to NFTfi from account */
-const approveWethToNftfi = async (contracts: Contracts, amount: string, acc: string): Promise<void> => {
-    await contracts.weth.methods.approve(contracts.nftfi.options.address, amount).send({from: acc})
+const approveWethToNftfi = async (contracts: Contracts, amount: string, account: string): Promise<void> => {
+    await contracts.weth.methods.approve(contracts.nftfi.options.address, amount).send({from: account})
 }
 
 /* Get current owner of promissory note associated with loanId */
 const getLoanOwner = async (contracts: Contracts, loanId: number): Promise<string> => {
-    return contracts.nftfiLoanCoord.methods.getLoanData(loanId).call().then(loanData =>
-        contracts.nftfiPromNote.methods.ownerOf(loanData[1]).call())
+    const loanData = await contracts.nftfiLoanCoord.methods.getLoanData(loanId).call()
+    return contracts.nftfiPromNote.methods.ownerOf(loanData[1]).call()
 }
 
 /* Initiate two NFTfi loans between structurer and borrowers */
 const initiateLoans = async (
     contracts: Contracts,
-    structurerAcc: string,
-    borrower1Acc: string,
-    borrower2Acc: string,
+    accounts: Accounts,
 ): Promise<void> => {
-    console.log('\nInitiating NFTfi loans...')
+    console.log('\nStep 1: Initiating NFTfi loans...')
     await Promise.all([
-        obtainWeth(contracts, '10000000000000000000', structurerAcc), // Obtain 10 wETH
-        approveWethToNftfi(contracts, '10000000000000000000', structurerAcc) // Approve transfer of 10 wETH
+        obtainWeth(contracts, TEN_ETH, accounts.structurer), // Obtain 10 wETH
+        approveWethToNftfi(contracts, TEN_ETH, accounts.structurer) // Approve transfer of 10 wETH
     ])
 
     // Verify initial wETH balances
     await Promise.all([
-        getWethBalance(contracts, structurerAcc),
-        getWethBalance(contracts, borrower1Acc),
-        getWethBalance(contracts, borrower2Acc),
+        getWethBalance(contracts, accounts.structurer),
+        getWethBalance(contracts, accounts.borrower1),
+        getWethBalance(contracts, accounts.borrower2),
     ])
     .then(results => console.log(
         'wETH balances before NFTfi loans:',
@@ -371,8 +395,8 @@ const initiateLoans = async (
             0,
             10000,
             0,
-            structurerAcc,
-            borrower1Acc,
+            accounts.structurer,
+            accounts.borrower1,
         ),
         acceptOffer(
             contracts,
@@ -381,8 +405,8 @@ const initiateLoans = async (
             1,
             10000,
             1,
-            structurerAcc,
-            borrower2Acc,
+            accounts.structurer,
+            accounts.borrower2,
         ),
     ]);
 
@@ -390,14 +414,14 @@ const initiateLoans = async (
     await Promise.all([
         getLoanOwner(contracts, 1),
         getLoanOwner(contracts, 2),
-        getWethBalance(contracts, structurerAcc),
-        getWethBalance(contracts, borrower1Acc),
-        getWethBalance(contracts, borrower2Acc),
+        getWethBalance(contracts, accounts.structurer),
+        getWethBalance(contracts, accounts.borrower1),
+        getWethBalance(contracts, accounts.borrower2),
     ]).then(results => {
-        if (results[0] == structurerAcc) {
+        if (results[0] == accounts.structurer) {
             console.log('NFTfi Promissory Note 1 issued to Structurer')
         }
-        if (results[1] == structurerAcc) {
+        if (results[1] == accounts.structurer) {
             console.log('NFTfi Promissory Note 2 issued to Structurer')
         }
         console.log(
@@ -409,20 +433,170 @@ const initiateLoans = async (
     })
 }
 
+// #region Minting tokens
+
+/* Approve transfer of NFTfi Promissory Note to NftSec for minting tokens */
+const approvePromNoteToNftSec = async (contracts: Contracts, accounts: Accounts, loanId: number): Promise<void> => {
+    const loanData = await contracts.nftfiLoanCoord.methods.getLoanData(loanId).call()
+    await contracts.nftfiPromNote.methods.approve(contracts.nftSec.options.address, loanData[1]).send({from: accounts.structurer})
+}
+
+/* Mint tranche tokens by sending NFTfi Promissory Notes to NftSec */
+const mintTranches = async (contracts: Contracts, accounts: Accounts): Promise<void> => {
+    console.log('\nStep 2: Minting tranche tokens...')
+    // Send NFTfi Promissory Notes
+    await Promise.all([
+        approvePromNoteToNftSec(contracts, accounts, 1),
+        approvePromNoteToNftSec(contracts, accounts, 2),
+    ])
+
+    // Mint tranche tokens
+    await contracts.nftSec.methods.mint(
+        [1000, 2000], // interest rates of 10% and 20%
+        ['600000000000000000', '900000000000000000'], // notional amounts of 0.6e18 and 0.9e18
+        [1, 2],
+        60000,
+        '100000000000000000', // residual price of 0.1 ETH
+    ).send({from: accounts.structurer})
+
+    // Verify tranche token prices and quantities
+    await Promise.all([
+        contracts.nftSec.methods.getTokenQuantity(0, 0).call(),
+        contracts.nftSec.methods.getTokenPrice(0, 0).call(),
+        contracts.nftSec.methods.getTokenQuantity(0, 1).call(),
+        contracts.nftSec.methods.getTokenPrice(0, 1).call(),
+        contracts.nftSec.methods.getResidualPrice(0).call(),
+    ]).then(results => {
+        console.log(
+            'Tranche tokens minted:',
+            '\tSenior Tranche:',
+            `\t\tQuantity - ${results[0]}`,
+            `\t\tPrice    - ${results[1]}`,
+            '\tJunior Tranche:',
+            `\t\tQuantity - ${results[2]}`,
+            `\t\tPrice    - ${results[3]}`,
+            '\tResidual Tranche:',
+            `\t\tPrice    - ${results[4]}`,
+        )
+    })
+}
+
+/* Approve transfer of wETH to NFTfi from account */
+const approveWethToNftSec = async (contracts: Contracts, amount: string, account: string): Promise<void> => {
+    await contracts.weth.methods.approve(contracts.nftSec.options.address, amount).send({from: account})
+}
+
+const investInTranches = async (contracts: Contracts, accounts: Accounts): Promise<void> => {
+    // Obtain and approve transfer of 20 wETH for each investor
+    await Promise.all([
+        obtainWeth(contracts, TWENTY_ETH, accounts.investor1),
+        obtainWeth(contracts, TWENTY_ETH, accounts.investor2),
+        obtainWeth(contracts, TWENTY_ETH, accounts.investor3),
+        obtainWeth(contracts, TWENTY_ETH, accounts.investor4),
+        approveWethToNftSec(contracts, TWENTY_ETH, accounts.investor1),
+        approveWethToNftSec(contracts, TWENTY_ETH, accounts.investor2),
+        approveWethToNftSec(contracts, TWENTY_ETH, accounts.investor3),
+        approveWethToNftSec(contracts, TWENTY_ETH, accounts.investor4),
+    ])
+
+    // Verify initial wETH balances
+    await Promise.all([
+        getWethBalance(contracts, accounts.structurer),
+        getWethBalance(contracts, accounts.investor1),
+        getWethBalance(contracts, accounts.investor2),
+        getWethBalance(contracts, accounts.investor3),
+        getWethBalance(contracts, accounts.investor4),
+    ])
+    .then(results => console.log(
+        'wETH balances before tranche purchases:',
+        `\tStructurer: ${results[0]/10**18}`,
+        `\tInvestor 1: ${results[1]/10**18}`,
+        `\tInvestor 2: ${results[2]/10**18}`,
+        `\tInvestor 3: ${results[3]/10**18}`,
+        `\tInvestor 4: ${results[4]/10**18}`,
+    ))
+
+    await Promise.all([
+        contracts.nftSec.methods.buyTokens(0, 0, '600000000000000000').send({from: accounts.investor1}), // Investor 1 purchases entire senior tranche
+        contracts.nftSec.methods.buyTokens(0, 1, '400000000000000000').send({from: accounts.investor2}), // Investor 2 purchases part of junior tranche
+        contracts.nftSec.methods.buyResidual(0).send({from: accounts.investor3}), // Investor 3 purchases non-fungible resudiual tranche
+    ])
+    // After these purchases, only part of junior tranche remains for sale
+    console.log('a')
+
+    // Verify tranche tokens successfully purchased
+    await Promise.all([
+        contracts.nftSec.methods.balanceOf(accounts.investor1, 0).call(),
+        contracts.nftSec.methods.balanceOf(accounts.investor2, 1).call(),
+        contracts.nftSec.methods.balanceOf(accounts.investor3, 2).call(),
+    ]).then(results => console.log(
+        `Investor 1 purchased ${results[0]} senior tranche tokens`,
+        `Investor 2 purchased ${results[1]} junior tranche tokens`,
+        `Investor 3 purchased ${results[2]} residual tranche token`,
+    ))
+
+    console.log('Investor 4 is dissatisfied with the initial price of junior tranche, so she waits ---')
+    for (let i = 0; i < 3; i++) {
+        await new Promise(r => setTimeout(r, 3000))
+        const juniorTranchePrice = await contracts.nftSec.methods.getTokenPrice(0, 1).call()
+        console.log(`\tJunior tranche price is now ${juniorTranchePrice}`)
+    }
+    await contracts.nftSec.methods.buyTokens(0, 1, '500000000000000000').send({from: accounts.investor4})
+
+    // Verify final wETH balances
+    await Promise.all([
+        contracts.nftSec.methods.balanceOf(accounts.investor4, 1).call(),
+        getWethBalance(contracts, accounts.structurer),
+        getWethBalance(contracts, accounts.investor1),
+        getWethBalance(contracts, accounts.investor2),
+        getWethBalance(contracts, accounts.investor3),
+        getWethBalance(contracts, accounts.investor4),
+    ])
+    .then(results => console.log(
+        `Investor 4 purchased ${results[0]} junior tranche tokens`,
+        'wETH balances after tranche purchases:',
+        `\tStructurer: ${results[1]/10**18}`,
+        `\tInvestor 1: ${results[2]/10**18}`,
+        `\tInvestor 2: ${results[3]/10**18}`,
+        `\tInvestor 3: ${results[4]/10**18}`,
+        `\tInvestor 4: ${results[5]/10**18}`,
+    ))
+}
+
+const repayLoan = async (contracts: Contracts, accounts: Accounts): Promise<void> => {
+    await Promise.all([
+        getWethBalance(contracts, accounts.structurer),
+        getWethBalance(contracts, accounts.borrower1),
+        getWethBalance(contracts, accounts.borrower2),
+    ])
+    .then(results => console.log(
+        'wETH balances before NFTfi loans:',
+        `\tStructurer: ${results[0]/10**18}`,
+        `\tBorrower 1: ${results[1]/10**18}`,
+        `\tBorrower 2: ${results[2]/10**18}`,
+    ))
+    await Promise.all([
+        obtainWeth(contracts, '100000000000000000', accounts.borrower1),
+        approveWethToNftfi(contracts, '1100000000000000000', accounts.borrower1)
+    ])
+    await contracts.nftfi.methods.payBackLoan(1).send({from: accounts.borrower1})
+    await Promise.all([
+        getWethBalance(contracts, accounts.structurer),
+        getWethBalance(contracts, accounts.borrower1),
+        getWethBalance(contracts, accounts.borrower2),
+    ])
+    .then(results => console.log(
+        'wETH balances after NFTfi loans:',
+        `\tStructurer: ${results[0]/10**18}`,
+        `\tBorrower 1: ${results[1]/10**18}`,
+        `\tBorrower 2: ${results[2]/10**18}`,
+    ))
+}
+
 /* Main body of scenario test */
 (async () => {
     try {
-        const [
-            miscAcc,
-            nftfiAcc,
-            borrower1Acc,
-            borrower2Acc,
-            structurerAcc,
-            investor1Acc,
-            investor2Acc,
-            investor3Acc,
-            investor4Acc,
-        ] = await Promise.all([
+        const accounts: Accounts = await Promise.all([
             MISC_ACC,
             NFTFI_ACC,
             BORROWER1_ACC,
@@ -432,10 +606,26 @@ const initiateLoans = async (
             INVESTOR2_ACC,
             INVESTOR3_ACC,
             INVESTOR4_ACC,
-        ].map(getAccount))
+            INVESTOR5_ACC,
+        ].map(getAccount)).then(result => { return {
+            misc: result[0],
+            nftfi: result[1],
+            borrower1: result[2],
+            borrower2: result[3],
+            structurer: result[4],
+            investor1: result[5],
+            investor2: result[6],
+            investor3: result[7],
+            investor4: result[8],
+            investor5: result[9],
+        }})
 
-        const contracts = await init(miscAcc, nftfiAcc, borrower1Acc, borrower2Acc)
-        await initiateLoans(contracts, structurerAcc, borrower1Acc, borrower2Acc)
+        const contracts = await init(accounts)
+        await initiateLoans(contracts, accounts)
+        await mintTranches(contracts, accounts)
+        await investInTranches(contracts, accounts)
+        // await repayLoan(contracts, accounts)
+        console.log('\nEnd of test.')
     } catch (e) {
         console.error(e.message)
     }

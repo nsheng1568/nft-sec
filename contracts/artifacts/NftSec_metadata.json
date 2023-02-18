@@ -21,6 +21,16 @@
 						"internalType": "address",
 						"name": "erc721Wrapper",
 						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "minAuctionTime",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "bountyTime",
+						"type": "uint256"
 					}
 				],
 				"stateMutability": "nonpayable",
@@ -198,6 +208,19 @@
 						"internalType": "uint32",
 						"name": "productId",
 						"type": "uint32"
+					}
+				],
+				"name": "buyResidual",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint32",
+						"name": "productId",
+						"type": "uint32"
 					},
 					{
 						"internalType": "uint8",
@@ -248,6 +271,25 @@
 					}
 				],
 				"name": "getNftPrice",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint32",
+						"name": "productId",
+						"type": "uint32"
+					}
+				],
+				"name": "getResidualPrice",
 				"outputs": [
 					{
 						"internalType": "uint256",
@@ -367,7 +409,7 @@
 					},
 					{
 						"internalType": "uint256",
-						"name": "duration",
+						"name": "productDuration",
 						"type": "uint256"
 					},
 					{
@@ -576,19 +618,6 @@
 				"type": "function"
 			},
 			{
-				"inputs": [],
-				"name": "test",
-				"outputs": [
-					{
-						"internalType": "bytes32",
-						"name": "",
-						"type": "bytes32"
-					}
-				],
-				"stateMutability": "view",
-				"type": "function"
-			},
-			{
 				"inputs": [
 					{
 						"internalType": "uint256",
@@ -680,7 +709,7 @@
 		},
 		"optimizer": {
 			"enabled": true,
-			"runs": 100
+			"runs": 0
 		},
 		"remappings": []
 	},
@@ -710,11 +739,11 @@
 			]
 		},
 		"@openzeppelin/contracts/token/ERC1155/ERC1155.sol": {
-			"keccak256": "0xd917747dc87f189c6779b894f367a028f9dca4be930283cccec8f312966af820",
+			"keccak256": "0xe7d7de84b2e5e666b71abf271a8e4105e5faba6e1b19e9bce98b46aea3804638",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://7a5e5b99830cf233f77aa3b1bd1f57561faee103beeee88e6a6f86d044817bbb",
-				"dweb:/ipfs/QmREYidSDpHPig3AhxzsMHg3w2ZtMeGfRhcokXxEZyj6fC"
+				"bzz-raw://939ce0223879626d89033d5cd7baff3b21c18f9a952b58ab04cc5774b720cca7",
+				"dweb:/ipfs/QmRkcEJZsG8E93HXo1Md4rc3uNUYHJVqyM5upd6FAwTN4h"
 			]
 		},
 		"@openzeppelin/contracts/token/ERC1155/IERC1155.sol": {
@@ -862,11 +891,11 @@
 			]
 		},
 		"contracts/NftSec.sol": {
-			"keccak256": "0xf7c8bcd379178d8a22cea08d70300c4c2f2571f75888c2dab5201b78c2bf84d0",
+			"keccak256": "0xa86704916445a8359c41dda254ed6b0f56f8e18dfd2136d1f925c2a0589aa742",
 			"license": "BUSL-1.1",
 			"urls": [
-				"bzz-raw://e77ae02cfe469e7a41cc72821fecd615746ef7235d204912027515789c7e8839",
-				"dweb:/ipfs/QmWF8BFjzyaPMXwbby2yeSwHdPys4AmcttE87enNrSSkK9"
+				"bzz-raw://9527e3bc1a7be350df709430e870b7c602f3971e59e42840a3bd57bf98368372",
+				"dweb:/ipfs/QmYCkwViWVEQZsJQoPFCGdpue5YhkFEVnB7ToJztZtTXiS"
 			]
 		},
 		"contracts/airdrop/IAirdropReceiverFactory.sol": {
