@@ -19,7 +19,17 @@
 					},
 					{
 						"internalType": "address",
+						"name": "nftfiHub",
+						"type": "address"
+					},
+					{
+						"internalType": "address",
 						"name": "erc721Wrapper",
+						"type": "address"
+					},
+					{
+						"internalType": "address",
+						"name": "permissoryNote",
 						"type": "address"
 					},
 					{
@@ -157,6 +167,25 @@
 			{
 				"inputs": [
 					{
+						"internalType": "uint256",
+						"name": "trancheId",
+						"type": "uint256"
+					}
+				],
+				"name": "a",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
 						"internalType": "address",
 						"name": "account",
 						"type": "address"
@@ -290,6 +319,49 @@
 					}
 				],
 				"name": "getResidualPrice",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint32",
+						"name": "productId",
+						"type": "uint32"
+					}
+				],
+				"name": "getResidualTokenId",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint32",
+						"name": "productId",
+						"type": "uint32"
+					},
+					{
+						"internalType": "uint8",
+						"name": "trancheId",
+						"type": "uint8"
+					}
+				],
+				"name": "getTokenId",
 				"outputs": [
 					{
 						"internalType": "uint256",
@@ -491,6 +563,40 @@
 					}
 				],
 				"name": "onERC1155Received",
+				"outputs": [
+					{
+						"internalType": "bytes4",
+						"name": "",
+						"type": "bytes4"
+					}
+				],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					},
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					},
+					{
+						"internalType": "bytes",
+						"name": "",
+						"type": "bytes"
+					}
+				],
+				"name": "onERC721Received",
 				"outputs": [
 					{
 						"internalType": "bytes4",
@@ -739,11 +845,11 @@
 			]
 		},
 		"@openzeppelin/contracts/token/ERC1155/ERC1155.sol": {
-			"keccak256": "0xe7d7de84b2e5e666b71abf271a8e4105e5faba6e1b19e9bce98b46aea3804638",
+			"keccak256": "0xd917747dc87f189c6779b894f367a028f9dca4be930283cccec8f312966af820",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://939ce0223879626d89033d5cd7baff3b21c18f9a952b58ab04cc5774b720cca7",
-				"dweb:/ipfs/QmRkcEJZsG8E93HXo1Md4rc3uNUYHJVqyM5upd6FAwTN4h"
+				"bzz-raw://7a5e5b99830cf233f77aa3b1bd1f57561faee103beeee88e6a6f86d044817bbb",
+				"dweb:/ipfs/QmREYidSDpHPig3AhxzsMHg3w2ZtMeGfRhcokXxEZyj6fC"
 			]
 		},
 		"@openzeppelin/contracts/token/ERC1155/IERC1155.sol": {
@@ -891,11 +997,11 @@
 			]
 		},
 		"contracts/NftSec.sol": {
-			"keccak256": "0xa86704916445a8359c41dda254ed6b0f56f8e18dfd2136d1f925c2a0589aa742",
+			"keccak256": "0xfbc80d33d586597ecd1231c31efd75104502638fc4b289b428fef7fb1d5e68ad",
 			"license": "BUSL-1.1",
 			"urls": [
-				"bzz-raw://9527e3bc1a7be350df709430e870b7c602f3971e59e42840a3bd57bf98368372",
-				"dweb:/ipfs/QmYCkwViWVEQZsJQoPFCGdpue5YhkFEVnB7ToJztZtTXiS"
+				"bzz-raw://a3b57291052df7d412d6198bc60eb1220fd65ffc529761d53799d3d8a7ebbe24",
+				"dweb:/ipfs/QmPwE1PGGxdBP1qaEfbXJ8SBx54v568hRcegH5TbKQPRm7"
 			]
 		},
 		"contracts/airdrop/IAirdropReceiverFactory.sol": {

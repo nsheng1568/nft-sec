@@ -1,6 +1,6 @@
 {
 	"compiler": {
-		"version": "0.7.0+commit.9e61f92b"
+		"version": "0.7.6+commit.7338295f"
 	},
 	"language": "Solidity",
 	"output": {
@@ -399,8 +399,8 @@
 			"bytecodeHash": "ipfs"
 		},
 		"optimizer": {
-			"enabled": false,
-			"runs": 200
+			"enabled": true,
+			"runs": 100
 		},
 		"remappings": []
 	},

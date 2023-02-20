@@ -1499,7 +1499,7 @@
 		},
 		"optimizer": {
 			"enabled": true,
-			"runs": 0
+			"runs": 100
 		},
 		"remappings": []
 	},
