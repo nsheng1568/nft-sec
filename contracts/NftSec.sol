@@ -87,6 +87,15 @@ contract NftSec is ERC1155Supply, IERC1155Receiver, IERC721Receiver {
         BOUNTY_TIME = bountyTime;
     }
 
+    /**
+     * @notice Mint tranche tokens by specifying the properties of each tranche and the underlying NFTfi loans.
+     * @param trancheInterestRates - Array of interest rates for each tranche, quoted in basis points. Must be empty if specifying an IO/PO structure.
+     * @param trancheNotionals - Array of notional amounts for each tranche. Must have length 2 if specifying an IO/PO structure, or otherwise must have
+     *                           the same length as trancheInterestRates.
+     * @param loanIds - NFTfi loan ids of the underlying loans. Must be approved to be transferred to NftSec.
+     * @param productDuration - Amount of time, in seconds, until the securitized product matures.
+     * @param residualPrice - Price of the non-fungible residual tranche.
+     */
     function mint(
         uint256[] calldata trancheInterestRates,
         uint256[] calldata trancheNotionals,
@@ -143,12 +152,18 @@ contract NftSec is ERC1155Supply, IERC1155Receiver, IERC721Receiver {
         currentTokenOffset += trancheNotionals.length + 1;
     }
 
+    /**
+     * @notice Purchase the non-fungible residual tranche associated with the given productId.
+     */
     function buyResidual(uint32 productId) external {
         Product storage product = productIdToProduct[productId];
         IERC20(WETH).transferFrom(msg.sender, product.owner, product.residualPrice);
         this.safeTransferFrom(address(this), msg.sender, product.trancheNotionals.length + product.tokenOffset, 1, "");
     }
 
+    /**
+     * @notice Purchase the given amount of tranche tokens for the given productId and trancheId.
+     */
     function buyTokens(uint32 productId, uint8 trancheId, uint256 amount) external {
         Product storage product = productIdToProduct[productId];
         require(trancheId < product.trancheNotionals.length, "Invalid tranche ID");
@@ -157,6 +172,9 @@ contract NftSec is ERC1155Supply, IERC1155Receiver, IERC721Receiver {
         this.safeTransferFrom(address(this), msg.sender, trancheId + product.tokenOffset, amount, "");
     }
 
+    /**
+     * @notice After the product has matured, redeem all tranche tokens associated with the given productId.
+     */
     function redeemTokens(uint32 productId) external {
         Product storage product = productIdToProduct[productId];
         require(
@@ -251,6 +269,9 @@ contract NftSec is ERC1155Supply, IERC1155Receiver, IERC721Receiver {
         }
     }
 
+    /**
+     * @notice Purchase the defaulted collateral NFT with the given contract and ID for the price posted in getPrice.
+     */
     function liquidateNft(address nftContract, uint256 nftId) external {
         Underlying storage underlying = _getUnderlying(nftContract, nftId);
         uint256 nftPrice = _getNftPrice(underlying.loanPrincipal, underlying.loanEndTime, underlying.auctionEndTime);
@@ -260,23 +281,35 @@ contract NftSec is ERC1155Supply, IERC1155Receiver, IERC721Receiver {
         underlying.loanProceeds = nftPrice;
     }
 
+    /**
+     * @notice Convenience method for token-holders to get the ERC-1155 ID of their residual token for ease of transfer.
+     */
     function getResidualTokenId(uint32 productId) external view returns (uint256) {
         Product memory product = productIdToProduct[productId];
         return product.trancheNotionals.length + product.tokenOffset;
     }
 
+    /**
+     * @notice Convenience method for token-holders to get the ERC-1155 ID of their tranche token for ease of transfer.
+     */
     function getTokenId(uint32 productId, uint8 trancheId) external view returns (uint256) {
         Product memory product = productIdToProduct[productId];
         require(trancheId < product.trancheNotionals.length, "Invalid tranche ID");
         return trancheId + product.tokenOffset;
     }
 
+    /**
+     * @notice Get the price of the residual tranche for a given productId.
+     */
     function getResidualPrice(uint32 productId) external view returns (uint256) {
         Product memory product = productIdToProduct[productId];
         require(_getTokenQuantity(product, uint8(product.trancheNotionals.length)) == 1, "Residual already purchased");
         return product.residualPrice;
     }
 
+    /**
+     * @notice Get the price of a tranche token given a productId and trancheId, quoted in basis points of 1 wei.
+     */
     function getTokenPrice(uint32 productId, uint8 trancheId) external view returns (uint256) {
         Product memory product = productIdToProduct[productId];
         require(trancheId < product.trancheNotionals.length, "Invalid tranche ID");
@@ -284,11 +317,17 @@ contract NftSec is ERC1155Supply, IERC1155Receiver, IERC721Receiver {
         return _getTokenPrice(product);
     }
 
+    /**
+     * @notice Get the quantity of a tranche token given a productId and trancheId.
+     */
     function getTokenQuantity(uint32 productId, uint8 trancheId) external view returns (uint256) {
         Product memory product = productIdToProduct[productId];
         return _getTokenQuantity(product, trancheId);
     }
 
+    /**
+     * @notice Get the price of a collateral NFT with the given contract and ID, or revert if the corresponding loan is not yet defaulted.
+     */
     function getNftPrice(address nftContract, uint256 nftId) external view returns (uint256) {
         Underlying storage underlying = _getUnderlying(nftContract, nftId);
         require(block.timestamp > underlying.loanEndTime, "Loan not expired yet");
