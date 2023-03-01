@@ -5,6 +5,7 @@ pragma solidity 0.8.4;
 import "./interfaces/INftfiHub.sol";
 import "./interfaces/IDirectLoanCoordinator.sol";
 import "./loans/direct/loanTypes/DirectLoanBaseMinimal.sol";
+import "./loans/direct/loanTypes/LoanData.sol";
 
 import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 import "@openzeppelin/contracts/token/ERC721/IERC721.sol";
@@ -13,6 +14,11 @@ import "@openzeppelin/contracts/token/ERC1155/extensions/ERC1155Supply.sol";
 import "@openzeppelin/contracts/token/ERC1155/IERC1155Receiver.sol";
 import "@openzeppelin/contracts/utils/math/Math.sol";
 
+/**
+ * @title  NftSec
+ * @author Nathan Sheng
+ * @notice Contract for securitizing pools of loans originated on NFTfi. Tranches are represented as ERC-1155 tokens.
+ */
 contract NftSec is ERC1155Supply, IERC1155Receiver, IERC721Receiver {
 
     struct Underlying {
@@ -89,40 +95,29 @@ contract NftSec is ERC1155Supply, IERC1155Receiver, IERC721Receiver {
         uint256 residualPrice
     ) external {
         require(trancheInterestRates.length < 32, "Too many tranches");
-        require(trancheInterestRates.length == trancheNotionals.length, "Number of interest rates and notionals don't match");
+        require(
+            trancheInterestRates.length == trancheNotionals.length
+                || trancheInterestRates.length == 0 && trancheNotionals.length == 2,
+            "Number of interest rates and notionals don't match");
 
         IDirectLoanCoordinator loanCoordinator = IDirectLoanCoordinator(INftfiHub(NFTFI_HUB).getContract(DirectLoanBaseMinimal(NFTFI).LOAN_COORDINATOR()));
         Product storage product = productIdToProduct[currentProductId];
+        Underlying memory underlying;
+        LoanData.LoanTerms memory loanTerms;
+        underlying.auctionEndTime = block.timestamp + productDuration;
         for (uint32 i = 0; i < loanIds.length; i++) {
-            Underlying memory underlying;
             underlying.loanId = loanIds[i];
-            uint256 loanRepayment;
-            uint256 nftId;
-            uint32 loanDuration;
-            uint16 loanAdminFee;
-            uint64 loanStartTime;
-            address nftContract;
-            {
-                (
-                    underlying.loanPrincipal,
-                    loanRepayment,
-                    nftId,
-                    ,
-                    loanDuration,
-                    ,
-                    loanAdminFee,
-                    ,
-                    loanStartTime,
-                    nftContract,
-                ) = DirectLoanBaseMinimal(NFTFI).loanIdToLoan(underlying.loanId);
-            }
-
+            (bool success, bytes memory data) = NFTFI.staticcall(abi.encodeWithSignature("loanIdToLoan(uint32)", underlying.loanId));
+            require(success, "Fetching loan ID from NFTfi failed");
+            loanTerms = abi.decode(data, (LoanData.LoanTerms));
+            require(loanTerms.loanERC20Denomination == WETH, "Only wETH-denominated loans allowed");
+            require(loanTerms.nftCollateralWrapper == ERC721_WRAPPER, "Only loans with ERC-721 collateral allowed");
             IERC721(PERMISSORY_NOTE).transferFrom(msg.sender, address(this), loanCoordinator.getLoanData(underlying.loanId).smartNftId);
-            underlying.loanProceeds = (loanRepayment - underlying.loanPrincipal) * (10000 - loanAdminFee) / 10000 + underlying.loanPrincipal;
-            underlying.loanEndTime = loanStartTime + loanDuration;
-            underlying.auctionEndTime = block.timestamp + productDuration;
+            underlying.loanPrincipal = loanTerms.loanPrincipalAmount;
+            underlying.loanProceeds = (loanTerms.maximumRepaymentAmount - underlying.loanPrincipal) * (10000 - loanTerms.loanAdminFeeInBasisPoints) / 10000 + underlying.loanPrincipal;
+            underlying.loanEndTime = loanTerms.loanStartTime + loanTerms.loanDuration;
             require(underlying.loanEndTime + MIN_AUCTION_TIME + BOUNTY_TIME < underlying.auctionEndTime, "Product duration too short for underlyings");
-            nftIdToLookup[nftContract][nftId] = UnderlyingLookup(currentProductId, i);
+            nftIdToLookup[loanTerms.nftCollateralContract][loanTerms.nftCollateralId] = UnderlyingLookup(currentProductId, i);
             product.underlyings.push(underlying);
         }
         product.owner = msg.sender;
@@ -130,11 +125,15 @@ contract NftSec is ERC1155Supply, IERC1155Receiver, IERC721Receiver {
         product.startTime = block.timestamp;
         product.endTime = product.startTime + productDuration;
         product.residualPrice = residualPrice;
-        for (uint8 trancheId = 0; trancheId < trancheInterestRates.length; trancheId++) {
-            product.trancheInterestRates.push(trancheInterestRates[trancheId]);
-            product.trancheNotionals.push(trancheNotionals[trancheId]);
+        if (trancheInterestRates.length == 0) {
+            product.trancheNotionals.push(trancheNotionals[0]);
+            product.trancheNotionals.push(trancheNotionals[1]);
+        } else {
+            for (uint8 trancheId = 0; trancheId < trancheInterestRates.length; trancheId++) {
+                product.trancheInterestRates.push(trancheInterestRates[trancheId]);
+                product.trancheNotionals.push(trancheNotionals[trancheId]);
+            }
         }
-        product.trancheNotionals.push(1);
         currentProductId += 1;
 
         for (uint8 trancheId = 0; trancheId < trancheNotionals.length; trancheId++) {
@@ -146,15 +145,13 @@ contract NftSec is ERC1155Supply, IERC1155Receiver, IERC721Receiver {
 
     function buyResidual(uint32 productId) external {
         Product storage product = productIdToProduct[productId];
-        require(_getTokenQuantity(product, uint8(product.trancheInterestRates.length)) == 1, "Residual already purchased");
         IERC20(WETH).transferFrom(msg.sender, product.owner, product.residualPrice);
-        this.safeTransferFrom(address(this), msg.sender, product.trancheInterestRates.length + product.tokenOffset, 1, "");
+        this.safeTransferFrom(address(this), msg.sender, product.trancheNotionals.length + product.tokenOffset, 1, "");
     }
 
     function buyTokens(uint32 productId, uint8 trancheId, uint256 amount) external {
         Product storage product = productIdToProduct[productId];
-        require(trancheId < product.trancheInterestRates.length, "Invalid tranche ID");
-        require(amount <= _getTokenQuantity(product, trancheId), "Not enough supply remaining");
+        require(trancheId < product.trancheNotionals.length, "Invalid tranche ID");
         uint256 price = _getTokenPrice(product);
         IERC20(WETH).transferFrom(msg.sender, product.owner, price * amount / 10000);
         this.safeTransferFrom(address(this), msg.sender, trancheId + product.tokenOffset, amount, "");
@@ -167,18 +164,30 @@ contract NftSec is ERC1155Supply, IERC1155Receiver, IERC721Receiver {
                 || block.timestamp > product.endTime
                 || (
                     block.timestamp > product.endTime - BOUNTY_TIME
-                    && balanceOf(msg.sender, product.trancheInterestRates.length) == 1
+                    && balanceOf(msg.sender, product.trancheNotionals.length) == 1
                 ),
             "Token not yet ready for redemption"
         );
 
         IERC20 weth = IERC20(WETH);
+        bool isIOPO = product.trancheInterestRates.length == 0;
         if (!product.payoutsComputed) {
             DirectLoanBaseMinimal nftfi = DirectLoanBaseMinimal(NFTFI);
-            uint256 totalProceeds = 0;
+            uint256 totalProceeds;
+            uint256 totalPrincipal;
+            uint256 totalInterest;
             for (uint32 i = 0; i < product.underlyings.length; i++) {
-                if (product.underlyings[i].liquidated || nftfi.loanRepaidOrLiquidated(product.underlyings[i].loanId)) {
-                    totalProceeds += product.underlyings[i].loanProceeds;
+                Underlying storage underlying = product.underlyings[i];
+                if (underlying.liquidated || nftfi.loanRepaidOrLiquidated(underlying.loanId)) {
+                    totalProceeds += underlying.loanProceeds;
+                    if (isIOPO) {
+                        if (underlying.liquidated) {
+                            totalPrincipal += Math.min(underlying.loanPrincipal, underlying.loanProceeds);
+                        } else {
+                            totalPrincipal += underlying.loanPrincipal;
+                            totalInterest += underlying.loanProceeds - underlying.loanPrincipal;
+                        }
+                    }
                 }
             }
             uint256 computationBounty = 10**17;
@@ -188,21 +197,38 @@ contract NftSec is ERC1155Supply, IERC1155Receiver, IERC721Receiver {
                 computationBounty = totalProceeds;
                 totalProceeds = 0;
             }
-            for (uint8 trancheId = 0; trancheId < product.trancheInterestRates.length; trancheId++) {
-                uint256 expectedPayout = product.trancheNotionals[trancheId] * (10000 + product.trancheInterestRates[trancheId]) / 10000;
-                if (totalProceeds >= expectedPayout) {
-                    product.tranchePayouts.push(expectedPayout);
-                    totalProceeds -= expectedPayout;
-                } else {
-                    product.tranchePayouts.push(Math.min(weth.balanceOf(address(this)), totalProceeds));
-                    totalProceeds = 0;
-                    for (; trancheId < product.trancheInterestRates.length; trancheId++) {
+            if (isIOPO) {
+                if (totalProceeds >= totalInterest) {
+                    product.tranchePayouts.push(totalInterest);
+                    if (totalProceeds >= totalInterest + totalPrincipal) {
+                        product.tranchePayouts.push(totalPrincipal);
+                        product.tranchePayouts.push(totalProceeds - totalInterest - totalPrincipal);
+                    } else {
+                        product.tranchePayouts.push(totalProceeds - totalInterest);
                         product.tranchePayouts.push(0);
                     }
-                    break;
+                } else {
+                    product.tranchePayouts.push(totalProceeds);
+                    product.tranchePayouts.push(0);
+                    product.tranchePayouts.push(0);
                 }
+            } else {
+                for (uint8 trancheId = 0; trancheId < product.trancheInterestRates.length; trancheId++) {
+                    uint256 expectedPayout = product.trancheNotionals[trancheId] * (10000 + product.trancheInterestRates[trancheId]) / 10000;
+                    if (totalProceeds >= expectedPayout) {
+                        product.tranchePayouts.push(expectedPayout);
+                        totalProceeds -= expectedPayout;
+                    } else {
+                        product.tranchePayouts.push(Math.min(weth.balanceOf(address(this)), totalProceeds));
+                        totalProceeds = 0;
+                        for (; trancheId < product.trancheInterestRates.length; trancheId++) {
+                            product.tranchePayouts.push(0);
+                        }
+                        break;
+                    }
+                }
+                product.tranchePayouts.push(Math.min(weth.balanceOf(address(this)), totalProceeds)); // remaining goes to residual
             }
-            product.tranchePayouts.push(Math.min(weth.balanceOf(address(this)), totalProceeds)); // remaining goes to residual
             product.payoutsComputed = true;
             weth.transfer(msg.sender, computationBounty);
         }
@@ -216,13 +242,13 @@ contract NftSec is ERC1155Supply, IERC1155Receiver, IERC721Receiver {
             uint256 balance = balanceOf(msg.sender, tokenId);
             if (balance > 0) {
                 _burn(msg.sender, tokenId, balance);
-                weth.transfer(msg.sender, product.tranchePayouts[trancheId] * balance / product.trancheNotionals[trancheId]);
+                if (trancheId == product.tranchePayouts.length - 1) {
+                    weth.transfer(msg.sender, product.tranchePayouts[trancheId]);
+                } else {
+                    weth.transfer(msg.sender, product.tranchePayouts[trancheId] * balance / product.trancheNotionals[trancheId]);
+                }
             }
         }
-    }
-
-    function a(uint256 trancheId) external view returns (uint256) {
-        return productIdToProduct[0].tranchePayouts[trancheId];
     }
 
     function liquidateNft(address nftContract, uint256 nftId) external {
@@ -236,24 +262,24 @@ contract NftSec is ERC1155Supply, IERC1155Receiver, IERC721Receiver {
 
     function getResidualTokenId(uint32 productId) external view returns (uint256) {
         Product memory product = productIdToProduct[productId];
-        return product.trancheInterestRates.length + product.tokenOffset;
+        return product.trancheNotionals.length + product.tokenOffset;
     }
 
     function getTokenId(uint32 productId, uint8 trancheId) external view returns (uint256) {
         Product memory product = productIdToProduct[productId];
-        require(trancheId < product.trancheInterestRates.length, "Invalid tranche ID");
+        require(trancheId < product.trancheNotionals.length, "Invalid tranche ID");
         return trancheId + product.tokenOffset;
     }
 
     function getResidualPrice(uint32 productId) external view returns (uint256) {
         Product memory product = productIdToProduct[productId];
-        require(_getTokenQuantity(product, uint8(product.trancheInterestRates.length)) == 1, "Residual already purchased");
+        require(_getTokenQuantity(product, uint8(product.trancheNotionals.length)) == 1, "Residual already purchased");
         return product.residualPrice;
     }
 
     function getTokenPrice(uint32 productId, uint8 trancheId) external view returns (uint256) {
         Product memory product = productIdToProduct[productId];
-        require(trancheId < product.trancheInterestRates.length, "Invalid tranche ID");
+        require(trancheId < product.trancheNotionals.length, "Invalid tranche ID");
         require(_getTokenQuantity(product, trancheId) > 0, "No supply remaining");
         return _getTokenPrice(product);
     }
@@ -318,11 +344,11 @@ contract NftSec is ERC1155Supply, IERC1155Receiver, IERC721Receiver {
     }
 
     function _getNftPrice(uint256 loanPrincipal, uint64 loanEndTime, uint256 auctionEndTime) internal view returns (uint256) {
-        // Begin sale at price equal to 1.5x original loan principal, and decay linearly until 0 ETH at tranche payout time
+        // Begin sale at price equal to 2x original loan principal, and decay linearly until 0 ETH at tranche payout time
         if (block.timestamp > auctionEndTime) {
             return 0;
         } else {
-            return 3 * loanPrincipal * (auctionEndTime - block.timestamp) / (auctionEndTime - loanEndTime) / 2;
+            return 2 * loanPrincipal * (auctionEndTime - block.timestamp) / (auctionEndTime - loanEndTime);
         }
     }
 }

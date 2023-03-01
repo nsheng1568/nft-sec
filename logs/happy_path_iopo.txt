@@ -1,0 +1,120 @@
+Step 0: Initializing contracts...
+Deployed LoanAirdropUtils at address 0xa131AD247055FD2e2aA8b156A11bdEc81b9eAD95
+Deployed LoanChecksAndCalculations at address 0x652c9ACcC53e765e1d96e2455E618dAaB79bA595
+Deployed ContractKeys at address 0x417Bf7C9dc415FEEb693B6FE313d1186C692600F
+Deployed NFTfiSigningUtils at address 0x9bF88fAe8CF8BaB76041c1db6467E7b37b977dD7
+Deployed BoredApeYachtClub at address 0xd9145CCE52D386f254917e481eB44e9943F39138
+Deployed WETH9 at address 0xd8b934580fcE35a11B58C6D73aDeE468a2833fa8
+Deployed NftfiHub at address 0xA831F4e5dC3dbF0e9ABA20d34C3468679205B10A
+Deployed ERC721Wrapper at address 0xB302F922B24420f3A3048ddDC4E2761CE37Ea098
+Bored Ape 0 purchased by Borrower 1
+Bored Ape 1 purchased by Borrower 2
+Deployed DirectLoanFixedOfferRedeploy at address 0xAc40c9C8dADE7B9CF37aEBb49Ab49485eBD3510d
+Deployed DirectLoanCoordinator at address 0xBBa767f31960394B6c57705A5e1F0B2Aa97f0Ce8
+Deployed PermittedNFTsAndTypeRegistry at address 0x09943Fa8DD32C76f7b880627a0F6af73e8f5A595
+Deployed SmartNft at address 0x1482717Eb2eA8Ecd81d2d8C403CaCF87AcF04927
+Deployed SmartNft at address 0x5802016Bc9976C6f63D6170157adAeA1924586c1
+Deployed NftSec at address 0xD7ACd2a9FD159E69Bb102A1ca21C9a3e3A5F771B
+
+Step 1: Initiating NFTfi loans...
+wETH balances before NFTfi loans:
+	Structurer: 10
+	Borrower 1: 0
+	Borrower 2: 0
+NFTfi Promissory Note 1 issued to Structurer
+NFTfi Promissory Note 2 issued to Structurer
+Bored Ape 0 transferred to NFTfi
+Bored Ape 1 transferred to NFTfi
+wETH balances after NFTfi loans:
+	Structurer: 8.5
+	Borrower 1: 1
+	Borrower 2: 0.5
+
+Step 2: Minting tranche tokens...
+NFTfi Promissory Note 1 transferred to NftSec
+NFTfi Promissory Note 2 transferred to NftSec
+Tranche tokens minted:
+	IO Tranche:
+		Quantity - 0.6 x 10^18
+		Price    - 1.03 wei
+	PO Tranche:
+		Quantity - 0.8 x 10^18
+		Price    - 1.03 wei
+	Residual Tranche:
+		Price    - 0.1 ETH
+
+Step 3: Investing in tranche tokens...
+wETH balances before tranche purchases:
+	Structurer: 8.5
+	Investor 1: 10
+	Investor 2: 10
+	Investor 3: 10
+	Investor 4: 10
+Investor 1 purchased 0.6 x 10^18 IO tranche tokens
+Investor 2 purchased 0.4 x 10^18 PO tranche tokens
+Investor 3 purchased 1 residual tranche token
+Investor 4 is dissatisfied with the initial price of PO tranche, so she waits ---
+	PO tranche price is now 0.9711 wei
+	PO tranche price is now 0.9122 wei
+	PO tranche price is now 0.8534 wei
+Investor 4 purchased 0.4 x 10^18 PO tranche tokens
+wETH balances after tranche purchases:
+	Structurer: 9.94186
+	Investor 1: 9.3997
+	Investor 2: 9.5998
+	Investor 3: 9.9
+	Investor 4: 9.65864
+
+Step 4: Repaying loan...
+wETH balances before repaying loan:
+	NftSec contract: 0
+	Borrower 1     : 11
+Borrower 1 repaid her loan backed by Bored Ape 0
+wETH balances after repaying loan:
+	NftSec contract: 1.095
+	Borrower 1     : 9.9
+
+Step 5: Liquidating collateral...
+wETH balances before liquidating collateral:
+	NftSec contract: 1.095
+	Liquidator     : 10
+Liquidator is interested in Bored Ape 1, so she periodically checks the price ---
+	Bored Ape 1 is not available for liquidation yet
+	Bored Ape 1 is available for a price of 0.9565217391304348 ETH
+	Bored Ape 1 is available for a price of 0.782608695652174 ETH
+	Bored Ape 1 is available for a price of 0.6086956521739131 ETH
+Bored Ape 1 transferred to Liquidator
+wETH balances after repaying loan:
+	NftSec contract: 1.703695652173913
+	Liquidator     : 9.391304347826088
+
+Step 6: Transacting fungible tokens...
+Tranche token ownership before secondary market transactions:
+	Investor 1 owns 0.6 x 10^18 IO tranche tokens
+	Investor 2 owns 0.4 x 10^18 PO tranche tokens
+	Investor 3 owns 1 residual tranche token
+	Investor 4 owns 0.4 x 10^18 PO tranche tokens
+Tranche token ownership after secondary market transactions:
+	Investor 1 owns 0.3 x 10^18 IO tranche tokens
+	Investor 3 owns 1 residual tranche token
+	Investor 4 owns 0.4 x 10^18 PO tranche tokens
+	Investor 5 owns 0.3 x 10^18 IO tranche and 0.4 x 10^18 PO tranche tokens
+
+Step 7: Redeeming tokens...
+wETH balances before redeeming tokens:
+	NftSec contract: 1.703695652173913
+	Investor 1     : 9.3997
+	Investor 3     : 9.9
+	Investor 4     : 9.65864
+	Investor 5     : 0
+Investor 3, who holds the residual token, waits for the product to mature ---
+Investor 3 redeems her residual token, capturing the computation bounty
+Investors 1, 4, and 5 also redeem their tokens afterwards
+wETH balances after redeeming tokens:
+	NftSec contract: 1e-18
+	Investor 1     : 9.501547826086957
+	Investor 3     : 10
+	Investor 4     : 10.35864
+	Investor 5     : 0.8018478260869566
+
+End of test.

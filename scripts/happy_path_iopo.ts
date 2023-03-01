@@ -109,8 +109,10 @@ const initBayc = async (accounts: Accounts): Promise<Contract> => {
     await bayc.methods.flipSaleState().send({from: accounts.misc}) // Begin sale of apes
 
     // Borrowers buy apes
-    await bayc.methods.mintApe(1).send({from: accounts.borrower1, value: APE_PRICE})
-    await bayc.methods.mintApe(1).send({from: accounts.borrower2, value: APE_PRICE})
+    await Promise.all([
+        bayc.methods.mintApe(1).send({from: accounts.borrower1, value: APE_PRICE}),
+        bayc.methods.mintApe(1).send({from: accounts.borrower2, value: APE_PRICE}),
+    ])
 
     // Verify the apes are bought
     const [bayc0Acc, bayc1Acc] = await Promise.all([
@@ -375,10 +377,7 @@ const getLoanOwner = async (contracts: Contracts, loanId: number): Promise<strin
 }
 
 /* Initiate two NFTfi loans between structurer and borrowers */
-const initiateLoans = async (
-    contracts: Contracts,
-    accounts: Accounts,
-): Promise<void> => {
+const initiateLoans = async (contracts: Contracts, accounts: Accounts): Promise<void> => {
     console.log('\nStep 1: Initiating NFTfi loans...')
     await Promise.all([
         obtainWeth(contracts, TEN_ETH, accounts.structurer), // Obtain 10 wETH
@@ -472,7 +471,7 @@ const mintTranches = async (contracts: Contracts, accounts: Accounts): Promise<v
 
     // Mint tranche tokens
     await contracts.nftSec.methods.mint(
-        [1000, 2000], // interest rates of 10% and 20%
+        [], // IO/PO tranches
         ['600000000000000000', '800000000000000000'], // notional amounts of 0.6e18 and 0.9e18
         [1, 2],
         35,
@@ -497,10 +496,10 @@ const mintTranches = async (contracts: Contracts, accounts: Accounts): Promise<v
         }
         console.log(
             'Tranche tokens minted:',
-            '\tSenior Tranche:',
+            '\tIO Tranche:',
             `\t\tQuantity - ${results[2]/10**18} x 10^18`,
             `\t\tPrice    - ${results[3]/10000} wei`,
-            '\tJunior Tranche:',
+            '\tPO Tranche:',
             `\t\tQuantity - ${results[4]/10**18} x 10^18`,
             `\t\tPrice    - ${results[5]/10000} wei`,
             '\tResidual Tranche:',
@@ -550,11 +549,11 @@ const investInTranches = async (contracts: Contracts, accounts: Accounts): Promi
     ))
 
     await Promise.all([
-        contracts.nftSec.methods.buyTokens(0, 0, '600000000000000000').send({from: accounts.investor1}), // Investor 1 purchases entire senior tranche
-        contracts.nftSec.methods.buyTokens(0, 1, '400000000000000000').send({from: accounts.investor2}), // Investor 2 purchases part of junior tranche
+        contracts.nftSec.methods.buyTokens(0, 0, '600000000000000000').send({from: accounts.investor1}), // Investor 1 purchases entire IO tranche
+        contracts.nftSec.methods.buyTokens(0, 1, '400000000000000000').send({from: accounts.investor2}), // Investor 2 purchases part of PO tranche
         contracts.nftSec.methods.buyResidual(0).send({from: accounts.investor3}), // Investor 3 purchases non-fungible resudiual tranche
     ])
-    // After these purchases, only part of junior tranche remains for sale
+    // After these purchases, only part of PO tranche remains for sale
 
     // Verify tranche tokens successfully purchased
     await Promise.all([
@@ -562,16 +561,16 @@ const investInTranches = async (contracts: Contracts, accounts: Accounts): Promi
         contracts.nftSec.methods.balanceOf(accounts.investor2, 1).call(),
         contracts.nftSec.methods.balanceOf(accounts.investor3, 2).call(),
     ]).then(results => console.log(
-        `Investor 1 purchased ${results[0]/10**18} x 10^18 senior tranche tokens`,
-        `Investor 2 purchased ${results[1]/10**18} x 10^18 junior tranche tokens`,
+        `Investor 1 purchased ${results[0]/10**18} x 10^18 IO tranche tokens`,
+        `Investor 2 purchased ${results[1]/10**18} x 10^18 PO tranche tokens`,
         `Investor 3 purchased ${results[2]} residual tranche token`,
     ))
 
-    console.log('Investor 4 is dissatisfied with the initial price of junior tranche, so she waits ---')
+    console.log('Investor 4 is dissatisfied with the initial price of PO tranche, so she waits ---')
     for (let i = 0; i < 3; i++) {
         await new Promise(r => setTimeout(r, 1000))
-        const juniorTranchePrice = await contracts.nftSec.methods.getTokenPrice(0, 1).call()
-        console.log(`\tJunior tranche price is now ${juniorTranchePrice/10000} wei`)
+        const poTranchePrice = await contracts.nftSec.methods.getTokenPrice(0, 1).call()
+        console.log(`\tPO tranche price is now ${poTranchePrice/10000} wei`)
     }
     await contracts.nftSec.methods.buyTokens(0, 1, '400000000000000000').send({from: accounts.investor4})
 
@@ -585,7 +584,7 @@ const investInTranches = async (contracts: Contracts, accounts: Accounts): Promi
         getWethBalance(contracts, accounts.investor4),
     ])
     .then(results => console.log(
-        `Investor 4 purchased ${results[0]/10**18} x 10^18 junior tranche tokens`,
+        `Investor 4 purchased ${results[0]/10**18} x 10^18 PO tranche tokens`,
         'wETH balances after tranche purchases:',
         `\tStructurer: ${results[1]/10**18}`,
         `\tInvestor 1: ${results[2]/10**18}`,
@@ -699,10 +698,10 @@ const transactTranches = async (contracts: Contracts, accounts: Accounts): Promi
         contracts.nftSec.methods.balanceOf(accounts.investor4, 1).call(),
     ]).then(results => console.log(
         'Tranche token ownership before secondary market transactions:',
-        `\tInvestor 1 owns ${results[0]/10**18} x 10^18 senior tranche tokens`,
-        `\tInvestor 2 owns ${results[1]/10**18} x 10^18 junior tranche tokens`,
+        `\tInvestor 1 owns ${results[0]/10**18} x 10^18 IO tranche tokens`,
+        `\tInvestor 2 owns ${results[1]/10**18} x 10^18 PO tranche tokens`,
         `\tInvestor 3 owns ${results[2]} residual tranche token`,
-        `\tInvestor 4 owns ${results[3]/10**18} x 10^18 junior tranche tokens`,
+        `\tInvestor 4 owns ${results[3]/10**18} x 10^18 PO tranche tokens`,
     ))
 
     // Investor 5 gets tokens from two other investors
@@ -732,10 +731,10 @@ const transactTranches = async (contracts: Contracts, accounts: Accounts): Promi
         contracts.nftSec.methods.balanceOf(accounts.investor5, 1).call(),
     ]).then(results => console.log(
         'Tranche token ownership after secondary market transactions:',
-        `\tInvestor 1 owns ${results[0]/10**18} x 10^18 senior tranche tokens`,
+        `\tInvestor 1 owns ${results[0]/10**18} x 10^18 IO tranche tokens`,
         `\tInvestor 3 owns ${results[1]} residual tranche token`,
-        `\tInvestor 4 owns ${results[2]/10**18} x 10^18 junior tranche tokens`,
-        `\tInvestor 5 owns ${results[3]/10**18} x 10^18 senior tranche and ${results[4]/10**18} x 10^18 junior tranche tokens`
+        `\tInvestor 4 owns ${results[2]/10**18} x 10^18 PO tranche tokens`,
+        `\tInvestor 5 owns ${results[3]/10**18} x 10^18 IO tranche and ${results[4]/10**18} x 10^18 PO tranche tokens`
     ))
 }
 

@@ -54,7 +54,7 @@ Investor 1 purchased 0.6 x 10^18 senior tranche tokens
 Investor 2 purchased 0.4 x 10^18 junior tranche tokens
 Investor 3 purchased 1 residual tranche token
 Investor 4 is dissatisfied with the initial price of junior tranche, so she waits ---
-	Junior tranche price is now 0.9711 wei
+	Junior tranche price is now 1.0005 wei
 	Junior tranche price is now 0.9417 wei
 	Junior tranche price is now 0.8828 wei
 Investor 4 purchased 0.4 x 10^18 junior tranche tokens
@@ -81,12 +81,12 @@ wETH balances before liquidating collateral:
 Liquidator is interested in Bored Ape 1, so she periodically checks the price ---
 	Bored Ape 1 is not available for liquidation yet
 	Bored Ape 1 is not available for liquidation yet
-	Bored Ape 1 is available for a price of 0.65625 ETH
-	Bored Ape 1 is available for a price of 0.5625 ETH
+	Bored Ape 1 is available for a price of 0.8695652173913043 ETH
+	Bored Ape 1 is available for a price of 0.7391304347826086 ETH
 Bored Ape 1 transferred to Liquidator
 wETH balances after repaying loan:
-	NftSec contract: 1.6575
-	Liquidator     : 9.4375
+	NftSec contract: 1.8341304347826086
+	Liquidator     : 9.26086956521739
 
 Step 6: Transacting fungible tokens...
 Tranche token ownership before secondary market transactions:
@@ -102,7 +102,7 @@ Tranche token ownership after secondary market transactions:
 
 Step 7: Redeeming tokens...
 wETH balances before redeeming tokens:
-	NftSec contract: 1.6575
+	NftSec contract: 1.8341304347826086
 	Investor 1     : 9.382
 	Investor 3     : 9.9
 	Investor 4     : 9.64688
@@ -113,8 +113,8 @@ Investors 1, 4, and 5 also redeem their tokens afterwards
 wETH balances after redeeming tokens:
 	NftSec contract: 0
 	Investor 1     : 9.712
-	Investor 3     : 10
-	Investor 4     : 10.09563
-	Investor 5     : 0.77875
+	Investor 3     : 10.11413043478261
+	Investor 4     : 10.12688
+	Investor 5     : 0.81
 
 End of test.

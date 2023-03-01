@@ -1,0 +1,35 @@
+Step 0: Initializing contracts...
+
+Step 1: Initiating NFTfi loans...
+
+Step 2: Minting tranche tokens...
+NFTfi Promissory Note approval gas cost:
+53751
+NftSec tranche token minting gas cost:
+16421489
+
+Step 3: Investing in tranche tokens...
+Senior tranche token purchase gas cost:
+1156345
+Residual tranche token purchase gas cost:
+124739
+
+Step 4: Repaying loan...
+
+Step 5: Liquidating collateral...
+NFT liquidation gas cost:
+611696
+
+Step 6: Transacting fungible tokens...
+
+Step 7: Redeeming tokens...
+Residual tranche redemption gas cost:
+1028789
+Senior tranche token redemption gas cost:
+101222
+Mezz tranche token redemption gas cost:
+101222
+Junior tranche token redemption gas cost:
+95702
+
+End of test.

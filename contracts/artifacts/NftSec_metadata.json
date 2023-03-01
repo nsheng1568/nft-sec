@@ -167,25 +167,6 @@
 			{
 				"inputs": [
 					{
-						"internalType": "uint256",
-						"name": "trancheId",
-						"type": "uint256"
-					}
-				],
-				"name": "a",
-				"outputs": [
-					{
-						"internalType": "uint256",
-						"name": "",
-						"type": "uint256"
-					}
-				],
-				"stateMutability": "view",
-				"type": "function"
-			},
-			{
-				"inputs": [
-					{
 						"internalType": "address",
 						"name": "account",
 						"type": "address"
@@ -815,7 +796,7 @@
 		},
 		"optimizer": {
 			"enabled": true,
-			"runs": 0
+			"runs": 200
 		},
 		"remappings": []
 	},
@@ -997,11 +978,11 @@
 			]
 		},
 		"contracts/NftSec.sol": {
-			"keccak256": "0xfbc80d33d586597ecd1231c31efd75104502638fc4b289b428fef7fb1d5e68ad",
+			"keccak256": "0x1bd5bc98d95aedc8399f0ba9d25d215be4dfcb7778f156482d0e8c15e2961d73",
 			"license": "BUSL-1.1",
 			"urls": [
-				"bzz-raw://a3b57291052df7d412d6198bc60eb1220fd65ffc529761d53799d3d8a7ebbe24",
-				"dweb:/ipfs/QmPwE1PGGxdBP1qaEfbXJ8SBx54v568hRcegH5TbKQPRm7"
+				"bzz-raw://f599710b5413bb8d0cf96bc1fd2c982cce9fb01a1ec83e52b112cb1e0bd2a0b1",
+				"dweb:/ipfs/QmdzE6NFRduLSrYJsZMtYZrUzgWHnv6ztm5nBzMpwhYueM"
 			]
 		},
 		"contracts/airdrop/IAirdropReceiverFactory.sol": {
